@@ -142,14 +142,16 @@ def compute_save_and_print_results(a: int, b: int, results: list) -> int:
 
 # %%
 
+# %%
+
 # %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
 #
 # ### Was sind die Gründe, dass sich diese Funktion ändert?
 #
 # - Die komplexe Berechnung
 # - Das Speichern der Ergebnisse
-# - Das Drucken des Reports
-# - Die Information über das neue Ergebnis
+# - Die Art, in der der Report ausgedruckt wird
+# - Die Information, die im Report enthalten ist
 # - Die Teile oder Reihenfolge der Berechnung
 
 # %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
@@ -190,13 +192,15 @@ def process_new_sensor_data(a: int, b: int, results: list) -> int:
 #
 # - <del>Die komplexe Berechnung</del> $\rightarrow$ `compute_result()`
 # - <del>Das Speichern der Ergebnisse</del> $\rightarrow$ `save_result()`
-# - <del>Das Drucken des Reports</del> $\rightarrow$ `print_report()`
-# - Die Information über das neue Ergebnis
+# - <del>Die Art, in der der Report ausgedruckt wird</del>
+#   $\rightarrow$ `print_report()`
+# - <del>Die Information, die im Report enthalten ist</del>
+#   $\rightarrow$ `print_report()`
 # - Die Teile oder Reihenfolge der Berechnung
 
 # %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
 #
-# - Die neue Funktion hat immer noch mehr als eine Verantwortung
+# - Die neue Funktion hat aber immer noch mehr als eine Verantwortung!
 # - Das rührt daher, dass Sie das Command-Query-Separation-Prinzip (CQS)
 #   verletzt
 #   - Sie hat Seiteneffekte (Speichern und Drucken)
