@@ -1,0 +1,96 @@
+name: cam
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  # - mhoelzl
+  - fastai
+dependencies:
+  - python>=3.11
+  # - cuda==11.7
+  # - cudnn
+  - appdirs
+  - attrs
+  - autopep8
+  - bandit
+  - black
+  - bump2version
+  - cattrs
+  - click
+  - configurator
+  - cookiecutter
+  - copier
+  - cython
+  - cytoolz
+  - datasets
+  # - duckdb
+  - einops
+  - fastai
+  - fastapi
+  - ffmpeg
+  - flake8
+  - gh
+  - hydra-core
+  - hypothesis
+  - ipykernel
+  - ipywidgets
+  - kaggle
+  - lark
+  - mypy
+  - jinja2
+  - jupyterlab>=4
+  - jupyterlab_rise>=0.40.0
+  # - jupyterlite-core-with-lab
+  - jupytext
+  - lark
+  - matplotlib
+  - mypy
+  - nbconvert
+  - networkx
+  # - nbex
+  - numba
+  - numpy
+  - openai
+  - openpyxl
+  - pandas
+  - pandoc
+  - papermill
+  - pdoc
+  - pip
+  - platformdirs
+  - pyarrow
+  - pydantic
+  - pydantic-settings
+  - pypandoc
+  # - pylance
+  - pytest
+  - pytest-cov
+  - pytest-mock
+  - python-build
+  - python-dotenv
+  - pytorch
+  - pytorch-cuda==11.7
+  - requests
+  - ruff
+  - scikit-build
+  - scikit-learn
+  - scipy
+  - seaborn
+  - skorch
+  - spacy>=3
+  - sphinx
+  - sqlalchemy>=2
+  - statsmodels
+  - streamlit
+  # - tensorboard
+  # - tensorflow
+  - timm
+  - tomli
+  - tomli-w
+  - tornado>=6.1
+  - tox<4
+#  - tox-conda<0.10
+  - transformers>=4
+  - typer
+  - uvicorn
+  - watchdog
