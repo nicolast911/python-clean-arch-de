@@ -25,10 +25,10 @@
 
 # %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
 #
-# ### Adventure Game Version 3b
+# ### Adventure Game Version 2b
 #
 # - Zuweisung von Funktionalität zu `World` und `Location` ist sinnvoll
-# - Wir sehen, dass `World` in Gefahr ist, zu viele "Änderungsgründe" zu haben
+# - `World` ist in Gefahr ist, zu viele "Änderungsgründe" zu haben
 #   - Änderungen an der Implementierung der Spiele-Welt
 #   - Änderungen an den Initialisierungsdaten (z.B. XML statt JSON)
 # - Können wir das vermeiden?
@@ -44,13 +44,92 @@
 # - Wer soll ein Objekt erzeugen, wenn es Umstände gibt, die gegen Creator
 #   sprechen?
 #   - komplexe Logik zur Erzeugung
-#   - Kohäsion
+#   - SRP/Kohäsion
 #   - Viele Parameter zur Erzeugung notwendig
 #
 # ### Antwort
 #
 # - Eine Klasse, die nur für die Erzeugung von Objekten zuständig ist
 # - Diese Klassen werden oft als *Factory* bezeichnet
+
+# %% tags=["keep"]
+import json
+from dataclasses import dataclass, field
+from pathlib import Path
+from pprint import pprint
+from typing import Any, Mapping, Sequence
+
+# %% tags=["keep"]
+json_file = list(Path().glob("**/simple-locations.json"))[0]
+with open(json_file) as file:
+    simple_locations = json.load(file)
+
+# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+LocationDescription = Mapping[str, Any]
+LocationDescriptions = Sequence[LocationDescription]
+
+
+# %% tags=["keep"]
+@dataclass
+class Location:
+    name: str
+    description: str = ""
+    connections: dict[str, "Location"] = field(default_factory=dict)
+
+    @classmethod
+    def from_description(cls, data: LocationDescription) -> "Location":
+        return cls(data["name"], data.get("description", ""))
+
+    def __getitem__(self, direction: str) -> "Location | None":
+        return self.connections.get(direction)
+
+
+# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+def _build_connections_for_all_locations(
+    locations: dict[str, Location], location_descriptions: LocationDescriptions
+):
+    for location_description in location_descriptions:
+        connections = {
+            direction: locations[name]
+            for direction, name in location_description.get("connections", {}).items()
+        }
+        locations[location_description["name"]].connections = connections
+
+
+# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+@dataclass
+class World:
+    locations: dict[str, Location]
+    initial_location_name: str
+
+    def __getitem__(self, location_name: str):
+        return self.locations[location_name]
+
+    @classmethod
+    def from_location_descriptions(cls, location_descriptions: LocationDescriptions):
+        locations = {
+            data["name"]: Location.from_description(data)
+            for data in location_descriptions
+        }
+        initial_location_name = location_descriptions[0]["name"]
+        _build_connections_for_all_locations(locations, location_descriptions)
+        return cls(locations, initial_location_name)
+
+# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+#
+# ## Die `WorldFactory`-Klasse
+
+# %%
+
+# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+#
+# ### Verwendung der Factory
+
+# %%
+
+# %%
+
+# %%
 
 # %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
 #
@@ -60,150 +139,14 @@
 
 # %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
 #
-# ## Beispiel
-#
-# - In Version 3b ist der Konstruktor von `World` relativ komplex
-# - Wir können die Erzeugung in eine Factory auslagern
-# - Siehe `code/adventure/v3c`
-
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
-#
-# ## Python: Benannte Parameter Idiom
-#
-# Das Python-Idiom "Benannte Parameter" (engl. "Named Parameters") ist eine
-# Variante des Factory Patterns.
-#
-# - Python unterstützt keine benannten Parameter
-# - Manchmal ist es schwer, Funktionen mit vielen Parametern zu vermeiden
-#   - Insbesondere bei der Konstruktion von Objekten
-# - Selbst wenn wir Default-Werte verwenden, müssen wir viele der Parameter angeben
-#   - Alle Parameter vor demjenigen, den wir ändern wollen
-# - Es ist schwer, den Überblick zu behalten, welche Parameter was bedeuten
-#   - Moderne IDEs vereinfachen das
-# - Wie können wir Funktionen mit vielen Parametern übersichtlich gestalten?
-
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
-#
-# # Benannte Parameter / Builder Pattern
-#
-# ### Frage
-#
-# - Wie können wir Funktionen mit vielen Parametern so gestalten, dass sie
-#   leicht zu benutzen und verständlich bleiben?
-# - Wie können wir Objekte konstruieren, die viel Information zu ihrer Konstruktion benötigen?
-#
-# ### Antwort
-#
-# - Wir schreiben eine Hilfsklasse, die die Parameter speichert
-# - Diese Klasse hat Methoden, die einzelne Parameter setzen
-#   - Jede dieser Methoden gibt `*this` als Referenz zurück
-# - Eine Methode konstruiert die gewünschte Klasse oder führt die gewünschte Operation aus
-
-# %% tags=["keep"]
-class Window:
-    def __init__(
-        self,
-        width: int,
-        height: int,
-        x: int,
-        y: int,
-        visible: bool,
-        active: bool,
-        resizable: bool,
-        fullscreen: bool,
-    ):
-        print(
-            f"Building window with width={width}, height={height}, x={x}, y={y}, visible={visible}, active={active}, resizable={resizable}, fullscreen={fullscreen}"
-        )
-
-
-# %% tags=["keep"]
-window = Window(800, 600, 0, 0, True, True, True, False)
-
-
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
-class Window:
-    def __init__(self, width, height, x, y, visible, active, resizable, fullscreen):
-        self.width = width
-        self.height = height
-        self.x = x
-        self.y = y
-        self.visible = visible
-        self.active = active
-        self.resizable = resizable
-        self.fullscreen = fullscreen
-
-
-class WindowBuilder:
-    def __init__(self):
-        self._width = 800
-        self._height = 600
-        self._x = 0
-        self._y = 0
-        self._visible = True
-        self._active = True
-        self._resizable = True
-        self._fullscreen = False
-
-    def build(self):
-        return Window(
-            self._width,
-            self._height,
-            self._x,
-            self._y,
-            self._visible,
-            self._active,
-            self._resizable,
-            self._fullscreen,
-        )
-
-    def width(self, width):
-        self._width = width
-        return self
-
-    def height(self, height):
-        self._height = height
-        return self
-
-    def x(self, x):
-        self._x = x
-        return self
-
-    def y(self, y):
-        self._y = y
-        return self
-
-    def visible(self, visible):
-        self._visible = visible
-        return self
-
-    def active(self, active):
-        self._active = active
-        return self
-
-    def resizable(self, resizable):
-        self._resizable = resizable
-        return self
-
-    def fullscreen(self, fullscreen):
-        self._fullscreen = fullscreen
-        return self
-
-# %%
-
-# %%
-
-
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
-#
 # ## Mini-Workshop: Factory im Bibliothekssystem
 #
 # - Sie haben in vorhergehenden Workshops den Beginn eines Bibliothekssystems
 #   implementiert
-# - Bei der Erzeugung werden die Daten von Büchern aus einer Datei gelesen (wir
-#   simulieren das, durch die `library_data_sk` Python-Bibliothek)
-# - Verwenden Sie das Factory Pattern, um die Erzeugung der Bücher von dem Rest
-#   des Bibliothekssystems zu trennen
+# - Implementieren Sie eine Möglichkeit, die Daten Ihrer Bibliothek aus einer
+#   JSON-Datei zu laden. (Legen Sie dazu eine JSON-Datei an, die strukturell
+#   zu Ihrer Implementierung passt)
+# - Verlagern Sie dann die Erzeugung des Bibliothekssystems in eine Factory-Klasse
 #
 # *Hinweis:* Sie können das Factory Pattern entweder für die Erzeugung einer
 # Sammlung von Büchern oder für die Erzeugung der Bibliothek verwenden. Gibt es

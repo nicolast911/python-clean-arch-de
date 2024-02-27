@@ -13100,12 +13100,12 @@ div#notebook {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=ecd348b092243260"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=88def758733966eb"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Adventure-Game-Version-3b">Adventure Game Version 3b<a class="anchor-link" href="#Adventure-Game-Version-3b">¶</a></h3><ul>
+<h3 id="Adventure-Game-Version-2b">Adventure Game Version 2b<a class="anchor-link" href="#Adventure-Game-Version-2b">¶</a></h3><ul>
 <li>Zuweisung von Funktionalität zu <code>World</code> und <code>Location</code> ist sinnvoll</li>
-<li>Wir sehen, dass <code>World</code> in Gefahr ist, zu viele "Änderungsgründe" zu haben<ul>
+<li><code>World</code> ist in Gefahr ist, zu viele "Änderungsgründe" zu haben<ul>
 <li>Änderungen an der Implementierung der Spiele-Welt</li>
 <li>Änderungen an den Initialisierungsdaten (z.B. XML statt JSON)</li>
 </ul>
@@ -13115,7 +13115,7 @@ div#notebook {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=6a0a81e6814eb1a1"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=56ec983aa279ce98"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Concrete-Factory-(Simple-Factory)">Concrete Factory (Simple Factory)<a class="anchor-link" href="#Concrete-Factory-(Simple-Factory)">¶</a></h1><ul>
@@ -13125,7 +13125,7 @@ div#notebook {
 <li>Wer soll ein Objekt erzeugen, wenn es Umstände gibt, die gegen Creator
 sprechen?<ul>
 <li>komplexe Logik zur Erzeugung</li>
-<li>Kohäsion</li>
+<li>SRP/Kohäsion</li>
 <li>Viele Parameter zur Erzeugung notwendig</li>
 </ul>
 </li>
@@ -13134,6 +13134,200 @@ sprechen?<ul>
 <li>Eine Klasse, die nur für die Erzeugung von Objekten zuständig ist</li>
 <li>Diese Klassen werden oft als <em>Factory</em> bezeichnet</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=4b65ee763d30732c">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=076997a98c4e9424">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">json_file</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"**/simple-locations.json"</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">simple_locations</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=e0a6f266bee1ba21">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">LocationDescription</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<span class="n">LocationDescriptions</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">LocationDescription</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=2f7821fdc1fb9ed9">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Location</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="n">connections</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Location"</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_description</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">LocationDescription</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Location"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="s2">""</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Location | None"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=ff3c5384aef68965">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_build_connections_for_all_locations</span><span class="p">(</span>
+    <span class="n">locations</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Location</span><span class="p">],</span> <span class="n">location_descriptions</span><span class="p">:</span> <span class="n">LocationDescriptions</span>
+<span class="p">):</span>
+    <span class="k">for</span> <span class="n">location_description</span> <span class="ow">in</span> <span class="n">location_descriptions</span><span class="p">:</span>
+        <span class="n">connections</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">direction</span><span class="p">:</span> <span class="n">locations</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">direction</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">location_description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"connections"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="n">locations</span><span class="p">[</span><span class="n">location_description</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]]</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="n">connections</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_alt celltag_subslide" id="cell-id=cb05858056b84594">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">World</span><span class="p">:</span>
+    <span class="n">locations</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Location</span><span class="p">]</span>
+    <span class="n">initial_location_name</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">locations</span><span class="p">[</span><span class="n">location_name</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=2e145ad4c8a1c88e"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Die-WorldFactory-Klasse">Die <code>WorldFactory</code>-Klasse<a class="anchor-link" href="#Die-WorldFactory-Klasse">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6a06c25d047b132d">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">WorldFactory</span><span class="p">:</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">location_descriptions</span><span class="p">:</span> <span class="n">LocationDescriptions</span><span class="p">):</span>
+        <span class="n">locations</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]:</span> <span class="n">Location</span><span class="o">.</span><span class="n">from_description</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">location_descriptions</span>
+        <span class="p">}</span>
+        <span class="n">initial_location_name</span> <span class="o">=</span> <span class="n">location_descriptions</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
+        <span class="n">_build_connections_for_all_locations</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">location_descriptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">World</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">initial_location_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=bc6a021dc2a38097"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Verwendung-der-Factory">Verwendung der Factory<a class="anchor-link" href="#Verwendung-der-Factory">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=eab9337729680295">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">factory</span> <span class="o">=</span> <span class="n">WorldFactory</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=836cde071ae2082f">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">simple_locations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=97a70615ac287d73">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>World(locations={'Room 1': Location(name='Room 1',
+                                    description='A small room',
+                                    connections={'north': Location(name='Room '
+                                                                        '2',
+                                                                   description='A '
+                                                                               'large '
+                                                                               'room',
+                                                                   connections={'south': &lt;Recursion on Location with id=1958144204688&gt;})}),
+                 'Room 2': Location(name='Room 2',
+                                    description='A large room',
+                                    connections={'south': Location(name='Room '
+                                                                        '1',
+                                                                   description='A '
+                                                                               'small '
+                                                                               'room',
+                                                                   connections={'north': &lt;Recursion on Location with id=1958143660752&gt;})})},
+      initial_location_name='Room 1')
+</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -13148,215 +13342,16 @@ sprechen?<ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=169b5122152be21e"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Beispiel">Beispiel<a class="anchor-link" href="#Beispiel">¶</a></h2><ul>
-<li>In Version 3b ist der Konstruktor von <code>World</code> relativ komplex</li>
-<li>Wir können die Erzeugung in eine Factory auslagern</li>
-<li>Siehe <code>code/adventure/v3c</code></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=5bc0ef7494b5fb59"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Python:-Benannte-Parameter-Idiom">Python: Benannte Parameter Idiom<a class="anchor-link" href="#Python:-Benannte-Parameter-Idiom">¶</a></h2><p>Das Python-Idiom "Benannte Parameter" (engl. "Named Parameters") ist eine
-Variante des Factory Patterns.</p>
-<ul>
-<li>Python unterstützt keine benannten Parameter</li>
-<li>Manchmal ist es schwer, Funktionen mit vielen Parametern zu vermeiden<ul>
-<li>Insbesondere bei der Konstruktion von Objekten</li>
-</ul>
-</li>
-<li>Selbst wenn wir Default-Werte verwenden, müssen wir viele der Parameter angeben<ul>
-<li>Alle Parameter vor demjenigen, den wir ändern wollen</li>
-</ul>
-</li>
-<li>Es ist schwer, den Überblick zu behalten, welche Parameter was bedeuten<ul>
-<li>Moderne IDEs vereinfachen das</li>
-</ul>
-</li>
-<li>Wie können wir Funktionen mit vielen Parametern übersichtlich gestalten?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=f2a3d9bbacb7bd8a"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Benannte-Parameter-/-Builder-Pattern">Benannte Parameter / Builder Pattern<a class="anchor-link" href="#Benannte-Parameter-/-Builder-Pattern">¶</a></h1><h3 id="Frage">Frage<a class="anchor-link" href="#Frage">¶</a></h3><ul>
-<li>Wie können wir Funktionen mit vielen Parametern so gestalten, dass sie
-leicht zu benutzen und verständlich bleiben?</li>
-<li>Wie können wir Objekte konstruieren, die viel Information zu ihrer Konstruktion benötigen?</li>
-</ul>
-<h3 id="Antwort">Antwort<a class="anchor-link" href="#Antwort">¶</a></h3><ul>
-<li>Wir schreiben eine Hilfsklasse, die die Parameter speichert</li>
-<li>Diese Klasse hat Methoden, die einzelne Parameter setzen<ul>
-<li>Jede dieser Methoden gibt <code>*this</code> als Referenz zurück</li>
-</ul>
-</li>
-<li>Eine Methode konstruiert die gewünschte Klasse oder führt die gewünschte Operation aus</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=ae885165c6fae48d">
-<div class="input">
-<div class="prompt input_prompt">In [1]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Window</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">visible</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="n">active</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="n">resizable</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="n">fullscreen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"Building window with width=</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">, height=</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">, x=</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, y=</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">, visible=</span><span class="si">{</span><span class="n">visible</span><span class="si">}</span><span class="s2">, active=</span><span class="si">{</span><span class="n">active</span><span class="si">}</span><span class="s2">, resizable=</span><span class="si">{</span><span class="n">resizable</span><span class="si">}</span><span class="s2">, fullscreen=</span><span class="si">{</span><span class="n">fullscreen</span><span class="si">}</span><span class="s2">"</span>
-        <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=db8123a86ab95f2b">
-<div class="input">
-<div class="prompt input_prompt">In [2]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">window</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Building window with width=800, height=600, x=0, y=0, visible=True, active=True, resizable=True, fullscreen=False
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=0841e6a69c1521e2">
-<div class="input">
-<div class="prompt input_prompt">In [3]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Window</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">visible</span><span class="p">,</span> <span class="n">active</span><span class="p">,</span> <span class="n">resizable</span><span class="p">,</span> <span class="n">fullscreen</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">visible</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="n">active</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">resizable</span> <span class="o">=</span> <span class="n">resizable</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fullscreen</span> <span class="o">=</span> <span class="n">fullscreen</span>
-
-
-<span class="k">class</span> <span class="nc">WindowBuilder</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="mi">800</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_height</span> <span class="o">=</span> <span class="mi">600</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_visible</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_active</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_resizable</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fullscreen</span> <span class="o">=</span> <span class="kc">False</span>
-
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">Window</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_visible</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_active</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_resizable</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_fullscreen</span><span class="p">,</span>
-        <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">width</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">height</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_height</span> <span class="o">=</span> <span class="n">height</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="n">y</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">visible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_visible</span> <span class="o">=</span> <span class="n">visible</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">active</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_active</span> <span class="o">=</span> <span class="n">active</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">resizable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resizable</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_resizable</span> <span class="o">=</span> <span class="n">resizable</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">fullscreen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullscreen</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fullscreen</span> <span class="o">=</span> <span class="n">fullscreen</span>
-        <span class="k">return</span> <span class="bp">self</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6158fdf504d582eb">
-<div class="input">
-<div class="prompt input_prompt">In [4]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">default_window</span> <span class="o">=</span> <span class="n">WindowBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7b269211dbddb463">
-<div class="input">
-<div class="prompt input_prompt">In [5]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_window</span> <span class="o">=</span> <span class="n">WindowBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=2ea93aa190074c78"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=0c717aefe697ca00"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Mini-Workshop:-Factory-im-Bibliothekssystem">Mini-Workshop: Factory im Bibliothekssystem<a class="anchor-link" href="#Mini-Workshop:-Factory-im-Bibliothekssystem">¶</a></h2><ul>
 <li>Sie haben in vorhergehenden Workshops den Beginn eines Bibliothekssystems
 implementiert</li>
-<li>Bei der Erzeugung werden die Daten von Büchern aus einer Datei gelesen (wir
-simulieren das, durch die <code>library_data_sk</code> Python-Bibliothek)</li>
-<li>Verwenden Sie das Factory Pattern, um die Erzeugung der Bücher von dem Rest
-des Bibliothekssystems zu trennen</li>
+<li>Implementieren Sie eine Möglichkeit, die Daten Ihrer Bibliothek aus einer
+JSON-Datei zu laden. (Legen Sie dazu eine JSON-Datei an, die strukturell
+zu Ihrer Implementierung passt)</li>
+<li>Verlagern Sie dann die Erzeugung des Bibliothekssystems in eine Factory-Klasse</li>
 </ul>
 <p><em>Hinweis:</em> Sie können das Factory Pattern entweder für die Erzeugung einer
 Sammlung von Büchern oder für die Erzeugung der Bibliothek verwenden. Gibt es

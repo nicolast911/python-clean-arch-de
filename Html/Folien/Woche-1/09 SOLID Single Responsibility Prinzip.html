@@ -13086,159 +13086,17 @@ div#notebook {
 <main>
 <div class="border-box-sizing" id="notebook" tabindex="-1">
 <div class="container" id="notebook-container">
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=cad42ddbefb88fa3"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=985918b9c7facba0"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div style="text-align:center; font-size:200%;">
-<b>SRP und Hohe Kohäsion</b>
+<b>SOLID: Single Responsibility Prinzip</b>
 </div>
 <br/>
 <div style="text-align:center;">Dr. Matthias Hölzl</div>
 <br/>
-<!-- 09 SRP und Hohe Kohäsion.html -->
-<!-- python_courses/slides/module_500_solid_grasp/topic_260_srp_and_high_cohesion_intro.py -->
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=7d94c55a74507bd9"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Aktuelle-Implementierung-des-Adventure-Spiels">Aktuelle Implementierung des Adventure-Spiels<a class="anchor-link" href="#Aktuelle-Implementierung-des-Adventure-Spiels">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=5633826ec901d46b">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">TypeAlias</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=076997a98c4e9424">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">json_file</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"**/simple-locations.json"</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">simple_locations</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=e0a6f266bee1ba21">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">LocationDescription</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-<span class="n">LocationDescriptions</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">LocationDescription</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=2f7821fdc1fb9ed9">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">Location</span><span class="p">:</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-    <span class="n">connections</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Location"</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_description</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">LocationDescription</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Location"</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="s2">""</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Location | None"</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=032e9d582abdee98">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">World</span><span class="p">:</span>
-    <span class="n">locations</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Location</span><span class="p">]</span>
-    <span class="n">initial_location_name</span><span class="p">:</span> <span class="nb">str</span>
-
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">locations</span><span class="p">[</span><span class="n">location_name</span><span class="p">]</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_location_descriptions</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">location_descriptions</span><span class="p">:</span> <span class="n">LocationDescriptions</span><span class="p">):</span>
-        <span class="n">locations</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">data</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]:</span> <span class="n">Location</span><span class="o">.</span><span class="n">from_description</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">location_descriptions</span>
-        <span class="p">}</span>
-        <span class="n">initial_location_name</span> <span class="o">=</span> <span class="n">location_descriptions</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
-        <span class="n">_build_connections_for_all_locations</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">location_descriptions</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">initial_location_name</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=ff3c5384aef68965">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_build_connections_for_all_locations</span><span class="p">(</span>
-    <span class="n">locations</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Location</span><span class="p">],</span> <span class="n">location_descriptions</span><span class="p">:</span> <span class="n">LocationDescriptions</span>
-<span class="p">):</span>
-    <span class="k">for</span> <span class="n">location_description</span> <span class="ow">in</span> <span class="n">location_descriptions</span><span class="p">:</span>
-        <span class="n">connections</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">direction</span><span class="p">:</span> <span class="n">locations</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">direction</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">location_description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"connections"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="p">}</span>
-        <span class="n">locations</span><span class="p">[</span><span class="n">location_description</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]]</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="n">connections</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=a1dcb642c7fe1055"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Wie ist diese Implementierung zu bewerten?<ul>
-<li>Was ist gut?</li>
-<li>Was sollten wir noch verbessern?</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=eda39b5dd03e7b93"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Generell ist die Struktur gut</li>
-<li>Ein potenzielles Problem ist, dass wir sehr viel Arbeit in die
-<code>World</code>-Klasse verlagern</li>
-<li>Das ist typisch, wenn wir "Information Expert" anwenden</li>
-<li>Wir brauchen einen "Gegenspieler" für dieses Pattern</li>
-</ul>
+<!-- 09 SOLID Single Responsibility Prinzip.html -->
+<!-- python_courses/slides/module_500_solid_grasp/topic_260_srp_intro.py -->
 </div>
 </div>
 </div>
@@ -13270,9 +13128,32 @@ haben darf</li>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=12ea3c4e88dab550"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Wie-entdecken-wir-eine-Verletzung-des-SRP?">Wie entdecken wir eine Verletzung des SRP?<a class="anchor-link" href="#Wie-entdecken-wir-eine-Verletzung-des-SRP?">¶</a></h3><ul>
+<li>Analyse von Änderungen, die aus Anforderungen entstehen könnten</li>
+<li>Betrachtung der Akteure, die die Klasse verwenden/Änderungen anfordern</li>
+<li>Analyse des Codes auf mögliche Änderungen</li>
+<li>Code Smell: Divergent Change</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=6cbac0bd2936f940"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Beispiel:-Verletzung-des-SRP">Beispiel: Verletzung des SRP<a class="anchor-link" href="#Beispiel:-Verletzung-des-SRP">¶</a></h3><p>Wir haben die folgende Funktion.</p>
+<ul>
+<li>Verletzt sie das SRP?</li>
+<li>Was können wir dagegen tun?</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=cbcbe5bb910f96ff">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_save_and_print_results</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -13290,12 +13171,12 @@ haben darf</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=46b6c2e6b44b96f9">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=46b6c2e6b44b96f9">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_results</span> <span class="o">=</span> <span class="p">[]</span>
 </pre></div>
 </div>
 </div>
@@ -13303,33 +13184,60 @@ haben darf</li>
 </div>
 <div class="cell border-box-sizing code_cell rendered" id="cell-id=b5b308111ebe47a5">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">compute_save_and_print_results</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">my_results</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Result: 3
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>3</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered" id="cell-id=b947aa9c27cf74e1">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_results</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[3]</pre>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=195d9fe77e3b9bb7"><div class="prompt input_prompt">
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=192175cfab21c62e"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Was-sind-die-Gr%C3%BCnde,-dass-sich-diese-Funktion-%C3%A4ndert?">Was sind die Gründe, dass sich diese Funktion ändert?<a class="anchor-link" href="#Was-sind-die-Gr%C3%BCnde,-dass-sich-diese-Funktion-%C3%A4ndert?">¶</a></h3><ul>
 <li>Die komplexe Berechnung</li>
 <li>Das Speichern der Ergebnisse</li>
-<li>Die Art, in der der Report ausgedruckt wird</li>
+<li>Die Formatierung des Berichts</li>
 <li>Die Information, die im Report enthalten ist</li>
 <li>Die Teile oder Reihenfolge der Berechnung</li>
 </ul>
@@ -13338,7 +13246,7 @@ haben darf</li>
 </div>
 <div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=816abc40616cdee9">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_result</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -13348,9 +13256,9 @@ haben darf</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=89dc8acae18c2fa6">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=89dc8acae18c2fa6">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">save_result</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
@@ -13360,9 +13268,9 @@ haben darf</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=c2153ac0fe74238c">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=c2153ac0fe74238c">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_report</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
@@ -13375,7 +13283,7 @@ haben darf</li>
 </div>
 <div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=5f878d792fa0ac75">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_new_sensor_data</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -13388,24 +13296,62 @@ haben darf</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d7f7252176a02f45">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=640a42fec534f743">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_sensor_data</span> <span class="o">=</span> <span class="p">[]</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f694ce5adaa72292">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">process_new_sensor_data</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">my_sensor_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Result: 3
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>3</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered" id="cell-id=c8fa15f072e8c72b">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_sensor_data</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[3]</pre>
+</div>
 </div>
 </div>
 </div>
@@ -13420,13 +13366,13 @@ haben darf</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=b4b11edd2e952128"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=862d84f6d81e97f1"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Was-sind-die-Gr%C3%BCnde,-dass-sich-die-neue-Funktion-%C3%A4ndert?">Was sind die Gründe, dass sich die neue Funktion ändert?<a class="anchor-link" href="#Was-sind-die-Gr%C3%BCnde,-dass-sich-die-neue-Funktion-%C3%A4ndert?">¶</a></h3><ul>
 <li><del>Die komplexe Berechnung</del> $\rightarrow$ <code>compute_result()</code></li>
 <li><del>Das Speichern der Ergebnisse</del> $\rightarrow$ <code>save_result()</code></li>
-<li><del>Die Art, in der der Report ausgedruckt wird</del>
+<li><del>Die Art, in der der Bericht ausgedruckt wird</del>
 $\rightarrow$ <code>print_report()</code></li>
 <li><del>Die Information, die im Report enthalten ist</del>
 $\rightarrow$ <code>print_report()</code></li>
@@ -13435,13 +13381,11 @@ $\rightarrow$ <code>print_report()</code></li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=08ac70fd1b3fcdbe"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=5972de0fbb0dbe14"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Die neue Funktion hat aber immer noch mehr als eine Verantwortung!</li>
-<li>Das rührt daher, dass Sie das Command-Query-Separation-Prinzip (CQS)
-verletzt<ul>
+<li>Die Funktion verletzt immer noch das Command-Query-Separation-Prinzip (CQS)<ul>
 <li>Sie hat Seiteneffekte (Speichern und Drucken)</li>
 <li>Sie gibt einen Wert zurück (das neue Ergebnis)</li>
 </ul>
@@ -13450,7 +13394,7 @@ verletzt<ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=abfbb54b172a2914"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=5db92b615fcbf6d6"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Command-Query-Separation-(CQS)">Command-Query Separation (CQS)<a class="anchor-link" href="#Command-Query-Separation-(CQS)">¶</a></h2><ul>
@@ -13460,45 +13404,423 @@ verletzt<ul>
 beobachtbaren Seiteneffekte hat</li>
 <li>Eine Anweisung ist eine Funktion, die keine Werte zurückgibt, aber
 beobachtbare Seiteneffekte hat</li>
-<li>Eine Funktion, die CQS nicht erfüllt verletzt immer das SRP</li>
+<li>Eine Funktion, die CQS nicht erfüllt verletzt meistens das SRP</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=eb3984557c4e11a2"><div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=d5c80bab562d1ff6">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4fa5e2653f25419b">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 7, 8, 9, 9]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fbef725735a22f8d">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b0e6116901cfd7ae">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=75de4a749c47245d">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 7, 8, 9, 9]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=ccf63547bc39a709"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="GRASP:-High-Cohesion-(Hohe-Koh%C3%A4renz)">GRASP: High Cohesion (Hohe Kohärenz)<a class="anchor-link" href="#GRASP:-High-Cohesion-(Hohe-Koh%C3%A4renz)">¶</a></h1><ul>
-<li>Beschreibt, wie gut verschiedene Teile eines Artefakts zusammenpassen</li>
-<li>Hohe Kohäsion vereinfacht Entwicklung, Wiederverwendung, Testen, Leistung</li>
-<li>Niedrige Kohäsion macht es schwierig, den Code zu verstehen oder herauszufinden,
-wo Änderungen vorgenommen werden sollen</li>
-<li>Der <strong>negative Effekt</strong> niedriger Kohäsion ist immer <strong>groß</strong></li>
-<li>Es ist <strong>schwer</strong>, ein System mit niedriger Kohäsion in einen Zustand mit mehr
-Kohäsion zu überführen</li>
-<li>Code Smells: Schrotflinten-Operation (shotgun surgery), divergente Änderungen
-(divergent change)</li>
-<li>Verwandt: Schichten, SRP, Command/Query Separation, Aspekte (Separation of
-Concerns)</li>
+<h2 id="Workshop:-CQS">Workshop: CQS<a class="anchor-link" href="#Workshop:-CQS">¶</a></h2><p>Ein Verkaufssystems für Veranstaltungstickets speichert die Anzahl der noch
+verfügbaren Tickets für verschiedene Veranstaltungen in einer Variable <code>events</code>
+und die Anzahl der erfolgreichen/fehlgeschlagenen Ticketkäufe in Variablen
+<code>tickets_sold</code> und <code>failed_purchases</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=9e1e6e876e80db9a">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">events</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Cats"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"Les Miserables"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"Phantom of the Opera"</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
+<span class="n">tickets_sold</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">failed_purchases</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=f6d08ef5f48c1021"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Die Klasse <code>User</code> wurde folgendermaßen implementiert:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=f4c35f14c8bcec81">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=cc6a094ab1ea6ce5">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="n">events</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">buy_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">number_of_tickets</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">number_of_tickets</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">"Sorry, there are not enough tickets for </span><span class="si">{</span><span class="n">event</span><span class="si">}</span><span class="s2">."</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">events</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">number_of_tickets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">number_of_tickets</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"You have </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> tickets for </span><span class="si">{</span><span class="n">event</span><span class="si">}</span><span class="s2">."</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">register_sale_and_print</span><span class="p">(</span><span class="n">sales_result</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sales_result</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sales_result</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Sorry"</span><span class="p">):</span>
+            <span class="k">global</span> <span class="n">failed_purchases</span>
+            <span class="n">failed_purchases</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">number_of_tickets</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sales_result</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tickets sold: </span><span class="si">{</span><span class="n">number_of_tickets</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">global</span> <span class="n">tickets_sold</span>
+            <span class="n">tickets_sold</span> <span class="o">+=</span> <span class="n">number_of_tickets</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=a20f058c36c715d7"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Das System wird folgendermaßen verwendet:</p>
+<ul>
+<li>Ein Benutzer kauft Tickets für eine Veranstaltung</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=2717af173b8ea131"><div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=42f86d6d26e338c3">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=a3de86bcd15825d2">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">buy_ticket</span><span class="p">(</span><span class="s2">"Cats"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">register_sale_and_print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>You have 2 tickets for Cats.
+Tickets sold: 2
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=ba80aa19f70f37e2">
+<div class="input">
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">buy_ticket</span><span class="p">(</span><span class="s2">"Les Miserables"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">register_sale_and_print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Sorry, there are not enough tickets for Les Miserables.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=709c9f945440c0d1"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Hohe-Koh%C3%A4sion-und-Tests">Hohe Kohäsion und Tests<a class="anchor-link" href="#Hohe-Koh%C3%A4sion-und-Tests">¶</a></h2><ul>
-<li>Geringe Kohäsion führt dazu, dass die Systemfunktionalität über das gesamte
-System "verschmiert" wird</li>
-<li>Dies führt oft zu einer hohen Kopplung und großen Klassen</li>
-<li>Diese Klassen lassen sich nur schwer in einen gewünschten Zustand versetzen</li>
-<li>"Verschmierte Funktionalität"<ul>
-<li>Erschweren Unit-Tests</li>
-<li>Erzwingen die Verwendung vieler Testdoubles</li>
-<li>Verringern den Wert von Unit-Tests als Dokumentation</li>
+<ul>
+<li>Wir wollen wissen, wie viele Tickets ein Benutzer für eine Veranstaltung hat
+und wie viele noch verfügbar sind:</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=ccfaf7bf9548747c">
+<div class="input">
+<div class="prompt input_prompt">In [23]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">buy_ticket</span><span class="p">(</span><span class="s2">"Cats"</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"There are </span><span class="si">{</span><span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Cats'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> tickets left for Cats."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>You have 2 tickets for Cats.
+There are 8 tickets left for Cats.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=481e7510a681736c"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Es stellt sich heraus, dass das System sehr fehleranfällig ist.</p>
+<ul>
+<li>Welche der besprochenen Prinzipien werden verletzt?</li>
+<li>Implementieren Sie eine verbesserte Version des Systems.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_answer" id="cell-id=c6dcdfb3f85e7bb1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Antwort:</em></p>
+<ul>
+<li>Command-Query-Separation-Prinzip (CQS):<ul>
+<li><code>buy_ticket()</code></li>
+<li><code>register_sale_and_print()</code></li>
 </ul>
 </li>
+<li>Temporale Kopplung zwischen <code>buy_ticket()</code> und <code>register_sale_and_print()</code></li>
+<li>Rückgabe von String-Werten statt strukturierten Daten</li>
+<li>...</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=96b66c63c35ea05f"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Wir lassen die globalen Variablen unverändert, es wäre aber besser, sie zu
+kapseln</li>
+<li>Wir isolieren die Verantwortung zum Kaufen des Tickets in einer eigenen
+Methode</li>
+<li>Die neuen Methoden befolgen CQS</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=00a092ad52e05f8a">
+<div class="input">
+<div class="prompt input_prompt">In [24]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="n">events</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">num_tickets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">buy_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">number_of_tickets</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">number_of_tickets</span><span class="p">:</span>
+            <span class="k">global</span> <span class="n">failed_purchases</span>
+            <span class="n">failed_purchases</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sorry, there are not enough tickets for </span><span class="si">{</span><span class="n">event</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">events</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">number_of_tickets</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">number_of_tickets</span>
+            <span class="k">global</span> <span class="n">tickets_sold</span>
+            <span class="n">tickets_sold</span> <span class="o">+=</span> <span class="n">number_of_tickets</span>
+
+    <span class="k">def</span> <span class="nf">buy_ticket_and_print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">number_of_tickets</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buy_ticket</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">number_of_tickets</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"You have </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num_tickets</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> tickets for </span><span class="si">{</span><span class="n">event</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tickets sold: </span><span class="si">{</span><span class="n">number_of_tickets</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=af119da91e653727">
+<div class="input">
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=dca8d75b76cb32b3">
+<div class="input">
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">user</span><span class="o">.</span><span class="n">buy_ticket_and_print</span><span class="p">(</span><span class="s2">"Cats"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>You have 2 tickets for Cats.
+Tickets sold: 2
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c5a74103241c2725">
+<div class="input">
+<div class="prompt input_prompt">In [27]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">user</span><span class="o">.</span><span class="n">buy_ticket_and_print</span><span class="p">(</span><span class="s2">"Les Miserables"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Sorry, there are not enough tickets for Les Miserables.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0b75ec25f97fd3b0">
+<div class="input">
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">user</span><span class="o">.</span><span class="n">num_tickets</span><span class="p">(</span><span class="s2">"Cats"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[28]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>2</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
