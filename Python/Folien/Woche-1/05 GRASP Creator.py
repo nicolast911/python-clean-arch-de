@@ -133,7 +133,7 @@ class World:
 
 # %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
 #
-# - Wir können die die `World`-Klasse jetzt verwenden.
+# - Wir können die `World`-Klasse jetzt verwenden.
 
 # %%
 world = World.from_location_descriptions(simple_locations)
