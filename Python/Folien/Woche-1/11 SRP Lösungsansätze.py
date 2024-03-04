@@ -37,22 +37,21 @@
 #
 # <img src="img/book_02.svg"
 #      style="display:block;margin:auto;width:60%"/>
-#
 
 # %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
 class Book:
     def __init__(self, title: str, author: str, pages: int):
-        self._title = title
-        self._author = author
-        self._pages = pages
+        self.title = title
+        self.author = author
+        self.pages = pages
 
     def print(self):
         # Lots of code that handles the printer
-        print(f"Printing {self._title} to printer.")
+        print(f"Printing {self.title} to printer.")
 
     def save(self):
         # Lots of code that handles the database
-        print(f"Saving {self._title} to database.")
+        print(f"Saving {self.title} to database.")
 
 
 # %% tags=["keep"]
@@ -81,11 +80,11 @@ class BookV1a:
 # %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
 class BookPrinterV1a:
     def __init__(self, book):
-        self._book = book
+        self.book = book
 
     def print(self):
         # Lots of code that handles the printer
-        print(f"Printing {self._book.title} to printer.")
+        print(f"Printing {self.book.title} to printer.")
 
 
 # %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
@@ -96,14 +95,6 @@ class BookDatabaseV1a:
     def save(self):
         # Lots of code that handles the database
         print(f"Saving {self.book.title} to database.")
-
-    @property
-    def book(self):
-        return self._book
-
-    @book.setter
-    def book(self, value):
-        self._book = value
 
 
 # %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
@@ -151,7 +142,7 @@ book_printer_facade_v1a.save()
 # <img src="img/book_resolution_1_srp.svg"
 #      style="display:block;margin:auto;width:50%"/>
 
-# %% tags=["keep"]
+# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
 class BookV1:
     def __init__(self, title: str, author: str, pages: int):
         self.title = title
@@ -161,14 +152,16 @@ class BookV1:
 
 # %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
 class BookPrinterV1:
-    def print(self, book):
+    @staticmethod
+    def print(book):
         # Lots of code that handles the printer
         print(f"Printing {book.title} to printer.")
 
 
 # %% tags=["keep"]
 class BookDatabaseV1:
-    def save(self, book):
+    @staticmethod
+    def save(book):
         # Lots of code that handles the database
         print(f"Saving {book.title} to database.")
 
@@ -195,25 +188,49 @@ book_database_v1.save(book_v1)
 
 # %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
 class BookFacadeV1:
-    def __init__(self):
+    def __init__(self, book):
+        self.book = book
         self.book_printer = BookPrinterV1()
         self.book_database = BookDatabaseV1()
 
-    def print(self, book):
-        self.book_printer.print(book)
+    def print(self):
+        self.book_printer.print(self.book)
 
-    def save(self, book):
-        self.book_database.save(book)
+    def save(self):
+        self.book_database.save(self.book)
+
+
+# %% tags=["keep"]
+book_facade_v1 = BookFacadeV1(book_v1)
+
+# %% tags=["keep"]
+book_facade_v1.print()
+
+# %% tags=["keep"]
+book_facade_v1.save()
+
+
+# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+#
+# ### Implementierung als Funktionen
+
+# %% tags=["keep"]
+def print_book(book):
+    # Lots of code that handles the printer
+    print(f"Printing {book.title} to printer.")
 
 
 # %% tags=["keep"]
-book_facade_v1 = BookFacadeV1()
+def save_book(book):
+    # Lots of code that handles the database
+    print(f"Saving {book.title} to database.")
+
 
 # %% tags=["keep"]
-book_facade_v1.print(book_v1)
+print_book(book_v1)
 
 # %% tags=["keep"]
-book_facade_v1.save(book_v1)
+save_book(book_v1)
 
 
 # %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
@@ -278,3 +295,13 @@ book_v2.save()
 # <img src="img/book_resolution_2_srp.svg"
 #      style="float:right;padding:5px;width:50%"/>
 # </div>
+
+# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+#
+# ## Workshop: SRP-Verletzung auflösen
+#
+# - Implementieren Sie die fehlen Funktionalität in Ihrem Bibliothekssystem,
+#   falls Sie das noch nicht gemacht haben
+# - Untersuchen Sie die Klassen Ihres Bibliothekssystems, ob Sie darin
+#   bereits SRP-Verletzungen finden
+# - Falls dies der Fall ist, lösen Sie sie auf

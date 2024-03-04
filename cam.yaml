@@ -7,8 +7,9 @@ channels:
   - fastai
 dependencies:
   - python>=3.11
-  # - cuda==11.7
-  # - cudnn
+  - cuda==12.1  # Same version as pytorch below
+  - cuda-toolkit
+  - cudnn
   - appdirs
   - attrs
   - autopep8
@@ -47,6 +48,7 @@ dependencies:
   - mypy
   - nbconvert
   - networkx
+  - ninja
   # - nbex
   - numba
   - numpy
@@ -69,7 +71,7 @@ dependencies:
   - python-build
   - python-dotenv
   - pytorch
-  - pytorch-cuda==11.7
+  - pytorch-cuda==12.1
   - requests
   - ruff
   - scikit-build
@@ -94,3 +96,4 @@ dependencies:
   - typer
   - uvicorn
   - watchdog
+  - wurlitzer

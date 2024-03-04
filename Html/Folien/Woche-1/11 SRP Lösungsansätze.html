@@ -13107,31 +13107,31 @@ div#notebook {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=97afe3d39f603f0c"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=2b58e20e2a392c3b"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Verletzung-des-SRPs">Verletzung des SRPs<a class="anchor-link" href="#Verletzung-des-SRPs">¶</a></h2><p><img alt="No description has been provided for this image" src="img/book_02.svg" style="display:block;margin:auto;width:60%"/></p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=e0d82c2d1512c417">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=be38018b000c8f8f">
 <div class="input">
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Book</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pages</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_title</span> <span class="o">=</span> <span class="n">title</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_author</span> <span class="o">=</span> <span class="n">author</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pages</span> <span class="o">=</span> <span class="n">pages</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="n">pages</span>
 
     <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Lots of code that handles the printer</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Printing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_title</span><span class="si">}</span><span class="s2"> to printer."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Printing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to printer."</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Lots of code that handles the database</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saving </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_title</span><span class="si">}</span><span class="s2"> to database."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saving </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to database."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13185,24 +13185,24 @@ Saving Clean Code to database.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=092d497f770d7903">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=17927638a92ca743">
 <div class="input">
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">BookPrinterV1a</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_book</span> <span class="o">=</span> <span class="n">book</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">book</span> <span class="o">=</span> <span class="n">book</span>
 
     <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Lots of code that handles the printer</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Printing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to printer."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Printing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to printer."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=82e004f5abb999b6">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=313f6f6652fa21bd">
 <div class="input">
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
@@ -13214,14 +13214,6 @@ Saving Clean Code to database.
     <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Lots of code that handles the database</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saving </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to database."</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">book</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_book</span>
-
-    <span class="nd">@book</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_book</span> <span class="o">=</span> <span class="n">value</span>
 </pre></div>
 </div>
 </div>
@@ -13343,7 +13335,7 @@ Saving Clean Code to database.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=a9b29cc757bce2de">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=a9b29cc757bce2de">
 <div class="input">
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
@@ -13358,13 +13350,14 @@ Saving Clean Code to database.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=cfa22571d9d6896d">
+<div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=f49f62b8914d556a">
 <div class="input">
 <div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">BookPrinterV1</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="n">book</span><span class="p">):</span>
         <span class="c1"># Lots of code that handles the printer</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Printing </span><span class="si">{</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to printer."</span><span class="p">)</span>
 </pre></div>
@@ -13372,13 +13365,14 @@ Saving Clean Code to database.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=30d4e69d858113b1">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=1f08c9ecf9135abb">
 <div class="input">
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">BookDatabaseV1</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">book</span><span class="p">):</span>
         <span class="c1"># Lots of code that handles the database</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saving </span><span class="si">{</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to database."</span><span class="p">)</span>
 </pre></div>
@@ -13450,43 +13444,44 @@ Saving Clean Code to database.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=b361355f003d578e">
+<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=72adc9f37344378c">
 <div class="input">
 <div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">BookFacadeV1</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">book</span> <span class="o">=</span> <span class="n">book</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">book_printer</span> <span class="o">=</span> <span class="n">BookPrinterV1</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">book_database</span> <span class="o">=</span> <span class="n">BookDatabaseV1</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">book_printer</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">book_printer</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">book</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">book_database</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">book_database</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">book</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=6df69f021222b030">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=3071a13ce711b672">
 <div class="input">
 <div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">book_facade_v1</span> <span class="o">=</span> <span class="n">BookFacadeV1</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">book_facade_v1</span> <span class="o">=</span> <span class="n">BookFacadeV1</span><span class="p">(</span><span class="n">book_v1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=deaaaa368f8fe0f6">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=74a9e0297e9cc0d0">
 <div class="input">
 <div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">book_facade_v1</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">book_v1</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">book_facade_v1</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -13503,12 +13498,89 @@ Saving Clean Code to database.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=6f4712e1611e7eed">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=5394aa6fc545f9a9">
 <div class="input">
 <div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">book_facade_v1</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">book_v1</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">book_facade_v1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Saving Clean Code to database.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=13635fba195e369e"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Implementierung-als-Funktionen">Implementierung als Funktionen<a class="anchor-link" href="#Implementierung-als-Funktionen">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=104543c6360ee8b0">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_book</span><span class="p">(</span><span class="n">book</span><span class="p">):</span>
+    <span class="c1"># Lots of code that handles the printer</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Printing </span><span class="si">{</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to printer."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=8d110246c9c5d186">
+<div class="input">
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">save_book</span><span class="p">(</span><span class="n">book</span><span class="p">):</span>
+    <span class="c1"># Lots of code that handles the database</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saving </span><span class="si">{</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> to database."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=2a0c9ddafd001967">
+<div class="input">
+<div class="prompt input_prompt">In [23]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">print_book</span><span class="p">(</span><span class="n">book_v1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Printing Clean Code to printer.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=a83e5f2bcf733211">
+<div class="input">
+<div class="prompt input_prompt">In [24]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">save_book</span><span class="p">(</span><span class="n">book_v1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13534,7 +13606,7 @@ Saving Clean Code to database.
 </div>
 <div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=4ff06a3c78f1fb5d">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">BookV2</span><span class="p">:</span>
@@ -13561,7 +13633,7 @@ Saving Clean Code to database.
 </div>
 <div class="cell border-box-sizing code_cell rendered celltag_keep celltag_subslide" id="cell-id=68b67055a9da839b">
 <div class="input">
-<div class="prompt input_prompt">In [22]:</div>
+<div class="prompt input_prompt">In [26]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">BookPrinterV2</span><span class="p">:</span>
@@ -13575,7 +13647,7 @@ Saving Clean Code to database.
 </div>
 <div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=056e9fe001879e16">
 <div class="input">
-<div class="prompt input_prompt">In [23]:</div>
+<div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">BookDatabaseV2</span><span class="p">:</span>
@@ -13589,7 +13661,7 @@ Saving Clean Code to database.
 </div>
 <div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=fb5dab7d9051ddbe">
 <div class="input">
-<div class="prompt input_prompt">In [24]:</div>
+<div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">book_v2</span> <span class="o">=</span> <span class="n">BookV2</span><span class="p">(</span>
@@ -13602,7 +13674,7 @@ Saving Clean Code to database.
 </div>
 <div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=0ff2cb347c46928f">
 <div class="input">
-<div class="prompt input_prompt">In [25]:</div>
+<div class="prompt input_prompt">In [29]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">book_v2</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
@@ -13624,7 +13696,7 @@ Saving Clean Code to database.
 </div>
 <div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=9b04caacebfb6c1b">
 <div class="input">
-<div class="prompt input_prompt">In [26]:</div>
+<div class="prompt input_prompt">In [30]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">book_v2</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
@@ -13651,6 +13723,19 @@ Saving Clean Code to database.
 <img alt="No description has been provided for this image" src="img/book_resolution_1_srp.svg" style="float:left;padding:5px;width:40%"/>
 <img alt="No description has been provided for this image" src="img/book_resolution_2_srp.svg" style="float:right;padding:5px;width:50%"/>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=9a96dc2d8297880b"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Workshop:-SRP-Verletzung-aufl%C3%B6sen">Workshop: SRP-Verletzung auflösen<a class="anchor-link" href="#Workshop:-SRP-Verletzung-aufl%C3%B6sen">¶</a></h2><ul>
+<li>Implementieren Sie die fehlen Funktionalität in Ihrem Bibliothekssystem,
+falls Sie das noch nicht gemacht haben</li>
+<li>Untersuchen Sie die Klassen Ihres Bibliothekssystems, ob Sie darin
+bereits SRP-Verletzungen finden</li>
+<li>Falls dies der Fall ist, lösen Sie sie auf</li>
+</ul>
 </div>
 </div>
 </div>

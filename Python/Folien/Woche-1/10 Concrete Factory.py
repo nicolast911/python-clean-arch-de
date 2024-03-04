@@ -43,7 +43,7 @@
 #
 # - Wer soll ein Objekt erzeugen, wenn es Umstände gibt, die gegen Creator
 #   sprechen?
-#   - komplexe Logik zur Erzeugung
+#   - Komplexe Logik zur Erzeugung
 #   - SRP/Kohäsion
 #   - Viele Parameter zur Erzeugung notwendig
 #
@@ -52,7 +52,7 @@
 # - Eine Klasse, die nur für die Erzeugung von Objekten zuständig ist
 # - Diese Klassen werden oft als *Factory* bezeichnet
 
-# %% tags=["keep"]
+# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -154,8 +154,3 @@ pprint(world)
 #   JSON-Datei zu laden. (Legen Sie dazu eine JSON-Datei an, die strukturell
 #   zu Ihrer Implementierung passt)
 # - Verlagern Sie dann die Erzeugung des Bibliothekssystems in eine Factory-Klasse
-#
-# *Hinweis:* Sie können das Factory Pattern entweder für die Erzeugung einer
-# Sammlung von Büchern oder für die Erzeugung der Bibliothek verwenden. Gibt es
-# erhebliche Vor- oder Nachteile von einer der Varianten oder sind sie im
-# Wesentlichen äquivalent?
