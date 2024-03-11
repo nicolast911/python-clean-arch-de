@@ -7,9 +7,6 @@ channels:
   - fastai
 dependencies:
   - python>=3.11
-  - cuda==12.1  # Same version as pytorch below
-  - cuda-toolkit
-  - cudnn
   - appdirs
   - attrs
   - autopep8
@@ -17,10 +14,15 @@ dependencies:
   - black
   - bump2version
   - cattrs
+  - cxx-compiler
   - click
   - configurator
   - cookiecutter
   - copier
+  - cuda>=12.1
+  - cudnn
+  - cupy
+  - cutensor
   - cython
   - cytoolz
   - datasets
@@ -90,7 +92,7 @@ dependencies:
   - tomli
   - tomli-w
   - tornado>=6.1
-  - tox<4
+  - tox
 #  - tox-conda<0.10
   - transformers>=4
   - typer
