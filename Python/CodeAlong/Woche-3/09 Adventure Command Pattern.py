@@ -55,7 +55,7 @@
 #
 # ## Version 3c: Command Pattern
 #
-# <img src="img/adventure-v3c-overview.svg" alt="Adventure Version 3b"
+# <img src="img/adventure-v3c-overview.svg" alt="Adventure Version 3c"
 #      style="display:block;margin:auto;height:80%"/>
 
 # %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
@@ -106,7 +106,7 @@ class SkipTurnAction(Action):
 
 
 # %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
-from world_factory import WorldFactory  # noqa: E402
+from world_factory_v2 import WorldFactory  # noqa: E402
 from simple_locations import simple_locations  # noqa: E402
 
 # %% tags=["keep"]
