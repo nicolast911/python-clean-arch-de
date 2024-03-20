@@ -54,7 +54,7 @@ def interactive_action_strategy(player: "Player"):
 class Player:
     name: str
     pawn: Pawn
-    select_action: Callable[["Player"], Action] = first_action_strategy
+    select_action: Callable[["Player"], Action] = random_action_strategy
 
     @property
     def location(self) -> Location:
