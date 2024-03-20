@@ -11,3 +11,7 @@ class World:
     def __getitem__(self, location_name: str):
         """Get a location by name."""
         return self.locations[location_name]
+
+    @property
+    def initial_location(self) -> Location:
+        return self[self.initial_location_name]

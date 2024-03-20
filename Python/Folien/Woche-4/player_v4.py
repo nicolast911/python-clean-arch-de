@@ -35,6 +35,21 @@ def random_action_strategy(player: "Player"):
         return SkipTurnAction()
 
 
+def interactive_action_strategy(player: "Player"):
+    print(f"Available actions for {player.description}:")
+    for i, action in enumerate(player.actions, 1):
+        print(f"{i}: {action.description}")
+    while True:
+        try:
+            choice = int(input("Your choice: "))
+            if 0 < choice <= len(player.actions):
+                return player.actions[choice - 1]
+            else:
+                print(f"Please enter a number between 1 and {len(player.actions)}!")
+        except ValueError:
+            print("Please enter a valid number!")
+
+
 @dataclass
 class Player:
     name: str
@@ -61,4 +76,5 @@ class Player:
 
     def take_turn(self):
         action = self.select_action(self)
+        print(f"{self.description} performs: {action.description}")
         action.perform(self)
