@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>GRASP: Zusammenfassung</b>
@@ -23,7 +9,7 @@
 # <!-- 10 GRASP Zusammenfassung.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_550_grasp_summary.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - GRASP bietet verschieden "Arten" von Mustern
 #   - Finden von Lösungen
@@ -31,7 +17,7 @@
 #   - Evaluierung von Lösungen
 # - Manche Muster können zu mehreren Kategorien gehören
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Finden von Lösungen
 #
@@ -41,7 +27,7 @@
 # - Pure Fabrication
 # - Protected Variations
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Mechanismen
 #
@@ -49,7 +35,7 @@
 # - Indirection
 # - Polymorphie
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Evaluierung von Lösungen
 #
@@ -57,7 +43,7 @@
 # - High Cohesion
 # - Protected Variations
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Beziehungen zwischen GRASP-Mustern
 #

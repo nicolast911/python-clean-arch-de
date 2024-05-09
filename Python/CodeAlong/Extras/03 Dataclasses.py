@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Dataclasses</b>
@@ -23,21 +9,21 @@
 # <!-- 03 Dataclasses.py -->
 # <!-- python_courses/slides/module_200_object_orientation/topic_140_a3_dataclasses.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Definition von Klassen ist in Python recht einfach
 # - Benötigt aber relativ viel Boilerplate-Code, um eine Klasse mit gutem Verhalten
 #   zu definieren
 # - Attribute sind in `__init__()` versteckt
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
 
-# %% tags=["keep"]
+# %%
 p = Point(1, 2)
 
 
@@ -45,7 +31,7 @@ p = Point(1, 2)
 
 # %%
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -60,17 +46,17 @@ class Point:
         return self.x == other.x and self.y == other.y
 
 
-# %% tags=["keep"]
+# %%
 p = Point(1, 2)
 
-# %% tags=["keep"]
+# %%
 p
 
-# %% tags=["keep"]
+# %%
 p == Point(1, 2)
 
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Dataclasses
 #
@@ -79,11 +65,7 @@ p == Point(1, 2)
 # - Weitere Möglichkeiten: Siehe
 #   [Dokumentation](https://docs.python.org/3/library/dataclasses.html)
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
-
 # %%
-
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
 
 # %%
 
@@ -91,18 +73,22 @@ p == Point(1, 2)
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
+
+# %%
+
+# %% [markdown]
 #
 # - Dataclasses sind vollwertige Klassen
 # - Sie können Methoden enthalten
 # - Attribute können Default-Werte haben
 # - Sie können vererbt werden
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import field
 
 
-# %% tags=["start"]
+# %%
 @dataclass
 class Point3D:
     x: float
@@ -110,11 +96,11 @@ class Point3D:
     z: float
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Dataclasses erzwingen, dass Default-Werte unveränderlich sind
 #   - zumindest für einige Typen ...
@@ -122,7 +108,7 @@ class Point3D:
 #   Funktion verwendet werden, die ein neues Objekt zurückgibt
 # - Diese Art von Funktion wird "Factory-Funktion" genannt
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 class Point:
     def __init__(self, coord=[0, 0]):  # noqa
         self.coord = coord
@@ -135,31 +121,31 @@ class Point:
         self.coord[1] += dy
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 p1 = Point()
 p1
 
-# %% tags=["keep"]
+# %%
 p2 = Point()
 p2
 
-# %% tags=["keep"]
+# %%
 p1.move(1, 2)
 p1
 
-# %% tags=["keep"]
+# %%
 p2
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
-
-# %%
-
-
 # %%
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+
+# %%
+
+# %%
+
+# %% [markdown]
 #
 # - Für Listen brauchen wir keine Factory-Funktion definieren
 # - Der Listen-Konstruktor `list()` leistet das gleiche
@@ -171,11 +157,11 @@ p2
 # %%
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass, field
 
 
-# %% tags=["start"]
+# %%
 # @dataclass
 # class DefaultDemo:
 #     items: list = field(default=[])
@@ -186,7 +172,7 @@ from dataclasses import dataclass, field
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Bei Python Versionen 3.10 und früher funktioniert der Test auf unveränderliche
 # Defaults nur für einige Typen aus der Standardbibliothek, nicht für
@@ -200,7 +186,7 @@ from dataclasses import dataclass, field
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # # Workshop: Einkaufsliste
 #
@@ -215,7 +201,7 @@ from dataclasses import dataclass, field
 # ist in `examples/ShoppingListStarterKit` in Projektgerüst, das Sie als
 # Startpunkt hernehmen können. In `examples/ShoppingList` ist ein Lösungsvorschlag.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Definieren Sie zunächst eine Klasse `ShoppingListItem`, die folgende Attribute hat:
 # - `product: str`
@@ -228,32 +214,32 @@ from dataclasses import dataclass, field
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # Erzeugen sie ein `ShoppingListItem`, das 2 Pakete Kaffee zu je Eur 6.99 repräsentiert:
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Erweitern Sie die Klasse `ShoppingListItem` um eine Methode `total_price()`,
 # die den Gesamtpreis des Eintrags berechnet.
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Definieren Sie eine Variable `mein_kaffee`, die ein `ShoppingListItem`
 # repräsentiert, das 2 Pakete Kaffee zu je Eur 6.99 repräsentiert:
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Berechnen Sie den Gesamtpreis von `mein_kaffee`:
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Definieren Sie eine Klasse `ShoppingList`, die eine Liste von
 # `ShoppingListItem`-Instanzen beinhaltet:
@@ -268,11 +254,11 @@ from dataclasses import dataclass, field
 # - Die Methode `total_price(self)` berechnet den Gesamtpreis der
 #   Einkaufsliste.
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Definieren Sie Variable `meine_einkaufsliste`, die eine Einkaufsliste mit
 # folgenden ShoppingListItems repräsentiert:
@@ -281,22 +267,22 @@ from dataclasses import dataclass, field
 # - 1 Paket Kaffee à 6.99
 #
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Berechnen Sie den Gesamtpreis von `meine_einkaufsliste`:
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Was ist die Ausgabe von `print(meine_einkaufsliste)`?
 # - Was ist die Ausgabe von `print(repr(meine_einkaufsliste))`?
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Erweitern Sie die Klasse `ShoppingList` um eine
 # [`__str__()`-Methode](
@@ -320,26 +306,26 @@ from dataclasses import dataclass, field
 # auswerten, nachdem Sie die Klasse `ShoppingList` erweitert haben, um die Auswirkungen
 # Ihrer Änderungen zu sehen.
 
-# %% lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Evaluieren Sie die Definition von `meine_einkaufsliste` erneut und
 # Drucken Sie die Einkaufsliste aus. Entspricht die Ausgabe Ihren Erwartungen?
 #
 # Wie sieht die Ausgabe von `repr(meine_einkaufsliste)` aus?
 
-# %% lang="de"
+# %%
 
 
-# %% lang="de"
+# %%
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Erweitern Sie die Klasse `ShoppingList` um folgende Methoden:
 #
@@ -350,7 +336,7 @@ from dataclasses import dataclass, field
 #   Ermöglicht den Zugriff auf Einträge über ihren numerischen Index.
 #
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Bemerkungen
 #
@@ -361,31 +347,31 @@ from dataclasses import dataclass, field
 # - Nachdem `ShoppingList` sowohl `__len__()` als auch `__getitem__()` definiert,
 #   können Sie auch von `typing.Sequence` erben.
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Stellen Sie fest, wie lange `meine_einkaufsliste` ist und
 # was ihr erstes und zweites Element sind:
 
-# %% lang="de"
+# %%
 
 
-# %% lang="de"
+# %%
 
-# %% lang="de"
+# %%
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Was ist der Effekt des folgenden Ausdrucks?
 
-# %% lang="de" tags=["keep"]
+# %%
 for item in meine_einkaufsliste:
     print(item)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Erweitern Sie die Definition der Klasse `ShoppingList`, so dass der Indexing
 # Operator `[]` auch mit einem String aufgerufen werden kann, und eine Liste mit allen
@@ -401,33 +387,33 @@ for item in meine_einkaufsliste:
 # *Hinweis:* Sie können die `isinstance()` Funktion verwenden um zu überprüfen,
 # ob ein Objekt ein String ist.
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
-# %% lang="de"
+# %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Fügen Sie 2 Stück Butter (à 1.59) und 1 Laib Brot (7.49) zur Einkaufsliste
 # `meine_einkaufsliste` hinzu.
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # Drucken Sie die Einkaufsliste nochmal aus.
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Was passiert, wenn Sie `Butter` und `Brot` nochmals zur Einkaufsliste
 # `meine_einkaufsliste` hinzufügen?
 
-# %% lang="de"
+# %%
 
-# %% lang="de"
+# %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # *Diskussion:* Wie könnte das Verhalten der Klasse verbessert werden?
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%

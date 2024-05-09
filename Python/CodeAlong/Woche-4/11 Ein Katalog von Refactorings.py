@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Ein Katalog von Refactorings</b>
@@ -23,7 +9,7 @@
 # <!-- 11 Ein Katalog von Refactorings.py -->
 # <!-- python_courses/slides/module_250_refactoring/topic_190_a3_refactoring_catalog.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # Ein Katalog von Refactorings
 #
@@ -36,7 +22,7 @@
 # - Funktionsdeklaration ändern
 # - Variable umbenennen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Variable kapseln
 # - Parameterobjekt einführen
@@ -44,7 +30,7 @@
 # - Funktionen in Transform zusammenfassen
 # - Phasen aufteilen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Weitere Refactoring-Kategorien
 #

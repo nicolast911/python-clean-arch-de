@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>GRASP: Hohe Kohäsion</b>
@@ -23,7 +9,7 @@
 # <!-- 03 GRASP Hohe Kohäsion.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_315_grasp_high_cohesion.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ### Problem
 #
@@ -36,7 +22,7 @@
 #
 # Dadurch erreichen wir als Nebenprodukt oft auch niedrige Kopplung.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Was ist Kohäsion?
 #
@@ -44,7 +30,7 @@
 #   - wie gut verschiedene Teile eines Artefakts zusammenpassen
 #   - wie fokussiert die Funktionalität eines Artefakts ist
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Konsequenzen
 #
@@ -55,7 +41,7 @@
 # - Es ist **schwer**, ein System mit niedriger Kohäsion in einen Zustand mit mehr
 #   Kohäsion zu überführen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Wie können wir feststellen, ob die Kohäsion hoch ist?
 #
@@ -64,7 +50,7 @@
 # - Übernimmt nicht zu viel Arbeit
 # - Arbeitet mit anderen Objekten zusammen, um komplexere Aufgaben zu erledigen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Kohäsion und Kopplung
 #
@@ -77,7 +63,7 @@
 #   - Erzwingen die Verwendung vieler Testdoubles
 #   - Verringern den Wert von Unit-Tests als Dokumentation
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Was können wir tun?
 #

@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Gang-of-Four Patterns</b>
@@ -23,7 +9,7 @@
 # <!-- 07 Gang-of-Four Patterns.py -->
 # <!-- python_courses/slides/module_210_design_patterns/topic_130_gof_patterns_short.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # Gang-of-Four Patterns
 #
@@ -34,7 +20,7 @@
 # - 1994 veröffentlicht
 # - 23 Patterns
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Eigenschaften
 #
@@ -43,7 +29,7 @@
 # - Implementierungsnah
 # - Sprachunabhängig
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Beispiele:
 #

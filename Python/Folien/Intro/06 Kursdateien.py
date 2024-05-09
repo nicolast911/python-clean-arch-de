@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Kursdateien</b>
@@ -23,7 +9,7 @@
 # <!-- 06 Kursdateien.py -->
 # <!-- python_courses/slides/module_110_introduction/topic_110_a3_course_files.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Entpacken der Kursdateien
 #
@@ -34,7 +20,7 @@
 # - Merken Sie sich den Ort, an dem Sie Ihre entpackten Dateien gespeichert haben.
 # - Sie brauchen diesen Ort, um im nächsten Schritt die Jupyter Notebooks zu öffnen.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Die Struktur des Kurses
 #

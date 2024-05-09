@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Liskov Substitutions-Prinzip</b>
@@ -23,22 +9,22 @@
 # <!-- 11 Liskov Substitutions-Prinzip.py -->
 # <!-- python_courses/slides/module_280_solid/topic_140_a3_solid_lsp.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # SOLID: Liskov Substitutions-Prinzip
 #
 # Ein Objekt einer Unterklasse soll immer für ein Objekt der Oberklasse
 # eingesetzt werden können.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## LSP Verletzung
 
-# %% tags=["keep"]
+# %%
 from dataclasses import dataclass
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class Rectangle:
     length: float
@@ -48,7 +34,7 @@ class Rectangle:
         return self.length * self.width
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Square(Rectangle):
     def __init__(self, length, width):
         super().__init__(length, length)
@@ -72,7 +58,7 @@ class Square(Rectangle):
         self.__dict__["width"] = new_value
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 my_rect = Rectangle(3, 4)
 print(f"Area is {my_rect.area()}")
 my_rect.length = 10
@@ -81,7 +67,7 @@ print(f"After setting values: {my_rect}")
 print(f"Area is now {my_rect.area()}")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 my_square = Square(3, 4)
 print(f"Area is {my_square.area()}")
 my_square.length = 10

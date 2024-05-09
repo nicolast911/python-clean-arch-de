@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>GoF: Command Pattern</b>
@@ -23,17 +9,17 @@
 # <!-- 08 GoF Command Pattern.py -->
 # <!-- python_courses/slides/module_210_design_patterns/topic_280_command.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Beispiel: Textverarbeitung
 #
 # - `Document`-Klasse mit `modify()` und `append()`-Methoden
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class Document:
     state: str = "<empty>"
@@ -54,14 +40,14 @@ class Document:
         print("  document state after:  ", self.state)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 doc = Document()
 doc.modify("Document Template")
 doc.append("-append", 3)
 doc.modify(None)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Command-Objekte für `Document`
 #
@@ -73,25 +59,25 @@ doc.modify(None)
 # - Methoden haben potenziell unterschiedliche Signaturen
 # - Wir wollen sie aber möglichst einheitlich handhaben
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod  # noqa: E402
 
 
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### `ModifyCommandV1`
 
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### `AppendCommandV1`
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class AppendCommandV1(CommandV1):
     text: str
@@ -101,7 +87,7 @@ class AppendCommandV1(CommandV1):
         doc.append(self.text, self.times)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Verwendung
 
@@ -109,7 +95,7 @@ class AppendCommandV1(CommandV1):
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Funktionale Implementierung
 
@@ -121,13 +107,13 @@ class AppendCommandV1(CommandV1):
 
 # %%
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class CommandV2(ABC):
     @abstractmethod
     def execute(self): ...
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class ModifyCommandV2(CommandV2):
     doc: Document
@@ -137,7 +123,7 @@ class ModifyCommandV2(CommandV2):
         self.doc.modify(self.change)
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class AppendCommandV2(CommandV2):
     doc: Document
@@ -148,7 +134,7 @@ class AppendCommandV2(CommandV2):
         self.doc.append(self.text, self.times)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Verwendung
 
@@ -156,21 +142,21 @@ class AppendCommandV2(CommandV2):
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Kommandos mit Undo-Funktionalität
 
-# %% tags=["start"]
+# %%
 class CommandV3(ABC):
     @abstractmethod
     def execute(self): ...
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### `ModifyCommandV3`
 
-# %% tags=["start"]
+# %%
 @dataclass
 class ModifyCommandV3(CommandV3):  # noqa
     doc: Document
@@ -180,11 +166,11 @@ class ModifyCommandV3(CommandV3):  # noqa
         self.doc.modify(self.change)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### `AppendCommandV3`
 
-# %% tags=["start"]
+# %%
 @dataclass
 class AppendCommandV3(CommandV3):  # noqa
     doc: Document
@@ -195,17 +181,17 @@ class AppendCommandV3(CommandV3):  # noqa
         self.doc.append(self.text, self.times)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Verwendung
 
-# %% tags=["keep"]
+# %%
 doc = Document()
 template_command = ModifyCommandV3(doc, "Document Template")
 append_command = AppendCommandV3(doc, "-append", 3)
 clear_command = ModifyCommandV3(doc, None)
 
-# %% tags=["keep"]
+# %%
 template_command.execute()
 append_command.execute()
 clear_command.execute()
@@ -217,15 +203,15 @@ clear_command.execute()
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # <img src="img/command_example.svg"
 #      style="display:block;margin:auto;width:70%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Verbesserte Implementierung
 
-# %% tags=["keep"]
+# %%
 class Command(ABC):  # noqa: F811
     history = []  # Note this is a class variable!
     redo_stack = []
@@ -250,11 +236,11 @@ class Command(ABC):  # noqa: F811
         self.do_execute()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Undo/Redo
 
-# %% tags=["keep"]
+# %%
 def undo():
     if not Command.history:
         return
@@ -263,7 +249,7 @@ def undo():
     last._undo_execution()  # noqa
 
 
-# %% tags=["keep"]
+# %%
 def redo():
     if not Command.redo_stack:
         return
@@ -271,25 +257,25 @@ def redo():
     last._execute_keeping_redo_stack()  # noqa
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### `ModifyCommand`
 
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### `AppendCommand`
 
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Beispiel-Anwendung
 
-# %% tags=["keep"]
+# %%
 def run_text_processing():
     doc = Document()
     while True:
@@ -307,7 +293,7 @@ def run_text_processing():
             command.execute()
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def create_command(doc: Document, user_input: str) -> Command:
     command, *args = user_input.split()
     if command.lower().startswith("m"):
@@ -323,7 +309,7 @@ def create_command(doc: Document, user_input: str) -> Command:
 
 # %%
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ### Zweck
 #
@@ -331,13 +317,13 @@ def create_command(doc: Document, user_input: str) -> Command:
 # mit verschiedenen Requests, Warteschlangen- oder Logging-Operationen sowie
 # das Rückgängigmachen von Operationen zu ermöglichen.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Auch bekannt als
 #
 # Action, Transaction
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Motivation
 #
@@ -349,7 +335,7 @@ def create_command(doc: Document, user_input: str) -> Command:
 # - Sollten in Warteschlangen abgelegt werden können
 # - Sollten für Macros verwendet werden können
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Mögliche Lösung: Implementierung als Objekt
 #
@@ -358,14 +344,14 @@ def create_command(doc: Document, user_input: str) -> Command:
 # - Das Kommando-Objekt bietet eine Methode `execute()`, die die Operation
 #   ausführt
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Struktur
 #
 # <img src="img/pat_command.svg"
 #      style="display:block;margin:auto;width:40%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Teilnehmer
 #
 # - `Command`
@@ -380,13 +366,13 @@ def create_command(doc: Document, user_input: str) -> Command:
 # - `Invoker`
 #   - Ruft `execute()` auf `ConcreteCommand` auf um die Anfrage auszuführen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Sequenzdiagramm
 #
 # <img src="img/pat_command_seq.svg"
 #      style="display:block;margin:auto;width:70%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Konsequenzen
 #
@@ -397,19 +383,19 @@ def create_command(doc: Document, user_input: str) -> Command:
 #   ausführt
 # - Zusammengesetzte Operationen sind möglich (z.B. Makros, siehe Composite Pattern)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Implementierung
 #
 # - Für einfache Szenarien kann eine `SimpleCommand`-Klasse, die einen Zeiger
 #   auf eine Funktion oder Methode speichert, verwendet werden
 # - ...
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from document_commands import Document, Command, undo, redo  # noqa
 from typing import Callable  # noqa: E402
 
 
-# %% tags=["keep"]
+# %%
 class SimpleCommand(Command):
     def __init__(self, doc: Document, action: Callable, *args, **kwargs):
         super().__init__(doc)
@@ -421,36 +407,36 @@ class SimpleCommand(Command):
         self.action(self.doc, *self.args, **self.kwargs)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 doc = Document()
 template_command = SimpleCommand(doc, Document.modify, "Document Template")
 append_command = SimpleCommand(doc, Document.append, "-123", 2)
 modify_command = SimpleCommand(doc, Document.modify, None)
 
-# %% tags=["keep"]
+# %%
 template_command.execute()
 append_command.execute()
 modify_command.execute()
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 undo()
 
-# %% tags=["keep"]
+# %%
 undo()
 
-# %% tags=["keep"]
+# %%
 redo()
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 SimpleCommand(
     doc, lambda doc, text: doc.modify(f"{text}? {text}!"), "That's new"
 ).execute()
 
-# %% tags=["keep"]
+# %%
 redo()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Command Pattern
 #
@@ -463,7 +449,7 @@ redo()
 # diese Transaktionen verarbeitet, sondern auch die letzte Transaktion
 # rückgängig machen kann.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Ziel
 #
@@ -472,10 +458,10 @@ redo()
 # zu erweitern ist, und eine Undo-Funktion für die letzte Transaktion
 # bereitzustellen.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Starter Code
 
-# %% tags=["keep"]
+# %%
 class Account:
     def __init__(self, initial_balance):
         self.balance = initial_balance
@@ -495,7 +481,7 @@ class Account:
         return self.balance
 
 
-# %% lang="de" tags=["subslide", "start"] slideshow={"slide_type": "subslide"}
+# %%
 class ATM:
     def __init__(self, initial_balance):
         self.account = Account(initial_balance)

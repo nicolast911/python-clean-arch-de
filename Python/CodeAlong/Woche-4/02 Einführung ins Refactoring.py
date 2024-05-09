@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Einführung ins Refactoring</b>
@@ -23,7 +9,7 @@
 # <!-- 02 Einführung ins Refactoring.py -->
 # <!-- python_courses/slides/module_250_refactoring/topic_110_a3_refactoring_intro.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Was ist Refactoring?
 #
@@ -34,7 +20,7 @@
 # *Im Wesentlichen, wenn Sie refaktorisieren, verbessern Sie das Design des Codes,
 # nachdem er geschrieben wurde.* (Martin Fowler)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Warum Refactoring?
 #
@@ -44,7 +30,7 @@
 # - Code wird einfacher zu testen
 # - ...
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Was ist Refactoring nicht?
 #
@@ -52,7 +38,7 @@
 # - Hinzufügen von neuen Features
 # - Beheben von Bugs
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Wann Refactoring?
 #
@@ -60,7 +46,7 @@
 # - Wenn Code erweitert werden muss
 # - Wenn wir schlechten Code finden, den wir ändern müssen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Sollen wir extra Zeit für Refactoring einplanen?
 #

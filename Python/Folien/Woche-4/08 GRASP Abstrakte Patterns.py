@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>GRASP: Abstrakte Patterns</b>
@@ -23,12 +9,12 @@
 # <!-- 08 GRASP Abstrakte Patterns.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_500_grasp_abstractions.py -->
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/grasp-patterns.svg"
 #      style="display:block;margin:auto;width:100%"/>
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # GRASP: Indirektion
 #
@@ -45,14 +31,14 @@
 # </div>
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Indirektion
 #
 # - Wie können wir die Kopplung zwischen zwei Objekten verringern?
 # - Wir führen eine weitere Schicht ein, die die beiden Objekte entkoppelt
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Sehr häufiges Muster auf jeder Schicht
 #
@@ -63,13 +49,13 @@
 # - Private Attribute mit Gettern/Settern
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Testen:
 #
 # - Indirektionen sind Nahtstellen, die für Testzwecke verwendet werden können
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Indirektion
 #
@@ -78,7 +64,7 @@
 #
 # <div style="float:right;">- David Wheeler</div>
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # GRASP: Polymorphie
 #
@@ -86,7 +72,7 @@
 #   Verhaltensweisen, die sich je nach Typ eines Objekts ändern können
 # - Normalerweise kein Wechsel zwischen den Verhaltensweisen während der Laufzeit
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## In Python
 #
@@ -101,7 +87,7 @@
 #   - Keine explizite Subtyp-Beziehung, nur das Verhalten zählt
 #   - Keine statischen Typchecks
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Verwandt: Regeln der Typenhierarchie
 #   - Isa-Regel
@@ -109,7 +95,7 @@
 #   - Erzwingen von Invarianten für Subtypen durch Supertyp
 # - Siehe auch: LSP, Offen/Geschlossen-Prinzip
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <!-- Pure Fabrication -->
 #
@@ -117,7 +103,7 @@
 # Information Expert oder Creator zu Lösungen führen, die nicht gut sind, weil
 # Sie niedrige Kohäsion oder hohe Kopplung haben?
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # GRASP: Pure Fabrication
 #
@@ -130,7 +116,7 @@
 #   - Aber: geringe Kohäsion, hohe Kopplung
 #   - Einführung von Data Access Objects (eine Pure Fabrication)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Vorsicht vor übermäßiger Verwendung
 #
@@ -142,7 +128,7 @@
 #   Verantwortlichkeiten *nicht* mit den für ihre Erfüllung benötigten
 #   Informationen zusammenfallen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Verwandte Prinzipien
 #
@@ -152,14 +138,14 @@
 #     Verantwortlichkeiten
 # - Fast alle Design Patterns sind Pure Fabrications
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <!-- Protected Variations -->
 # - Programme haben Variations- oder Evolutionspunkte
 # - Wie können wir diese so gestalten, dass sie keine unerwünschten Auswirkungen
 #   auf andere Komponenten haben?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Protected Variation
 #
@@ -168,7 +154,7 @@
 # - Diese Schnittstellen sind häufig Pure Fabrications
 # - Oft führen diese Schnittstellen eine Indirektion ein
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Protected Variations
 #
@@ -180,7 +166,7 @@
 # - Schnittstellen, Polymorphe Methodenaufrufe
 # - Private Attribute mit Gettern/Settern
 #
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Testen:
 # - Geschützte Variationen sind oft Einstiegspunkte für Tests
@@ -188,13 +174,13 @@
 #   dass das System noch funktioniert, wenn die Variabilität tatsächlich
 #   verwendet wird
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Protected Variation ist ein sehr allgemeines Prinzip
 # - Viele anderen Software-Entwicklungsprinzipien und Patterns sind
 #   spezielle Fälle von Protected Variation
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Vorsicht vor übermäßiger Verwendung
 #

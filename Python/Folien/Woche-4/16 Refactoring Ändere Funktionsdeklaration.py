@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Refactoring: Ändere Funktionsdeklaration</b>
@@ -23,7 +9,7 @@
 # <!-- 16 Refactoring Ändere Funktionsdeklaration.py -->
 # <!-- python_courses/slides/module_250_refactoring/topic_260_refact_change_function_decl.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Ändere Funktionsdeklaration
 #
 # Auch bekannt als:
@@ -33,11 +19,11 @@
 # - Füge Parameter hinzu
 # - Entferne Parameter
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from order_line import make_order_lines
 
 
-# %% tags=["keep"]
+# %%
 def ttl(discount: bool, order_lines: list) -> float:
     total = 0.0
     for order_line in order_lines:
@@ -47,12 +33,12 @@ def ttl(discount: bool, order_lines: list) -> float:
     return total
 
 
-# %% tags=["keep"]
+# %%
 print(ttl(False, make_order_lines()))
 print(ttl(True, make_order_lines()))
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def compute_total(order_lines: list, discount: bool = False) -> float:
     total = 0.0
     for order_line in order_lines:
@@ -62,11 +48,11 @@ def compute_total(order_lines: list, discount: bool = False) -> float:
     return total
 
 
-# %% tags=["keep"]
+# %%
 print(compute_total(make_order_lines(), False))
 print(compute_total(make_order_lines(), True))
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Motivation
 #
 # - Der Name der Funktion spiegelt nicht mehr ihre Intention wieder
@@ -75,7 +61,7 @@ print(compute_total(make_order_lines(), True))
 #   - zu viele Parameter
 #   - "falsche" Parametertypen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Einfache Mechanik
 #
 # - Beim Entfernen von Parametern: Stelle sicher, dass der Parameter nicht
@@ -84,7 +70,7 @@ print(compute_total(make_order_lines(), True))
 # - Ändere alle Aufrufe der Funktion
 # - Teste das Programm
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Migrations-Mechanik
 #
 # - If necessary, refactor the body of the function to facilitate the following steps
@@ -98,7 +84,7 @@ print(compute_total(make_order_lines(), True))
 #   to change its name
 # - Test the program
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # - Mit der Migrations-Mechanik können wir auch ein veröffentlichtes Interface
 #   ändern
 # - Dazu entfernen wir das alte Interface nach dem Inlining nicht, sondern

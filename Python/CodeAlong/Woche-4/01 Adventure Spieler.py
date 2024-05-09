@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Adventure: Spieler</b>
@@ -23,27 +9,27 @@
 # <!-- 01 Adventure Spieler.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_390_adventure_player.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Version 3c: Command Pattern
 #
 # <img src="img/adventure-v3c-overview.svg" alt="Adventure Version 3c"
 #      style="display:block;margin:auto;height:80%"/>
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from random import choice
 from typing import Any
 
-# %% tags=["keep"]
+# %%
 from action_v3 import Action, MoveAction
 from location_v4 import Location
 from simple_locations import simple_locations
 from world_factory_v4 import WorldFactory
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Pawn:
     name: str
@@ -53,21 +39,21 @@ class Pawn:
         action.perform(self)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 world_factory = WorldFactory()
 world = world_factory.create(simple_locations)
 
-# %% tags=["keep"]
+# %%
 pawn = Pawn("Alice", world.locations["Room 1"])
 print(pawn)
 
-# %% tags=["keep"]
+# %%
 action = MoveAction("north", world.locations["Room 2"])
 pawn.perform(action)
 print(pawn)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Sowohl menschliche als auch computergesteuerte Spieler
 # - Dazu notwendig:
@@ -76,7 +62,7 @@ print(pawn)
 #   - Ausführen der Aktion
 # - Wer soll diese Verantwortlichkeiten übernehmen?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Informationsexperte:
 #   - Im Moment kennt niemand alle Aktionen, die möglich sind
@@ -85,7 +71,7 @@ print(pawn)
 #     weitere Aktionen
 # - Sollen wir die Verantwortung an `Pawn` übergeben?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Gegenargumente
 #
@@ -96,7 +82,7 @@ print(pawn)
 #   - Interaktion mit menschlichem Benutzer
 # - Niedrige Repräsentationslücke?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Domänenmodell
 
@@ -104,20 +90,20 @@ print(pawn)
 # <img src="img/adv-domain-03.svg"
 #      style="display:block;margin:auto;width:50%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - `Player` ist für die Strategie zuständig
 # - Wir sollten eine `Player`-Klasse einführen und ihr die Verantwortung
 #   für die neuen Aufgaben übergeben
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Version 4a: `Player`-Klasse
 #
 # <img src="img/adventure-v4a.svg" alt="Adventure Version 4a"
 #      style="display:block;margin:auto;height:80%"/>
 
-# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Location:
     name: str
@@ -132,7 +118,7 @@ class Location:
         return self.connections.get(direction)
 
 
-# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Pawn:
     name: str
@@ -142,7 +128,7 @@ class Pawn:
         action.perform(self)
 
 
-# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Action(ABC):  # noqa
     @property
     @abstractmethod
@@ -152,7 +138,7 @@ class Action(ABC):  # noqa
     def perform(self, instigator: "Pawn") -> None: ...
 
 
-# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class MoveAction(Action):
     direction: str
@@ -166,7 +152,7 @@ class MoveAction(Action):
         instigator.location = self.target
 
 
-# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class SkipTurnAction(Action):
     @property
@@ -177,25 +163,25 @@ class SkipTurnAction(Action):
         # Do nothing...
         pass
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 world_factory = WorldFactory()
 world = world_factory.create(simple_locations)
 
-# %% tags=["keep"]
+# %%
 pawn = Pawn("Alice", world.locations["Room 1"])
 print(pawn)
 
-# %% tags=["keep"]
+# %%
 player = Player("Alice", pawn)
 print(player)
 
-# %% tags=["keep"]
+# %%
 player.take_turn()
 print(player)
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 for _ in range(10):
     player.take_turn()

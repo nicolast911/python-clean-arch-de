@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Dependency Inversion Prinzip</b>
@@ -23,7 +9,7 @@
 # <!-- 10 Dependency Inversion Prinzip.py -->
 # <!-- python_courses/slides/module_280_solid/topic_160_a3_solid_dip.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # # Abhängigkeiten
 #
@@ -33,7 +19,7 @@
 # - Daten- und Kontrollfluss-Abhängigkeiten sind inhärent in der Logik
 # - Quellcode-Abhängigkeiten können wir durch die Architektur kontrollieren
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Beispiel
 #
@@ -41,15 +27,15 @@
 # - Datenfluss: von `my_module.py` zur Datenbank
 # - Quellcode-Abhängigkeit: `my_module.py` hängt von der Datenbank (`sqlite3`) ab
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Modul `my_module.py`:
 
-# %% tags=["keep"]
+# %%
 import sqlite3  # Quellcode-Abhängigkeit
 
 
-# %% tags=["keep"]
+# %%
 class MyDomainClassV1:
     def __init__(self):
         conn = sqlite3.connect(":memory:")
@@ -67,18 +53,18 @@ class MyDomainClassV1:
         return cur.fetchall()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Modul `main.py`:
 
-# %% tags=["keep"]
+# %%
 # from my_module import MyDomainClassV1
 
 my_domain_object = MyDomainClassV1()
 my_domain_object.perform_work("Hello World")
 print(my_domain_object.retrieve_result())
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Die Quellcode-Abhängigkeit geht in die gleiche Richtung wie der Datenfluss:
 #
@@ -88,7 +74,7 @@ print(my_domain_object.retrieve_result())
 #      style="display:block;margin:auto;width:75%"/>
 
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Wir würden derartige Abhängigkeiten im Kern unsere Anwendung gerne vermeiden
 #
@@ -98,22 +84,22 @@ print(my_domain_object.retrieve_result())
 # - Einfacher den Code zu verstehen
 # - ...
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/dependency-02.svg"
 #      style="display:block;margin:auto;width:75%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Modul `my_module.py`:
 #   - Keine Abhängigkeit mehr zu `sqlite3`
 #   - Kombination aus Adapter und Strategy Pattern
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod
 
 
-# %% tags=["keep"]
+# %%
 class DatabaseAdapter(ABC):
     @abstractmethod
     def save_object(self, data: str):
@@ -124,7 +110,7 @@ class DatabaseAdapter(ABC):
         ...
 
 
-# %% tags=["keep"]
+# %%
 class MyDomainClassV2:
     def __init__(self, db: DatabaseAdapter):
         self.db = db
@@ -137,17 +123,17 @@ class MyDomainClassV2:
         return self.db.retrieve_data()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Modul `sqlite_adapter.py`:
 #   - Implementiert `DatabaseAdapter` für `sqlite3`
 #   - Hängt von `sqlite3` ab
 
-# %% tags=["keep"]
+# %%
 import sqlite3
 
 
-# %% tags=["keep"]
+# %%
 class SqliteAdapter(DatabaseAdapter):
     def __init__(self):
         conn = sqlite3.connect(":memory:")
@@ -164,21 +150,21 @@ class SqliteAdapter(DatabaseAdapter):
         return cur.fetchall()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Modul `main.py`:
 
-# %% tags=["keep"]
+# %%
 # from my_module import MyDomainClassV2
 # from sqlite_adapter import SqliteAdapter
 
 
-# %% tags=["keep"]
+# %%
 my_domain_object = MyDomainClassV2(SqliteAdapter())
 my_domain_object.perform_work("Hello World")
 print(my_domain_object.retrieve_result())
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # SOLID: Dependency Inversion Prinzip
 #
@@ -192,7 +178,7 @@ print(my_domain_object.retrieve_result())
 # - Abhängigkeitsinversion (Dependency Inversion) erreicht dies durch die Einführung
 #   von Schnittstellen, die "die Abhängigkeiten umkehren"
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Vorher
 # <img src="img/dependency-01.svg"
@@ -202,34 +188,34 @@ print(my_domain_object.retrieve_result())
 # <img src="img/dependency-02.svg"
 #      style="display:block;margin:auto;width:75%"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/dip-01.svg"
 #      style="display:block;margin:auto;width:95%"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/dip-02.svg"
 #      style="display:block;margin:auto;width:95%"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/dip-03.svg"
 #      style="display:block;margin:auto;width:95%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Beispiel
 
-# %% tags=["keep"]
+# %%
 from dataclasses import dataclass
 from pprint import pprint
 
-# %% tags=["keep"]
+# %%
 from augurdb import AugurDatabase
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class BadEmployee:
     id: int
@@ -242,17 +228,17 @@ class BadEmployee:
         self.database.commit_transaction()
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 db = AugurDatabase()
 be = BadEmployee(123, "Joe", db)
 
-# %% tags=["keep"]
+# %%
 be.save()
 
-# %% tags=["keep"]
+# %%
 pprint(db.records)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Einführen eines Interfaces
 
@@ -268,11 +254,11 @@ class DatabaseAdapter(ABC):
         ...
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Verwenden des Interfaces
 
-# %% tags=["alt"]
+# %%
 # module employee
 @dataclass
 class BetterEmployee:
@@ -284,11 +270,11 @@ class BetterEmployee:
         self.database.save(self)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Konkrete Implementierung des Interfaces
 
-# %% tags=["keep"]
+# %%
 from dataclasses import dataclass, field
 
 
@@ -304,7 +290,7 @@ class AugurDatabaseAdapter(DatabaseAdapter):
         self.database.commit_transaction()
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 db = AugurDatabaseAdapter()
 be = BetterEmployee(123, "Joe", db)
 
@@ -315,7 +301,7 @@ be.save()
 pprint(db.database.records)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Wetterbericht
 #
@@ -326,18 +312,18 @@ pprint(db.database.records)
 # - Schreiben Sie eine konkrete Implementierung der Abstraktion
 # - Testen Sie die Implementierung
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class WeatherReport:
     temperature: float
     humidity: float
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class WeatherServer:
     def get_weather_report(self) -> WeatherReport:
@@ -346,7 +332,7 @@ class WeatherServer:
         return WeatherReport(20 + 10 * random(), 0.5 + 0.5 * random())
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class WeatherReporter:
     def __init__(self, server: WeatherServer):
         self.server: WeatherServer = server
@@ -359,14 +345,14 @@ class WeatherReporter:
             return "It's not hot"
 
 
-# %% tags=["keep"]
+# %%
 reporter = WeatherReporter(WeatherServer())
 
-# %% tags=["keep"]
+# %%
 reporter.report()
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod
 
 
@@ -390,7 +376,7 @@ class DiWeatherReporter:
             return "It's not hot"
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class WeatherServerAdapter(WeatherDataSource):
     def __init__(self, server: WeatherServer):
         self.server: WeatherServer = server

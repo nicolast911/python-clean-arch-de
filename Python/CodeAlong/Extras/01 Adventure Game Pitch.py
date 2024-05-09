@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Adventure Game: Pitch</b>
@@ -23,7 +9,7 @@
 # <!-- 01 Adventure Game Pitch.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_130_adventure_pitch.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Die Welt unseres Adventure Games: Eine Reise in die Fantasie
 #
@@ -34,7 +20,7 @@
 # Charaktere, denen wir begegnen werden, und die verschiedenen Aktivitäten, die
 # diesem Bereich Leben einhauchen.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Das große Theater
 #
@@ -49,7 +35,7 @@
 #    verschiedenen Szenen auf unserer Theaterbühne, jede mit ihrer eigenen
 #    Kulisse, Ambiente und Handlung.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Hauptprotagonisten
 #
@@ -63,7 +49,7 @@
 #    digitalen Reich. Mit den Pawn werden Sie die Welt durchqueren, erkunden
 #    und zahlreiche Abenteuer erleben.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Charaktere des Reiches
 #
@@ -74,7 +60,7 @@
 #    mit kryptischen Ratschlägen oder tapfere Krieger, die Sie zu Duellen
 #    herausfordern, sie sind wesentlich für die Vielfalt der Erzählung.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Elemente von Mystery & Adventure
 #
@@ -88,7 +74,7 @@
 #    gefährlichen Gebirgspässen bis hin zu ruhigen Seelandschaften, jeder Ort
 #    bietet einzigartige Interaktionen, Herausforderungen und Geschichten.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Aktivitäten & Aktionen
 #
@@ -111,7 +97,7 @@
 #    Ihres Fortschritts, das Anpassen von Einstellungen oder sogar das
 #    Auswählen verschiedener Spielmodi gehören.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Zusammenfassend lässt sich sagen, dass unsere Abenteuer-Spiel-Domäne ein
 # reiches Geflecht von miteinander verbundenen Orten ist, gefüllt mit

@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Adapter</b>
@@ -23,7 +9,7 @@
 # <!-- 09 Adapter.py -->
 # <!-- python_courses/slides/module_210_design_patterns/topic_190_adapter.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Zweck
 #
@@ -31,13 +17,13 @@
 # - Zusammenarbeit von Klassen, die aufgrund inkompatibler Schnittstellen nicht
 #   zusammenarbeiten können
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Auch bekannt als
 #
 # - Wrapper
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Motivation
 #
@@ -51,19 +37,19 @@
 # - Mit einem Adapter können wir die Schnittstelle der Bibliothek an die
 #   Schnittstelle unseres Editors anpassen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/PlantUML/adapter-example.svg"
 #      style="display:block;margin:auto;width:80%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Anwendbarkeit
 #
 # - Nutzung einer bestehenden Klasse mit inkompatibler Schnittstelle
 # - [...]
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Struktur
 #
@@ -74,7 +60,7 @@
 # <img src="img/PlantUML/pat_adapter.svg"
 #      style="display: block; margin: auto; width: 80%;"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Teilnehmer
 #
@@ -87,14 +73,14 @@
 # - **Adaptee**
 #   - Die Klasse, deren Schnittstelle angepasst werden soll
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Interaktionen
 #
 # - Der Client ruft eine Target-Methode auf einem Adapter-Objekt auf
 # - Der Adapter ruft die entsprechende Methode auf dem Adaptee auf
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Konsequenzen
 #
@@ -104,7 +90,7 @@
 #   - ein Adapter kann mit mehreren adaptierten Objekten zusammenarbeiten
 #   - erschwert das Überschreiben von Adaptee-Methoden
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Weitere Konsequenzen
 #
@@ -112,13 +98,13 @@
 # - Klassen mit integrierter Schnittstellenanpassung (pluggable Adapters)
 # - 2-Wege-Adapter, wenn verschiedene Clients das gleiche Objekt adaptieren müssen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Implementierung
 #
 # - ...
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Beispielcode
 
@@ -148,7 +134,7 @@ class Company:
         return sum(employee.salary() for employee in self.employees) + self.monthly_rent
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class LegacyEmployee:
     first_name: str
@@ -171,18 +157,18 @@ class LegacyEmployeeAdapter(Employee):
         return f"LegacyEmployee({self.name()}, {self.salary()})"
 
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 _legacy_employee_1 = LegacyEmployee("John", "Doe", 1500.0)
 _employee_1 = LegacyEmployeeAdapter(_legacy_employee_1)
 _employee_1
 
 
-# %% tags=["keep"]
+# %%
 _legacy_employee_2 = LegacyEmployee("Jane", "Miller", 2000.0)
 _employee_2 = LegacyEmployeeAdapter(_legacy_employee_2)
 _employee_2
 
-# %% tags=["keep"]
+# %%
 _company = Company([_employee_1, _employee_2])
 _company
 
@@ -190,7 +176,7 @@ _company
 _company.monthly_expenses()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Praxisbeispiele
 #
@@ -198,7 +184,7 @@ _company.monthly_expenses()
 # - InterViews 2.6
 # - ...
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Verwandte Muster
 #
@@ -207,7 +193,7 @@ _company.monthly_expenses()
 # - Decorator: erweitert anderes Objekt, ohne die Schnittstelle zu ändern
 # - Proxy: Stellvertreter für ein Objekt, das die gleiche Schnittstelle hat
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Python-Implementierung
 #
@@ -217,7 +203,7 @@ _company.monthly_expenses()
 #   - Methoden können nach der Definition zu einem Objekt hinzugefügt werden
 # - ...
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Monkey Patching
 #
@@ -234,7 +220,7 @@ LegacyEmployee.name = name
 # %%
 _legacy_employee_1.name()
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 LegacyEmployee.salary = lambda obj: obj.pay
 
 # %%
@@ -247,7 +233,7 @@ _company2 = Company([_legacy_employee_1, _legacy_employee_2])
 _company2.monthly_expenses()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Einheitliche Schnittstelle für einen Chat-Client
 #
@@ -263,7 +249,7 @@ _company2.monthly_expenses()
 # zugrundeliegenden Dienst, der verwendet wird.
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Im Folgenden finden Sie den Startercode mit separaten Klassen für jeden
 # Messaging-Dienst.
@@ -281,7 +267,7 @@ _company2.monthly_expenses()
 #   Messaging-Dienstes Bescheid wissen. Stattdessen sollte sie mit allen Diensten über
 #   die gemeinsame Schnittstelle interagieren.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Nachdem Sie die Adapter erstellt haben, demonstrieren Sie deren Verwendung, indem Sie
 # eine Chat-Anwendung erstellen, die Nachrichten über alle verfügbaren Dienste sendet
@@ -290,7 +276,7 @@ _company2.monthly_expenses()
 #
 # Viel Erfolg!
 
-# %% tags=["keep"]
+# %%
 class SMS:
     def __init__(self):
         self.service_name = "SMS"
@@ -302,7 +288,7 @@ class SMS:
         print(f"Receiving a text from {number} via {self.service_name}")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Email:
     def __init__(self):
         self.service_name = "Email"
@@ -317,7 +303,7 @@ class Email:
         print(f"Receiving an email from {email_address} via {self.service_name}")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class InAppChat:
     def __init__(self):
         self.service_name = "In-App Chat"
@@ -329,11 +315,11 @@ class InAppChat:
         print(f"Receiving a message from {username} via {self.service_name}")
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod
 
 
-# %% tags=["alt"]
+# %%
 class MessagingAdapter(ABC):
     @abstractmethod
     def send(self, to, message):
@@ -344,7 +330,7 @@ class MessagingAdapter(ABC):
         pass
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class SMSAdapter(MessagingAdapter):
     def __init__(self, sms: SMS):
         self._sms = sms
@@ -356,7 +342,7 @@ class SMSAdapter(MessagingAdapter):
         self._sms.receive_text(from_)
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class EmailAdapter(MessagingAdapter):
     def __init__(self, email: Email):
         self._email = email
@@ -368,7 +354,7 @@ class EmailAdapter(MessagingAdapter):
         self._email.receive_email(from_)
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class InAppChatAdapter(MessagingAdapter):
     def __init__(self, chat: InAppChat):
         self._chat = chat
@@ -380,7 +366,7 @@ class InAppChatAdapter(MessagingAdapter):
         self._chat.receive_message(from_)
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class ChatApplication:
     def __init__(self, adapters):
         self._adapters = adapters
@@ -394,18 +380,18 @@ class ChatApplication:
             adapter.receive(from_)
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 sms = SMS()
 email = Email()
 chat = InAppChat()
 
-# %% tags=["alt"]
+# %%
 sms_adapter = SMSAdapter(sms)
 email_adapter = EmailAdapter(email)
 chat_adapter = InAppChatAdapter(chat)
 
-# %% tags=["alt"]
+# %%
 chat_app = ChatApplication([sms_adapter, email_adapter, chat_adapter])
 
-# %% tags=["alt"]
+# %%
 chat_app.send_message("555-1234", "Hello!")

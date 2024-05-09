@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Einführung in die Fehlerbehandlung</b>
@@ -23,7 +9,7 @@
 # <!-- 01 Einführung in die Fehlerbehandlung.py -->
 # <!-- python_courses/slides/module_170_exceptions/topic_108_a1_intro_error_handling.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # Fehlerbehandlung
 #
@@ -36,7 +22,7 @@
 #   zwei andere Möglichkeiten Fehler zu behandeln
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Wir können versuchen, einen "Fehlerwert" zurückzugeben, der kein gültiges
 #   Ergebnis ist.
@@ -49,7 +35,7 @@
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Diese Version ist einfach zu verwenden, aber fehleranfällig:
 
@@ -59,7 +45,7 @@
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Code zur Fehlerbehandlung ist mit dem "Erfolgsfall" verwoben
 
@@ -69,7 +55,7 @@
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Wir können auch zwei Werte zurückgeben: Ergebnis und ein Erfolg/Fehler Flag
 
@@ -80,7 +66,7 @@
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Die Probleme bei dieser Lösung sind ähnlich wie bei der vorhergehenden.
 
@@ -91,7 +77,7 @@
 # %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 #  Beide Ansätze haben mehrere Probleme:
 #  - Die Fehlerbehandlung ist optional. Wird sie nicht durchgeführt, so wird mit
@@ -102,7 +88,7 @@
 #    unübersichtlichem Code, da der "interessante" Pfad nicht vom Code zur
 #    Fehlerbehandlung getrennt ist.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Gewünschte Eigenschaften
 #

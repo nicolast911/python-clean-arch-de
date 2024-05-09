@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Refactoring: Kapsle Variable</b>
@@ -23,16 +9,16 @@
 # <!-- 17 Refactoring Kapsle Variable.py -->
 # <!-- python_courses/slides/module_250_refactoring/topic_270_refact_encapsulate_variable.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Kapsle Variable
 
-# %% tags=["keep"]
+# %%
 class ProductV0:
     def __init__(self, name: str):
         self.name = name
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class ProductV1:
     def __init__(self, name: str):
         self.__name = name
@@ -46,7 +32,7 @@ class ProductV1:
         self.__name = value
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Motivation
 #
 # - Erleichtert zukünftige Refactorings
@@ -57,7 +43,7 @@ class ProductV1:
 # - Ermöglicht Validierung, Monitoring, ...
 # - In Python weniger relevant als in anderen Sprachen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Mechanik
 #
 # - Implementiere Getter (und nur bei Bedarf Setter)

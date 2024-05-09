@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Adventure Game: Observer</b>
@@ -23,14 +9,14 @@
 # <!-- 07 Adventure Game Observer.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_450_adventure_observer.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Adventure Version 4
 #
 # - OCP mit Strategy Pattern
 # - Debug-Ausgaben mit Print Statement in `Player.take_turn()`
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Für wen wollen wir (potenziell) Information ausgeben?
 #
@@ -38,7 +24,7 @@
 # - Zuschauer
 # - Entwickler (Logging)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Information pro Spieler
 #
@@ -49,7 +35,7 @@
 # - Aktion konnte nicht ausgeführt werden
 # - Zug ist zu Ende
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Information pro Spiel
 #
@@ -59,11 +45,11 @@
 # - Ergebnis des Spiels (Gewonnen/Verloren, Zusammenfassung der Ereignisse)
 # - Ein Fehler ist aufgetreten
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass, field
 from typing import Callable
 
-# %% tags=["keep"]
+# %%
 from action_v4 import Action, SkipTurnAction
 from location_v4 import Location, LocationDescriptions
 from pawn_v4 import Pawn
@@ -73,7 +59,7 @@ from world_factory_v4 import WorldFactory
 from world_v4 import World
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Player:
     name: str
@@ -113,14 +99,14 @@ class Player:
         print(f"{self.name} performs: {action.description}")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 action_strategies = {
     "interactive": interactive_action_strategy,
     "random": random_action_strategy,
 }
 
 
-# %% tags=["keep"]
+# %%
 def create_player(
     world: World,
     name: str,
@@ -140,7 +126,7 @@ def create_player(
     return player
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Game:  # noqa: F811
     location_descriptions: LocationDescriptions
@@ -183,18 +169,18 @@ class Game:  # noqa: F811
         print("Round ended.")
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 game = Game(simple_locations)
 
 # %%
 game.add_player("Alice", "Room 1")
 game.add_player("Bob", "Room 2")
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 game.play_game()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Probleme
 #
@@ -203,7 +189,7 @@ game.play_game()
 # - Keine Möglichkeit, Ausgaben in mehreren Formaten/auf mehreren Kanälen zu
 #   erzeugen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Lösungsansatz: Observer Pattern
 #
@@ -220,7 +206,7 @@ game.play_game()
 #   </li>
 # </ul>
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class GameObserver:
     def notify_player_joined(self, player: Player): ...
 
@@ -239,7 +225,7 @@ class GameObserver:
     def notify_action_selected(self, player: Player, action: Action): ...
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class DebugGameObserver(GameObserver):
     def notify_player_joined(self, player: Player):
         print(f"DEBUG: Player {player.name} has joined the game.")
@@ -266,7 +252,7 @@ class DebugGameObserver(GameObserver):
         print(f"DEBUG: {player.name} performs: {action.description}")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class CliObserver(GameObserver):
     def notify_player_joined(self, player: Player):
         print(f"Player {player.name} has joined the game.")
@@ -279,7 +265,7 @@ class CliObserver(GameObserver):
         print(f"{player.name} performs: {action.description}")
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Player:
     name: str
@@ -316,7 +302,7 @@ class Player:
         for observer in self.observers: observer.notify_action_selected(self, action)  # noqa: E701
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Game:
     location_descriptions: LocationDescriptions
@@ -360,7 +346,7 @@ class Game:
         for observer in self.observers: observer.notify_round_ended()
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 game = Game(simple_locations)
 
 # %%
@@ -372,16 +358,16 @@ game.attach_observer(CliObserver())
 # %%
 game.add_player("Bob", "Room 2")
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 game.play_game()
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 game.attach_observer(DebugGameObserver())
 
 # %%
 game.play_game()
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Observer Pattern für die Bibliothesverwaltung
 #
@@ -390,7 +376,7 @@ game.play_game()
 # - Fügen Sie einen Observer hinzu, der die Ereignisse in der Bibliothek
 #   auf der Standardausgabe ausgibt
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Nach hinzufügen des Observers sollte die Ausgabe fúr den
 # Beispielcode in etwa so aussehen:
@@ -409,11 +395,11 @@ game.play_game()
 # Error: Book with ISBN ISBN3 is not available
 # ```
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass, field  # noqa
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class BookInfo:
     title: str
@@ -422,7 +408,7 @@ class BookInfo:
     num_copies: int = 1
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class MemberInfo:
     name: str
@@ -430,7 +416,7 @@ class MemberInfo:
     member_id: str
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class BookInventory:
     books: dict[str, BookInfo] = field(default_factory=dict)
@@ -445,7 +431,7 @@ class BookInventory:
         return isbn in self.books and self.books[isbn].num_copies > 0
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class MemberRegistry:
     members: dict[str, MemberInfo] = field(default_factory=dict)
@@ -454,7 +440,7 @@ class MemberRegistry:
         self.members[member.member_id] = member
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class RentalRegistry:
     rentals: dict[str, list[str]] = field(default_factory=dict)
@@ -479,7 +465,7 @@ class RentalRegistry:
         return self.rentals
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Library:
     book_inventory: BookInventory = field(default_factory=BookInventory)
@@ -508,38 +494,38 @@ class Library:
         return self.rental_registry.get_all_rentals()
 
 
-# %% tags=["keep"]
+# %%
 library = Library()
 
-# %% tags=["keep"]
+# %%
 library.add_book("Book 1", ["Author 1"], "ISBN1", 2)
 library.add_book("Book 2", ["Author 2"], "ISBN2", 1)
 
-# %% tags=["keep"]
+# %%
 library.add_member("John Doe", "123 Main St", "M001")
 library.add_member("Jane Smith", "456 Elm St", "M002")
 
-# %% tags=["keep"]
+# %%
 library.borrow_book("M001", "ISBN1")
 library.borrow_book("M001", "ISBN2")
 
-# %% tags=["keep"]
+# %%
 library.borrow_book("M002", "ISBN1")
 library.borrow_book("M002", "ISBN2")
 
-# %% tags=["keep"]
+# %%
 library.return_book("M001", "ISBN2")
 library.borrow_book("M002", "ISBN2")
 library.borrow_book("M002", "ISBN3")
 
-# %% tags=["keep"]
+# %%
 library.get_member_rentals("M001")
 
-# %% tags=["keep"]
+# %%
 library.get_all_rentals()
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class LibraryObserver:
     def on_book_added(self, book: BookInfo):
         pass
@@ -557,7 +543,7 @@ class LibraryObserver:
         pass
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class ConsoleObserver(LibraryObserver):
     def on_book_added(self, book: BookInfo):
         print(
@@ -577,7 +563,7 @@ class ConsoleObserver(LibraryObserver):
         print(f"Error: {message}")
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class RentalRegistry:
     rentals: dict[str, list[str]] = field(default_factory=dict)
@@ -608,7 +594,7 @@ class RentalRegistry:
         return self.rentals
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Library:
     book_inventory: BookInventory = field(default_factory=BookInventory)
@@ -670,34 +656,34 @@ class Library:
         return self.rental_registry.get_all_rentals()
 
 
-# %% tags=["alt"]
+# %%
 library = Library()
 console_observer = ConsoleObserver()
 library.add_observer(console_observer)
 
-# %% tags=["alt"]
+# %%
 library.add_book("Book 1", ["Author 1"], "ISBN1", 2)
 library.add_book("Book 2", ["Author 2"], "ISBN2", 1)
 
-# %% tags=["alt"]
+# %%
 library.add_member("John Doe", "123 Main St", "M001")
 library.add_member("Jane Smith", "456 Elm St", "M002")
 
-# %% tags=["alt"]
+# %%
 library.borrow_book("M001", "ISBN1")
 library.borrow_book("M001", "ISBN2")
 
-# %% tags=["alt"]
+# %%
 library.borrow_book("M002", "ISBN1")
 library.borrow_book("M002", "ISBN2")
 
-# %% tags=["alt"]
+# %%
 library.return_book("M001", "ISBN2")
 library.borrow_book("M002", "ISBN2")
 library.borrow_book("M002", "ISBN3")
 
-# %% tags=["alt"]
+# %%
 library.get_member_rentals("M001")
 
-# %% tags=["alt"]
+# %%
 library.get_all_rentals()

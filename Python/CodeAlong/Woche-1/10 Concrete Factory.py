@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Concrete Factory</b>
@@ -23,7 +9,7 @@
 # <!-- 10 Concrete Factory.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_270_adventure_factory.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ### Adventure Game Version 2b
 #
@@ -33,7 +19,7 @@
 #   - Änderungen an den Initialisierungsdaten (z.B. XML statt JSON)
 # - Können wir das vermeiden?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # # Concrete Factory (Simple Factory)
 #
@@ -52,24 +38,24 @@
 # - Eine Klasse, die nur für die Erzeugung von Objekten zuständig ist
 # - Diese Klassen werden oft als *Factory* bezeichnet
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from pprint import pprint
 from typing import Any, Mapping, Sequence
 
-# %% tags=["keep"]
+# %%
 json_file = list(Path().glob("**/simple-locations.json"))[0]
 with open(json_file) as file:
     simple_locations = json.load(file)
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 LocationDescription = Mapping[str, Any]
 LocationDescriptions = Sequence[LocationDescription]
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class Location:
     name: str
@@ -84,7 +70,7 @@ class Location:
         return self.connections.get(direction)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def _build_connections_for_all_locations(
     locations: dict[str, Location], location_descriptions: LocationDescriptions
 ):
@@ -96,7 +82,7 @@ def _build_connections_for_all_locations(
         locations[location_description["name"]].connections = connections
 
 
-# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class World:
     locations: dict[str, Location]
@@ -115,13 +101,13 @@ class World:
         _build_connections_for_all_locations(locations, location_descriptions)
         return cls(locations, initial_location_name)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Die `WorldFactory`-Klasse
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Verwendung der Factory
 
@@ -131,13 +117,13 @@ class World:
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Factories sind Beispiele für das GRASP Pattern "Pure Fabrication"
 # - Sie können die Kohäsion von Klassen erhöhen und ihre Komplexität reduzieren
 # - Sie erhöhen aber auch die Gesamtkomplexität des Systems
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Mini-Workshop: Factory im Bibliothekssystem
 #

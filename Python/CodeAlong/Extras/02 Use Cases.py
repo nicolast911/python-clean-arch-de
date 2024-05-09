@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Use Cases</b>
@@ -23,7 +9,7 @@
 # <!-- 02 Use Cases.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_140_adventure_use_cases.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ### Use Case 1: Spiel initialisieren
 #
@@ -31,7 +17,7 @@
 #
 # **Actors:** Spieler
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Kontext:** Der Spieler startet ein neues Spiel oder startet ein vorheriges
 # Spiel neu.
@@ -41,7 +27,7 @@
 # **Trigger:** Spieler wählt "Neues Spiel" oder "Spiel laden" aus dem
 # Hauptmenü.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Hauptszenario:**
 # 1. Spieler wählt "Neues Spiel".
@@ -49,7 +35,7 @@
 # 3. System platziert den Spielstein an einem Startpunkt.
 # 4. Spiel präsentiert den initialen Spielzustand dem Spieler.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Erfolgsgarantie:** Spiel ist initialisiert und bereit für den Spieler, um
 # einen Zug zu machen.
@@ -61,7 +47,7 @@
 # - Spieler: Möchte eine reibungslose Erfahrung beim Starten oder Laden eines
 #   Spiels.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Erweiterungen:**
 # 1a. Spieler wählt "Spiel laden".
@@ -72,7 +58,7 @@
 # 1. System zeigt eine Fehlermeldung an.
 # 2. Spieler wird zum Hauptmenü zurückgebracht.
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ### Use Case 2: Hauptspielschleife
 #
@@ -81,7 +67,7 @@
 # **Actors:** Spieler, NPCs
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Kontext:** Spieler interagiert mit dem Spiel, und NPCs handeln auf der
 # Grundlage vordefinierter Logik.
@@ -91,7 +77,7 @@
 # **Trigger:** Spieler beginnt seinen Zug.
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Hauptszenario:**
 # 1. Spieler beginnt seinen Zug, indem er eine Aktion wählt (z.B. bewegen,
@@ -102,7 +88,7 @@
 # 5. System überprüft auf mögliche Game-Over-Bedingungen.
 # 6. Gibt die Kontrolle an den Spieler für den nächsten Zug zurück.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Erfolgsgarantie:** Die Spielschleife läuft reibungslos, und der Spieler
 # kennt immer das Ergebnis seiner Aktionen.
@@ -112,7 +98,7 @@
 # **Stakeholders und Interessen:**
 # - Spieler: Erwartet eine nahtlose Spielerfahrung ohne Unterbrechungen.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Erweiterungen:**
 # 1a. Die Game-Over-Bedingung ist erfüllt (z.B. Spielerfigur erreicht ein
@@ -127,7 +113,7 @@
 # 2. Spieler speichert das Spiel.
 # 3. Die Spielschleife wird fortgesetzt.
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ### Use Case 3: Spieler macht einen Zug
 #
@@ -136,7 +122,7 @@
 # **Actors:** Spieler
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Kontext:** Spieler entscheidet sich für eine Aktion während seines Zuges.
 #
@@ -145,7 +131,7 @@
 # **Trigger:** System fordert den Spieler zu einer Aktion auf.
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Hauptszenario:**
 # 1. Spieler wählt eine Aktion (z.B. zu einem Ort bewegen, mit einem NPC
@@ -154,7 +140,7 @@
 # 3. System gibt Feedback über das Ergebnis der Aktion.
 # 4. Spielerzug endet.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Erfolgsgarantie:** Die vom Spieler gewählte Aktion wird ausgeführt, und es
 # wird Feedback gegeben.
@@ -164,7 +150,7 @@
 # **Stakeholders und Interessen:**
 # - Spieler: Erwartet, dass seine gewählten Aktionen korrekt ausgeführt werden.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Erweiterungen:**
 # 1a. Spieler wählt eine ungültige Aktion (z.B. Bewegung zu einem nicht

@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Anaconda</b>
@@ -23,7 +9,7 @@
 # <!-- 03 Anaconda.py -->
 # <!-- python_courses/slides/module_110_introduction/topic_102_a3_anaconda.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # Python Distributionen
 #
@@ -37,14 +23,14 @@
 #   Machine Learning Bereich weit verbreitet ist, weil viele für ML benötigte
 #   Bibliotheken darin enthalten sind
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # # Installation von Anaconda
 #
 # - Gehen Sie zur [Anaconda Webseite](https://www.anaconda.com/) und folgen Sie den
 #   Anweisungen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # # Starten des Python Interpreters
 #
@@ -58,7 +44,7 @@
 #
 # Gratulation! Jetzt können Sie mit dem Python Interpreter arbeiten!
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # # Hinweise zum Python Interpreter
 #

@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Aufräumarbeiten mit Finally</b>
@@ -23,7 +9,7 @@
 # <!-- 05 Aufräumarbeiten mit Finally.py -->
 # <!-- python_courses/slides/module_170_exceptions/topic_116_a1_finally.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Aufräumarbeiten mit `finally`
 #
@@ -32,7 +18,7 @@
 # - Z.B. wenn Betriebssystem-Ressourcen angefordert wurden, die freigegeben werden
 #   müssen
 
-# %% tags=["subslide", "alt"] slideshow={"slide_type": "subslide"}
+# %%
 def process_data_from_file(file_name):  # type: ignore
     print(f"Opening file {file_name}")
     try:
@@ -48,7 +34,7 @@ def process_data_from_file(file_name):  # type: ignore
         print(f"Closing {file_name}.")
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 process_data_from_file("good.data")
 
 # %%
@@ -57,14 +43,14 @@ process_data_from_file("good.data")
 # %%
 # process_data_from_file("worse.data")
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Mini-Workshop: Freigeben von Ressourcen
 #
 # Ihr Programm enthält die folgende Klasse, die eine Datenbankverbindung repräsentiert:
 
 
-# %% tags=["keep"]
+# %%
 class Database:
     def __init__(self):
         self.id = f"db-{id(self) % 100}"
@@ -85,24 +71,24 @@ class Database:
             raise RuntimeError("Not connected to database.")
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Ihre Anwendung verwendet die Datenbank in einer Funktion `process_data(db: Database)`:
 
-# %% tags=["keep"]
+# %%
 def process_data(db: Database):
     print(f"Processing data with database {db.id}.")
     db.read_data()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Da Datenbankverbindungen viele Ressourcen in der verwendeten Datenbank belegen, muss
 # die Verbindung nach ihrer Verwendung wieder mit `disconnect()` freigegeben werden.
 #
 # Einer Ihrer Kollegen hat versucht das Problem folgendermaßen zu lösen:
 
-# %% tags=["keep"]
+# %%
 def our_great_app():
     db = Database()
     db.connect()
@@ -110,7 +96,7 @@ def our_great_app():
     db.disconnect()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Nach einer Änderung der `process_data()` Funktion kommt es immer wieder
 # vor, dass Ihr Programm die Datenbankverbindung nicht freigibt.
@@ -120,25 +106,25 @@ def our_great_app():
 #   die Datenbankverbindung wirklich nicht freigegeben wird:
 
 
-# %% tags=["alt"]
+# %%
 def process_data(db: Database):  # noqa
     print(f"Processing data with database {db.id}.")
     # db.read_data()
     raise ValueError("Error reading Data!")
 
 
-# %% tags=["keep"]
+# %%
 # our_great_app()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Modifizieren Sie `our_great_app()` so, dass dieser Fehler vermieden wird.
 # - Implementieren Sie die Lösung so, dass sie das Problem auch bei zukünftigen
 #   Änderungen vermeiden.
 # - Testen Sie, dass die Datenbankverbindung jetzt wirklich freigegeben wird.
 
-# %% tags=["alt"]
+# %%
 def our_great_app():  # noqa
     db = Database()
     db.connect()

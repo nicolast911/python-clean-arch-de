@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Refactoring: Extrahiere Variable</b>
@@ -23,14 +9,14 @@
 # <!-- 14 Refactoring Extrahiere Variable.py -->
 # <!-- python_courses/slides/module_250_refactoring/topic_240_refact_extract_variable.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Extrahiere Variable
 
-# %% tags=["keep"]
+# %%
 from order_line import make_order_lines
 
 
-# %% tags=["keep"]
+# %%
 def compute_total(order_lines):
     total = 0.0
     for order_line in order_lines:
@@ -38,11 +24,11 @@ def compute_total(order_lines):
     return total
 
 
-# %% tags=["keep"]
+# %%
 print(compute_total(make_order_lines()))
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def compute_total(order_lines):
     total = 0.0
     for order_line in order_lines:
@@ -51,17 +37,17 @@ def compute_total(order_lines):
     return total
 
 
-# %% tags=["keep"]
+# %%
 print(compute_total(make_order_lines()))
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Motivation
 #
 # - Hilft dabei, komplexe Ausdrücke zu verstehen
 #   - Erklärende Variablen/Konstanten
 # - Debugging oft einfacher
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Mechanik
 #
 # - Stelle sicher, dass der Ausdruck frei von Seiteneffekten ist

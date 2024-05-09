@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Ausnahmen (Exceptions)</b>
@@ -23,7 +9,7 @@
 # <!-- 02 Ausnahmen (Exceptions).py -->
 # <!-- python_courses/slides/module_170_exceptions/topic_110_a1_exceptions.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Ausnahmen (Exceptions)
 #
@@ -33,12 +19,12 @@
 
 # %%
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Nicht behandelte Ausnahmen brechen die Programmausführung ab:
 
@@ -48,7 +34,7 @@
 
 # %%
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ## Fehlerklassen
 #
 # In Python gibt es viele vordefinierte Fehlerklassen, mit denen verschiedene
@@ -68,7 +54,7 @@
 # Die Liste der in der Standardbibliothek definierten Fehlerklassen ist
 # [hier](https://docs.python.org/3/library/exceptions.html).
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Workshop: Bank Account
 #
@@ -86,11 +72,11 @@
 # - Wenn `withdraw` mit einem negativen Wert aufgerufen wird oder durch das
 #   Abheben des Betrags die `balance` des Kontos negativ werden würde.
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 # %%
 
-# %% [markdown] lang="de"
+# %% [markdown]
 #
 # Testen Sie die Funktionalität der Klasse sowohl für erfolgreiche
 # Transaktionen, als auch für Transaktionen, die Exceptions auslösen.

@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>SOLID: OCP (Teil 2)</b>
@@ -23,21 +9,21 @@
 # <!-- 10 SOLID OCP (Teil 2).py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_340_solid_ocp_part2.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Wiederholung: OCP-Verletzung
 #
 # <img src="img/movie_v0.svg" alt="MovieV0"
 #      style="display:block;margin:auto;width:50%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Lösungsversuch 1: Vererbung
 #
 # <img src="img/movie_v2.svg" alt="MovieV2"
 #      style="display:block;margin:auto;width:70%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - OCP ist erfüllt
 # - Großer Scope der Vererbung
@@ -45,53 +31,53 @@
 # - Nur eindimensionale Klassifikation
 # - Keine Möglichkeit, Preisschema zu wechseln
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Lösungsversuch 2: Strategie-Muster
 #
 # <img src="img/movie_v3.svg" alt="MovieV3"
 #      style="display:block;margin:auto;width:80%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - OCP ist erfüllt
 # - Vererbung ist auf die Preisberechnung beschränkt
 # - Mehrdimensionale Klassifikation ist einfach
 # - Preisschema kann zur Laufzeit gewechselt werden
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Implementierung
 
-# %% tags=["keep"]
+# %%
 from abc import ABC, abstractmethod
 
 
-# %% tags=["keep"]
+# %%
 class PriceStrategy(ABC):
     @abstractmethod
     def compute_price(self, movie) -> float: ...
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class RegularPriceStrategy(PriceStrategy):
     def compute_price(self, movie) -> float:
         return 4.99
 
 
-# %% tags=["keep"]
+# %%
 class ChildrenPriceStrategy(PriceStrategy):
     def compute_price(self, movie) -> float:
         return 5.99
 
 
-# %% tags=["keep"]
+# %%
 class NewReleasePriceStrategy(PriceStrategy):
     def compute_price(self, movie) -> float:
         return 6.99
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Movie:
     def __init__(self, title: str, price_strategy):
         self.title = title
@@ -104,14 +90,14 @@ class Movie:
         print(f"{self.title} costs {self.compute_price()}")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 movies = [
     Movie("Casablanca", RegularPriceStrategy()),
     Movie("Shrek", ChildrenPriceStrategy()),
     Movie("Brand New", NewReleasePriceStrategy()),
 ]
 
-# %% tags=["keep"]
+# %%
 for m in movies:
     m.print_info()
 
@@ -122,7 +108,7 @@ movies[2].price_strategy = RegularPriceStrategy()
 movies[2].print_info()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Berechnung von ÖPNV-Fahrpreisen
 #
@@ -133,7 +119,7 @@ movies[2].print_info()
 # Entfernungstarifen basieren und Boote können Premiumtarife für
 # landschaftlich reizvolle Strecken haben.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Sie haben ein rudimentäres Fahrpreisberechnungssystem, das den Fahrpreis
 # basierend auf dem Verkehrsmittel bestimmt. Leider verstößt dieses System
@@ -148,11 +134,11 @@ movies[2].print_info()
 # ohne den vorhandenen Code zu ändern und die Verkehrsmittel für Verbindungen
 # zur Laufzeit gewechselt werden können.
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from enum import Enum
 
 
-# %% tags=["keep"]
+# %%
 class TransportType(Enum):
     BUS = 1
     SUBWAY = 2
@@ -160,7 +146,7 @@ class TransportType(Enum):
     BOAT = 4
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Connection:
     def __init__(self, transport_type):
         self._type = transport_type
@@ -178,19 +164,19 @@ class Connection:
             return 0.0
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 bus = Connection(TransportType.BUS)
 print(f"Bus fare: ${bus.calculate_fare(10)}")
 
-# %% tags=["keep"]
+# %%
 subway = Connection(TransportType.SUBWAY)
 print(f"Subway fare: ${subway.calculate_fare(10)}")
 
-# %% tags=["keep"]
+# %%
 train = Connection(TransportType.TRAIN)
 print(f"Train fare: ${train.calculate_fare(10)}")
 
-# %% tags=["keep"]
+# %%
 boat = Connection(TransportType.BOAT)
 print(f"Boat fare: ${boat.calculate_fare(10)}")
 
@@ -198,7 +184,7 @@ print(f"Boat fare: ${boat.calculate_fare(10)}")
 from abc import ABC, abstractmethod
 
 
-# %% tags=["alt"]
+# %%
 class FareCalculationStrategy(ABC):
     def __init__(self):
         pass
@@ -208,31 +194,31 @@ class FareCalculationStrategy(ABC):
         pass
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class BusFare(FareCalculationStrategy):
     def calculate_fare(self, distance: float) -> float:
         return 2.50  # flat rate
 
 
-# %% tags=["alt"]
+# %%
 class SubwayFare(FareCalculationStrategy):
     def calculate_fare(self, distance: float) -> float:
         return 1.50 + (distance * 0.20)  # base rate + per km
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class TrainFare(FareCalculationStrategy):
     def calculate_fare(self, distance: float) -> float:
         return 5.00 + (distance * 0.15)  # base rate + per km
 
 
-# %% tags=["alt"]
+# %%
 class BoatFare(FareCalculationStrategy):
     def calculate_fare(self, distance: float) -> float:
         return 10.00  # premium rate
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Connection:
     def __init__(self, fare_strategy):
         self._fare_strategy = fare_strategy
@@ -241,23 +227,23 @@ class Connection:
         return self._fare_strategy.calculate_fare(distance)
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 bus = Connection(BusFare())
 print(f"Bus fare: ${bus.compute_fare(10)}")
 
-# %% tags=["alt"]
+# %%
 subway = Connection(SubwayFare())
 print(f"Subway fare: ${subway.compute_fare(10)}")
 
-# %% tags=["alt"]
+# %%
 train = Connection(TrainFare())
 print("Train fare: $", train.compute_fare(10))
 
-# %% tags=["alt"]
+# %%
 boat = Connection(BoatFare())
 print(f"Boat fare: ${boat.compute_fare(10)}")
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Extra-Workshop: Zoo-Management System mit Strategy
 #
@@ -266,11 +252,11 @@ print(f"Boat fare: ${boat.compute_fare(10)}")
 #
 # Lösen Sie das OCP-Problem für dieses System mit dem Strategy-Muster.
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class AnimalFeedingSchedule(ABC):
     def __init__(self):
         super().__init__()
@@ -284,7 +270,7 @@ class AnimalFeedingSchedule(ABC):
         pass
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class MammalFeedingSchedule(AnimalFeedingSchedule):
     def get_feeding_schedule(self) -> str:
         return "Feed at 9am and 5pm."
@@ -293,7 +279,7 @@ class MammalFeedingSchedule(AnimalFeedingSchedule):
         return "Diet: Grass and fruits."
 
 
-# %% tags=["alt"]
+# %%
 class BirdFeedingSchedule(AnimalFeedingSchedule):
     def get_feeding_schedule(self) -> str:
         return "Feed at 8am and 4pm."
@@ -302,7 +288,7 @@ class BirdFeedingSchedule(AnimalFeedingSchedule):
         return "Diet: Seeds and insects."
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class ReptileFeedingSchedule(AnimalFeedingSchedule):
     def get_feeding_schedule(self) -> str:
         return "Feed at 12pm."
@@ -311,7 +297,7 @@ class ReptileFeedingSchedule(AnimalFeedingSchedule):
         return "Diet: Insects."
 
 
-# %% tags=["alt"]
+# %%
 class AquaticFeedingSchedule(AnimalFeedingSchedule):
     def get_feeding_schedule(self) -> str:
         return "Feed at 11am and 6pm."
@@ -320,7 +306,7 @@ class AquaticFeedingSchedule(AnimalFeedingSchedule):
         return "Diet: Algae and small fish."
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Animal:
     def __init__(self, name: str, feeding_schedule):
         self.name = name
@@ -331,7 +317,7 @@ class Animal:
         return self.feeding_schedule.get_diet()
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 animals = [
     Animal("Elephant", MammalFeedingSchedule()),
     Animal("Penguin", BirdFeedingSchedule()),
@@ -339,7 +325,7 @@ animals = [
     Animal("Shark", AquaticFeedingSchedule()),
 ]
 
-# %% tags=["alt"]
+# %%
 for animal in animals:
     print(animal.name)
     print(animal.feeding_schedule)

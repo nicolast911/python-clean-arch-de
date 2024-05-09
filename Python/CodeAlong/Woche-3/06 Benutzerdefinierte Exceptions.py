@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Benutzerdefinierte Exceptions</b>
@@ -23,7 +9,7 @@
 # <!-- 06 Benutzerdefinierte Exceptions.py -->
 # <!-- python_courses/slides/module_170_exceptions/topic_130_a3_user_defined_exceptions.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Benutzerdefinierte Exceptionklassen
 #
@@ -33,7 +19,7 @@
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Benutzerdefinierte Exceptions können wie alle anderen Exceptions erzeugt und
 #   behandelt werden.
@@ -42,7 +28,7 @@
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Exceptions können mit beliebig vielen Argumenten initialisiert werden.
 # - Die Werte der Argumente können mit `args` abgefragt werden.
@@ -53,17 +39,17 @@
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Benutzerdefinierte Exceptions können genau wie alle anderen Exceptions
 #   ausgelöst und behandelt werden.
 
 # %%
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Behandeln von Unterklassen einer Exception
 #
@@ -72,7 +58,7 @@
 
 # %%
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Wann eigene Exceptions definieren?
 #
@@ -84,7 +70,7 @@
 #   - `FileNotFoundError` statt `OSError`
 #   - `DimensionMismatchError` statt `ValueError` für physikalische Berechnungen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Benutzerdefinierte Exceptions
 #
@@ -94,14 +80,14 @@
 #   auslösen, wenn die E-Mail-Adresse nicht in der Liste `valid_mail_addresses`
 #   enthalten ist.
 
-# %% tags=["keep"]
+# %%
 valid_mail_addresses = [
     "joe@example.com",
     "jane@example.com",
     "jill@example.com",
 ]
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 # %%
 

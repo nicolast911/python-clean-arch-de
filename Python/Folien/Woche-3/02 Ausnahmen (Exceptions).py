@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Ausnahmen (Exceptions)</b>
@@ -23,7 +9,7 @@
 # <!-- 02 Ausnahmen (Exceptions).py -->
 # <!-- python_courses/slides/module_170_exceptions/topic_110_a1_exceptions.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Ausnahmen (Exceptions)
 #
@@ -39,14 +25,14 @@ def int_sqrt(n: int) -> int:
     raise ValueError(f"{n} is not a square number.")
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 int_sqrt(9)
 
 
 # %%
 # int_sqrt(8)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Nicht behandelte Ausnahmen brechen die Programmausführung ab:
 
@@ -62,7 +48,7 @@ print_int_sqrt(9)
 # %%
 # print_int_sqrt(8)
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ## Fehlerklassen
 #
 # In Python gibt es viele vordefinierte Fehlerklassen, mit denen verschiedene
@@ -82,7 +68,7 @@ print_int_sqrt(9)
 # Die Liste der in der Standardbibliothek definierten Fehlerklassen ist
 # [hier](https://docs.python.org/3/library/exceptions.html).
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Workshop: Bank Account
 #
@@ -100,7 +86,7 @@ print_int_sqrt(9)
 # - Wenn `withdraw` mit einem negativen Wert aufgerufen wird oder durch das
 #   Abheben des Betrags die `balance` des Kontos negativ werden würde.
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass
 
 
@@ -132,7 +118,7 @@ class BankAccount:
         self.balance -= amount
 
 
-# %% [markdown] lang="de"
+# %% [markdown]
 #
 # Testen Sie die Funktionalität der Klasse sowohl für erfolgreiche
 # Transaktionen, als auch für Transaktionen, die Exceptions auslösen.
@@ -165,10 +151,10 @@ b
 # b.withdraw(1000.0)
 
 
-# %% [markdown] lang="de" tags=["alt"]
+# %% [markdown]
 # ## Lösung ohne Dataclasses:
 
-# %% tags=["alt"]
+# %%
 class BankAccount:
     def __init__(self, balance):
         if balance < 0:
@@ -197,29 +183,29 @@ class BankAccount:
         self.balance -= amount
 
 
-# %% tags=["alt"]
+# %%
 BankAccount(100.0)
 
-# %% tags=["alt"]
+# %%
 # BankAccount(-100)
 
-# %% tags=["alt"]
+# %%
 b = BankAccount(100.0)
 b
 
-# %% tags=["alt"]
+# %%
 b.deposit(200.0)
 b
 
-# %% tags=["alt"]
+# %%
 # b.deposit(-100.0)
 
-# %% tags=["alt"]
+# %%
 b.withdraw(50.0)
 b
 
-# %% tags=["alt"]
+# %%
 # b.withdraw(-200.0)
 
-# %% tags=["alt"]
+# %%
 # b.withdraw(1000.0)

@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Refactoring: Extrahiere Funktion</b>
@@ -23,16 +9,16 @@
 # <!-- 12 Refactoring Extrahiere Funktion.py -->
 # <!-- python_courses/slides/module_250_refactoring/topic_220_refact_extract_function.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Extrahiere Funktion
 #
 # - Invers zu *Inline Function*
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from order_line import OrderLine, make_order_lines
 
 
-# %% tags=["keep"]
+# %%
 def print_receipt(order_lines: list[OrderLine]):
     # Print the line items
     for order_line in order_lines:
@@ -47,11 +33,11 @@ def print_receipt(order_lines: list[OrderLine]):
     print(f"Total: {total:.2f}€")
 
 
-# %% tags=["keep"]
+# %%
 print_receipt(make_order_lines())
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def compute_total(order_lines):
     total = 0.0
     for order_line in order_lines:
@@ -59,7 +45,7 @@ def compute_total(order_lines):
     return total
 
 
-# %% tags=["keep"]
+# %%
 def print_receipt(order_lines):
     for order_line in order_lines:
         print(
@@ -69,10 +55,10 @@ def print_receipt(order_lines):
     print(f"Total: {total:.2f}€")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 print_receipt(make_order_lines())
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Motivation
 #
 # - Jedes Code-Fragment, das man nicht unmittelbar versteht, sollte in eine
@@ -84,7 +70,7 @@ print_receipt(make_order_lines())
 #   sind ein Hinweis auf eine mögliche Extraktion
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Mechanism
 #
 # - Create a new function

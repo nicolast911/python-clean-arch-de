@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>GRASP: Controller</b>
@@ -23,7 +9,7 @@
 # <!-- 06 GRASP Controller.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_420_grasp_controller.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Starten eines Spiels
 #
@@ -34,12 +20,12 @@
 #   - Jeder Spieler wählt eine Aktion
 #   - Die Aktion wird ausgeführt
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass, field
 from typing import Callable
 
 
-# %% tags=["keep"]
+# %%
 from action_v4 import Action
 from location_v4 import Location, LocationDescriptions
 from pawn_v4 import Pawn
@@ -48,39 +34,39 @@ from simple_locations import simple_locations
 from world_factory_v4 import WorldFactory
 from world_v4 import World
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 world_factory = WorldFactory()
 world = world_factory.create(simple_locations)
 
-# %% tags=["keep"]
+# %%
 alice_pawn = Pawn("Alice", world.locations["Room 1"])
 bob_pawn = Pawn("Bob", world.locations["Room 2"])
 
-# %% tags=["keep"]
+# %%
 players = [
     Player("Alice", alice_pawn, interactive_action_strategy),
     Player("Bob", bob_pawn),
 ]
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def run_game():
     for _ in range(5):
         for player in players:
             player.take_turn()
 
 
-# %% tags=["keep"]
+# %%
 # run_game()
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Zwei gegenläufige Anforderungen
 #
 # - Viele kleine, kohäsive Klassen und Funktionen für gute Struktur
 # - Einfaches Interface für den Benutzer
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # GRASP: Controller
 #
@@ -96,7 +82,7 @@ def run_game():
 # - Ein Use-Case-Controller bearbeitet immer einen kompletten Use-Case (Controller
 #   können aber auch mehr als einen Use-Case bearbeiten).
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Controller
 #
@@ -106,7 +92,7 @@ def run_game():
 # - Tests: Controller bieten eine zentrale Schnittstelle für einzelne
 #   Subsysteme oder Anwendungsfälle
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Controller in unserem Adventure-Game
 #
@@ -114,7 +100,7 @@ def run_game():
 #   - Anwendungsfälle (Use Cases)
 #   - Domänenmodell
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Domänenmodell
 
@@ -122,7 +108,7 @@ def run_game():
 # <img src="img/adv-domain-03.svg"
 #      style="display:block;margin:auto;width:50%"/>
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Game:
     location_descriptions: LocationDescriptions
@@ -146,14 +132,14 @@ class Game:
             player.take_turn()
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 action_strategies = {
     "interactive": interactive_action_strategy,
     "random": random_action_strategy,
 }
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def create_player(
     world: World,
     name: str,
@@ -173,18 +159,18 @@ def create_player(
     return player
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 game = Game(simple_locations)
 
 # %%
 game.add_player("Alice", "Room 1")
 game.add_player("Bob", "Room 2", "interactive")
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 # for _ in range(5):
 #     game.play_round()
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Controller für Bibliotheksverwaltung
 #
@@ -194,11 +180,11 @@ game.add_player("Bob", "Room 2", "interactive")
 # - Modifizieren Sie das Anwendungsbeispiel so, dass der Controller verwendet wird
 # - Wie hat sich die Benutzung des Systems verändert?
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass, field  # noqa
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class BookInfo:
     title: str
@@ -207,7 +193,7 @@ class BookInfo:
     num_copies: int = 1
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class MemberInfo:
     name: str
@@ -215,7 +201,7 @@ class MemberInfo:
     member_id: str
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class BookInventory:
     books: dict[str, BookInfo] = field(default_factory=dict)
@@ -230,7 +216,7 @@ class BookInventory:
         return isbn in self.books and self.books[isbn].num_copies > 0
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class MemberRegistry:
     members: dict[str, MemberInfo] = field(default_factory=dict)
@@ -239,7 +225,7 @@ class MemberRegistry:
         self.members[member.member_id] = member
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class RentalRegistry:
     rentals: dict[str, list[str]] = field(default_factory=dict)
@@ -264,69 +250,69 @@ class RentalRegistry:
         return self.rentals
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 book_inventory = BookInventory()
 member_registry = MemberRegistry()
 rental_registry = RentalRegistry()
 
-# %% tags=["keep"]
+# %%
 # Add books to the inventory
 book1 = BookInfo("Book 1", ["Author 1"], "ISBN1", 2)
 book2 = BookInfo("Book 2", ["Author 2"], "ISBN2", 1)
 book_inventory.add_book(book1)
 book_inventory.add_book(book2)
 
-# %% tags=["keep"]
+# %%
 # Add members to the registry
 member1 = MemberInfo("John Doe", "123 Main St", "M001")
 member2 = MemberInfo("Jane Smith", "456 Elm St", "M002")
 member_registry.add_member(member1)
 member_registry.add_member(member2)
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 # Check availability
 print(book_inventory.is_available("ISBN1"))  # True
 print(book_inventory.is_available("ISBN2"))  # True
 
-# %% tags=["keep"]
+# %%
 # Borrow books
 rental_registry.borrow_book("M001", "ISBN1", book_inventory)
 rental_registry.borrow_book("M001", "ISBN2", book_inventory)
 
-# %% tags=["keep"]
+# %%
 # Check availability
 print(book_inventory.is_available("ISBN1"))  # True
 print(book_inventory.is_available("ISBN2"))  # False
 
-# %% tags=["keep"]
+# %%
 # Borrow books
 rental_registry.borrow_book("M002", "ISBN1", book_inventory)
 rental_registry.borrow_book("M002", "ISBN2", book_inventory)
 
-# %% tags=["keep"]
+# %%
 # Check availability
 print(book_inventory.is_available("ISBN1"))  # False
 print(book_inventory.is_available("ISBN2"))  # False
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 # Check member rentals
 print(rental_registry.get_member_rentals("M001"))  # ["ISBN1", "ISBN2"]
 print(rental_registry.get_member_rentals("M002"))  # ["ISBN1"]
 
-# %% tags=["keep"]
+# %%
 # Check all rentals
 print(
     rental_registry.get_all_rentals()
 )  # {"M001": ["ISBN1", "ISBN2"], "M002": ["ISBN1"]}
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 # Return a book
 rental_registry.return_book("M001", "ISBN1", book_inventory)
 print(book_inventory.is_available("ISBN1"))  # True
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Library:
     book_inventory: BookInventory = field(default_factory=BookInventory)
@@ -355,39 +341,39 @@ class Library:
         return self.rental_registry.get_all_rentals()
 
 
-# %% tags=["alt"]
+# %%
 library = Library()
 
-# %% tags=["alt"]
+# %%
 library.add_book("Book 1", ["Author 1"], "ISBN1", 2)
 library.add_book("Book 2", ["Author 2"], "ISBN2", 1)
 
-# %% tags=["alt"]
+# %%
 library.add_member("John Doe", "123 Main St", "M001")
 library.add_member("Jane Smith", "456 Elm St", "M002")
 
-# %% tags=["alt"]
+# %%
 print(library.is_book_available("ISBN1"))  # True
 print(library.is_book_available("ISBN2"))  # True
 
-# %% tags=["alt"]
+# %%
 library.borrow_book("M001", "ISBN1")
 library.borrow_book("M001", "ISBN2")
 
-# %% tags=["alt"]
+# %%
 print(library.is_book_available("ISBN1"))  # True
 print(library.is_book_available("ISBN2"))  # False
 
-# %% tags=["alt"]
+# %%
 library.borrow_book("M002", "ISBN1")
 library.borrow_book("M002", "ISBN2")
 
-# %% tags=["alt"]
+# %%
 print(library.is_book_available("ISBN1"))  # False
 print(library.is_book_available("ISBN2"))  # False
 
-# %% tags=["alt"]
+# %%
 library.get_member_rentals("M001")
 
-# %% tags=["alt"]
+# %%
 library.get_all_rentals()

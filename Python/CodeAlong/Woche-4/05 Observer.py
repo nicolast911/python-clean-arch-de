@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Observer</b>
@@ -23,7 +9,7 @@
 # <!-- 05 Observer.py -->
 # <!-- python_courses/slides/module_210_design_patterns/topic_210_observer.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Beispiel: Aktienkurse
 #
@@ -32,21 +18,21 @@
 # - Clients sollen unabhängig voneinander sein
 # - Die Anwendung soll nicht über konkrete Clients Bescheid wissen
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from random import randint, normalvariate, sample
 import weakref
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class Stock:
     name: str
     price: float
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class StockMarket:
     stocks: list[Stock] = field(default_factory=list)
@@ -73,22 +59,22 @@ class StockMarket:
             stock.price *= change_percent
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 market = StockMarket()
 
-# %% tags=["keep"]
+# %%
 market.add_stock(Stock("Banana", 100.0))
 market.add_stock(Stock("Billionz", 200.0))
 market.add_stock(Stock("Macrosoft", 300.0))
 market.add_stock(Stock("BCD", 400.0))
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 for i in range(10):
     print(f"============= Update {i + 1} =============")
     market.update_prices()
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Konsequenzen
 #
@@ -96,7 +82,7 @@ for i in range(10):
 # - Änderung des Ausgabeformats nur durch Änderung des `StockMarket`
 # - Keine einfache Möglichkeit, Clients hinzuzufügen oder zu entfernen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Probleme
 #
@@ -104,7 +90,7 @@ for i in range(10):
 # - Verletzung des Open-Closed-Prinzips
 # - Hohe Kopplung (an alle Clients)
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ## Observer
 #
 # ### Zweck
@@ -119,20 +105,20 @@ for i in range(10):
 # - Ein *Subject* kann beliebig viele *Observers* haben
 # - *Observer* werden automatisch über Änderungen am *Subject* benachrichtigt
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Klassendiagramm mit Observer
 #
 # <img src="img/stock_example.svg"
 #      style="display:block;margin:auto;width:90%"/>
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class StockObserver(ABC):
     @abstractmethod
     def update(self, stocks: list["Stock"]): ...
 
 
-# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class StockMarket:
     stocks: list[Stock] = field(default_factory=list)
@@ -159,7 +145,7 @@ class StockMarket:
             stock.price *= change_percent
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class PrintingStockObserver(StockObserver):
     def __init__(self, name: str):
         super().__init__()
@@ -171,7 +157,7 @@ class PrintingStockObserver(StockObserver):
             print(f"  {stock.name}: {stock.price:.2f}")
 
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 class RisingStockObserver(StockObserver):
     def __init__(self, name: str):
         super().__init__()
@@ -187,38 +173,38 @@ class RisingStockObserver(StockObserver):
             self.old_prices[stock.name] = stock.price
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 market = StockMarket()
 
-# %% tags=["keep"]
+# %%
 printing_observer = PrintingStockObserver("PrintingObserver")
 rising_observer = RisingStockObserver("RisingObserver")
 
-# %% tags=["keep"]
+# %%
 market.attach_observer(printing_observer)
 market.attach_observer(rising_observer)
 
-# %% tags=["keep"]
+# %%
 market.add_stock(Stock("Banana", 100.0))
 market.add_stock(Stock("Billionz", 200.0))
 market.add_stock(Stock("Macrosoft", 300.0))
 market.add_stock(Stock("BCD", 400.0))
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 for i in range(10):
     print(f"============= Update {i + 1} =============")
     market.update_prices()
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 del printing_observer
 
-# %% tags=["keep"]
+# %%
 for i in range(10):
     print(f"============= Update {i + 1} =============")
     market.update_prices()
 
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ### Anwendbarkeit
 #
@@ -227,14 +213,14 @@ for i in range(10):
 #   anderen Objekten
 # - Eine Abstraktion hat zwei Aspekte, wobei einer vom anderen abhängt
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ### Struktur: Pull Observer
 #
 # <img src="img/pat_observer_pull.svg"
 #      style="display:block;margin:auto;width:100%"/>
 
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ## Observer (Verhaltensmuster)
 #
 # ### Teilnehmer
@@ -248,7 +234,7 @@ for i in range(10):
 #   - definiert eine Aktualisierungs-Schnittstelle für Objekte, die über
 #     Änderungen eines Subjects informiert werden sollen
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # - `ConcreteSubject`
 #   - Speichert den Zustand, der für `ConcreteObserver`-Objekte von Interesse
 #     ist
@@ -260,14 +246,14 @@ for i in range(10):
 #   - Implementiert die `Observer`-Aktualisierungs-Schnittstelle, um seinen
 #     Zustand mit dem des Subjects konsistent zu halten
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ### Interaktionen: Pull Observer
 #
 # <img src="img/pat_observer_pull_seq.svg"
 #      style="display:block;margin:auto;width:65%"/>
 
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ### Zusammenarbeit
 #
 # - `ConcreteSubject` benachrichtigt seine Observer über Änderungen in seinem
@@ -278,19 +264,19 @@ for i in range(10):
 #   des Subjects in Einklang zu bringen
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Struktur: Push Observer
 #
 # <img src="img/pat_observer_push.svg"
 #      style="display:block;margin:auto;width:100%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Interaktion: Push Observer
 #
 # <img src="img/pat_observer_push_seq.svg"
 #      style="display:block;margin:auto;width:65%"/>
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ### Konsequenzen
 #
 # - `Subject` und `Observer` können unabhängig voneinander
@@ -301,7 +287,7 @@ for i in range(10):
 # - Unterstützung für Broadcast-Kommunikation
 # - Unerwartete Updates
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ### Praxisbeispiele
 #
 # - Event-Listener in Benutzeroberflächen
@@ -313,7 +299,7 @@ for i in range(10):
 # - Singleton: ...
 
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ## Mini-Workshop: Produktion von Werkstücken
 #
 # In einem Produktionssystem wollen Sie verschiedene andere Systeme
@@ -330,7 +316,7 @@ for i in range(10):
 # implementieren und vergleichen.
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 
 # %%
 

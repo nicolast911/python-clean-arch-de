@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Refactoring: Code Smells</b>
@@ -23,14 +9,14 @@
 # <!-- 03 Refactoring Code Smells.py -->
 # <!-- python_courses/slides/module_250_refactoring/topic_150_a3_code_smells.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # Was sind Code Smells?
 #
 # Code Smells sind Hinweise darauf, dass wir schlechten Code haben und refactoren
 # sollten.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Code Smells
 #
@@ -41,7 +27,7 @@
 # - Global Data
 # - Mutable Data
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Divergent Change
 # - Shotgun Surgery
@@ -52,7 +38,7 @@
 # - Loops
 # - Lazy Element
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Speculative Generality
 # - Temporary Field
@@ -60,7 +46,7 @@
 # - Middle Man
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Insider Trading
 # - Large Class

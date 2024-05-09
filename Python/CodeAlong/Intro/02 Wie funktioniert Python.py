@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Wie funktioniert Python?</b>
@@ -23,7 +9,7 @@
 # <!-- 02 Wie funktioniert Python.py -->
 # <!-- python_courses/slides/module_110_introduction/topic_100_b2_how_does_python_work.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # # Einführung
 #
 # Wir beantworten die folgenden Fragen:
@@ -33,17 +19,17 @@
 # - Welche Entwicklungsumgebungen gibt es?
 # - Wie arbeitet man mit Notebooks?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ## Compiler (C++)
 #
 # <img src="img/compiler.svg" style="width:60%;margin:auto"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ## Interpreter (Python)
 #
 # <img src="img/interpreter.svg" style="width:60%;margin:auto"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ## Ausführen von Programmen
 #
 # <br/>
@@ -53,7 +39,7 @@
 # </video>
 # </center>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ## Interpreter (Python)
 #
 # <br/>
@@ -63,19 +49,19 @@
 # </video>
 # </center>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ## Jupyter Notebooks
 #
 # <img src="img/jupyter-notebook.svg" style="width:60%;margin:auto"/>
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 def say_hello(name):
     print(f"Hello, {name}!")
 
 
 # %%
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -86,7 +72,7 @@ plt.figure(figsize=(12, 8))
 plt.scatter(page_load_time, purchase_amount)
 plt.show()
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 # ## Entwicklungsumgebungen
 #
 # - Visual Studio Code

@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Die Linux Shell</b>
@@ -23,7 +9,7 @@
 # <!-- 05 Die Linux Shell.py -->
 # <!-- python_courses/slides/module_110_introduction/topic_106_a3_shell_linux.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # Die Shell auf Linux
 #
@@ -36,7 +22,7 @@
 # - Die meisten Linux Systeme verwenden die Bash Shell
 
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Die Bash Shell
 #
@@ -44,7 +30,7 @@
 # - Normalerweise die Default-Shell im Terminal
 # - Verwendung: Ausführen von Programmen, Verwalten von Dateien, etc.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Der Prompt
 #
@@ -57,7 +43,7 @@
 # - `$` zeigt an, dass Sie jetzt Kommandos eingeben können
 #   - `root`-Benutzer: `#` statt `$`
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Das Aktuelle Verzeichnis
 #
@@ -67,7 +53,7 @@
 # - `ls`: Anzeigen von Dateien im aktuellen Verzeichnis
 # - Optionen in der Form `-l` oder `--help`
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Wechseln des Arbeitsverzeichnisses
 #
@@ -82,7 +68,7 @@
 # - cd '/home/test user/'
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Tipps zum Arbeiten mit Pfaden
 #
@@ -92,7 +78,7 @@
 #   `Strg-R`) um in Verzeichnisse zu wechseln, die Sie schon einmal besucht
 #   haben
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Das war's schon
 #

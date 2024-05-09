@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Refactoring: Inline Function</b>
@@ -23,21 +9,21 @@
 # <!-- 13 Refactoring Inline Function.py -->
 # <!-- python_courses/slides/module_250_refactoring/topic_230_refact_inline_function.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # ### Inline Function
 #
 # - Invers zu *Extrahiere Funktion*
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from order_line import OrderLine, make_order_lines
 
 
-# %% tags=["keep"]
+# %%
 def order_line_price(order_line: OrderLine):
     return order_line.price
 
 
-# %% tags=["keep"]
+# %%
 def compute_total(order_lines):
     total = 0.0
     for order_line in order_lines:
@@ -45,11 +31,11 @@ def compute_total(order_lines):
     return total
 
 
-# %% tags=["keep"]
+# %%
 print(compute_total(make_order_lines()))
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def compute_total(order_lines):
     total = 0.0
     for order_line in order_lines:
@@ -57,10 +43,10 @@ def compute_total(order_lines):
     return total
 
 
-# %% tags=["keep"]
+# %%
 print(compute_total(make_order_lines()))
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Motivation
 #
 # - Manchmal ist eine Funktion nicht leichter zu verstehen als ihr Codeblock
@@ -69,7 +55,7 @@ print(compute_total(make_order_lines()))
 # - Generell: Potenziell anwendbar, wenn man aufgrund zu vieler Indirektionen den
 #   Überblick verliert
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # #### Mechanik
 #
 # - Stelle sicher, dass die Funktion keiner objektorientierten Polymorphie

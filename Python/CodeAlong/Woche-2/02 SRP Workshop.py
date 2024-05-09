@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>SRP Workshop</b>
@@ -23,7 +9,7 @@
 # <!-- 02 SRP Workshop.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_310_workshop_srp.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Wiederholung: Single Responsibility Principle (SRP, SOLID)
 #
@@ -31,7 +17,7 @@
 # - Alternativ: Ein Modul sollte nur gegenüber einem einzigen Akteur
 #   verantwortlich sein.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Auflösungs-Strategien
 #
@@ -42,18 +28,18 @@
 #      style="float:right;padding:5px;width:50%"/>
 # </div>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/book_resolution_1.svg"
 #      style="display:block;margin:auto;width:100%"/>
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/book_resolution_2.svg"
 #      style="display:block;margin:auto;width:100%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Wetter-App
 #
@@ -78,21 +64,21 @@
 # skalierbarere Anwendung.
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Klassendiagramm der Wetter-App
 #
 # <img src="img/weather_app_class.svg"
 #      style="display:block;margin:auto;width:40%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### `run_weather_app()` Sequenzendiagramm
 #
 # <img src="img/weather_app_sequence.svg"
 #      style="display:block;margin:auto;width:30%"/>
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Weather:
     def __init__(self):
         self.raw_data = ""
@@ -133,7 +119,7 @@ class Weather:
         return ", ".join(map(str, self.data))
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def run_weather_app(introduce_error: bool = False):
     w = Weather()
     w.fetch_data_from_source()
@@ -143,8 +129,8 @@ def run_weather_app(introduce_error: bool = False):
     w.display_in_format_b()
 
 
-# %% tags=["keep"]
+# %%
 run_weather_app()
 
-# %% tags=["keep"]
+# %%
 run_weather_app(True)

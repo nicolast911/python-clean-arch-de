@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Die Windows Kommandozeile</b>
@@ -23,7 +9,7 @@
 # <!-- 04 Die Windows Kommandozeile.py -->
 # <!-- python_courses/slides/module_110_introduction/topic_104_a3_shell_windows.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # (Anaconda) Powershell
 #
@@ -32,7 +18,7 @@
 #   - Nur diese Version hat Zugriff auf die von Anaconda installierten Programme
 
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Starten von Programmen
 #
@@ -45,7 +31,7 @@
 #   - `notepad` für einen einfachen Text-Editor
 #   - `python` für den Python Interpreter
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Das Aktuelle Verzeichnis
 #
@@ -54,7 +40,7 @@
 # - Sie können auch das Kommando `pwd` eingeben, um das aktuelle Verzeichnis zu sehen.
 # - Mit `ls` oder `dir` können Sie die Dateien im aktuellen Verzeichnis anzeigen.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Wechseln des Arbeitsverzeichnisses
 #
@@ -68,7 +54,7 @@
 # - Pfade mit Leerzeichen müssen in Anführungszeichen eingeschlossen werden:
 #   - cd 'C:\Users\Test User\'
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Tipps zum Arbeiten mit Pfaden
 #
@@ -77,7 +63,7 @@
 # - Verwenden Sie `..` um ins übergeordnete Verzeichnis zu wechseln
 # - Kopieren Sie Pfade aus dem Explorer oder Finder
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Das war's schon
 #

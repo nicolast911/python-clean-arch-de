@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>GRASP: Niedrige Kopplung</b>
@@ -23,7 +9,7 @@
 # <!-- 08 GRASP Niedrige Kopplung.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_240_grasp_low_coupling.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Aktueller Stand des Adventure-Spiels
 #
@@ -32,7 +18,7 @@
 # - `World` erzeugt `Location`-Objekte (Creator)
 # - `World` kann `Location`-Objekte finden (Information Expert)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Nächster Schritt
 #
@@ -41,7 +27,7 @@
 #   - Erstellen der Verbindungen (Doing)
 #   - Speichern der Verbindungen (Knowing)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Wer soll die Verbindungen erzeugen?
 #
@@ -52,7 +38,7 @@
 #  <li> (Wir brauchen die Daten aller Locations) </li>
 # </ul>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Wer soll die Verbindungen speichern?
 #
@@ -67,32 +53,32 @@
 #   </li>
 # </ul>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # **Das ist keine Richtige Anwendung von Information Expert!**
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Implementierung
 
-# %% tags=["keep"]
+# %%
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from pprint import pprint
 from typing import Any, Mapping, Sequence, TypeAlias
 
-# %% tags=["keep"]
+# %%
 json_file = list(Path().glob("**/simple-locations.json"))[0]
 with open(json_file) as file:
     simple_locations = json.load(file)
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 LocationDescription: TypeAlias = Mapping[str, Any]
 LocationDescriptions: TypeAlias = Sequence[LocationDescription]
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Location:
     name: str
@@ -103,7 +89,7 @@ class Location:
         return cls(description["name"], description.get("description", ""))
 
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class World:
     locations: dict[str, Location]
@@ -127,7 +113,7 @@ class World:
         return self.connections[location.name].get(direction)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def _world_from_location_descriptions(location_descriptions):
     locations = {
         data["name"]: Location.from_description(data) for data in location_descriptions
@@ -138,7 +124,7 @@ def _world_from_location_descriptions(location_descriptions):
     return result
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def _build_connections_for_all_locations(world, location_descriptions):
     for ld in location_descriptions:
         world.connections[ld["name"]] = {
@@ -147,11 +133,11 @@ def _build_connections_for_all_locations(world, location_descriptions):
         }
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Erzeugen von `World`-Instanzen
 
-# %% tags=["keep"]
+# %%
 world = World.from_location_descriptions(simple_locations)
 
 # %%
@@ -168,7 +154,7 @@ room1
 room2 = world["Room 2"]
 room2
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Was ist das Problem?
 #
@@ -181,18 +167,18 @@ room2
 world.connection(room1, "north")
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Wie können wir das vermeiden?
 #
 # - Verlagern der Verantwortlichkeit für die Navigation
 # - Jede `Location` kennt ihre ausgehenden Verbindungen
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Implementierung
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class World:
     locations: dict[str, Location]
@@ -211,7 +197,7 @@ class World:
         return _world_from_location_descriptions(location_descriptions)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Location:
     name: str
@@ -222,7 +208,7 @@ class Location:
         return cls(data["name"], data.get("description", ""))
 
 
-# %% tags=["keep", "alt"]
+# %%
 @dataclass
 class Location:
     name: str
@@ -237,7 +223,7 @@ class Location:
         return self.connections.get(direction)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def _world_from_location_descriptions(location_descriptions: LocationDescriptions):
     locations = {
         data["name"]: Location.from_description(data) for data in location_descriptions
@@ -247,7 +233,7 @@ def _world_from_location_descriptions(location_descriptions: LocationDescription
     return World(locations, initial_location_name)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def _build_connections_for_all_locations(
     locations: dict[str, Location], location_descriptions: LocationDescriptions
 ):
@@ -259,28 +245,28 @@ def _build_connections_for_all_locations(
         locations[location_description["name"]].connections = connections
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Wie können wir die Klasse jetzt verwenden?
 
-# %% tags=["keep"]
+# %%
 world = World.from_location_descriptions(simple_locations)
 
 # %%
 pprint(world)
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 room1 = world["Room 1"]
 room1
 
-# %% tags=["keep"]
+# %%
 room2 = world["Room 2"]
 room2
 
 # %%
 room1["north"]
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Hat uns Information Expert in die Irre geführt?
 #
@@ -313,7 +299,7 @@ room1["north"]
 #   </li>
 # </ul>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 # <div style="float:left;margin:auto;padding:80px 0;width:25%">
 # <p>
 #   Im Domänenmodell ist die benötigte
@@ -324,7 +310,7 @@ room1["north"]
 # <img src="img/adv-domain-03-small.svg"
 #      style="float:right;margin:auto;width:70%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Merkregel: Lokale Informationen ist besser als globaler Zustand
 #
@@ -333,7 +319,7 @@ room1["north"]
 # - Das verringert fast immer die Kopplung im System
 # - Vermeiden Sie Strukturen wie das `connections` Dictionary in der ersten Lösung
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Niedrige Kopplung (Low Coupling, GRASP)
 #
@@ -345,7 +331,7 @@ room1["north"]
 #
 # Weise Verantwortlichkeiten so zu, dass die (unnötige) Kopplung minimiert wird
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Kommentare
 #
@@ -361,7 +347,7 @@ room1["north"]
 # - Lose Kopplung
 #   - Ist besonders wichtig von *stabilen* zu *instabilen* Teilen des Systems
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Vermeidung von Kopplung
 #
@@ -376,7 +362,7 @@ room1["north"]
 #   - Ist sehr schwer zu beseitigen
 #   - Sollte während der Entwicklung immer im Fokus sein
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Wie können wir Kopplung vermeiden?
 #
@@ -386,14 +372,14 @@ room1["north"]
 #   - Interface Segregation Principle
 #   - Dependency Inversion Principle
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Niedrige Kopplung zur Evaluierung von Design-Alternativen
 #
 # - Evaluatives Kriterium
 # - Die Design-Alternative mit der niedrigsten Kopplung ist of eine gute Wahl
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Beispiel
 #

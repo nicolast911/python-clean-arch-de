@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>GRASP: Informations-Experte</b>
@@ -23,7 +9,7 @@
 # <!-- 06 GRASP Informations-Experte.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_170_grasp_info_expert.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # - Use Case "Spiel initialisieren"
 # - Bisher:
@@ -36,7 +22,7 @@
 # - Frage:
 #   - Wer findet `Location` Objekte anhand ihres Namens?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Kandidaten
 
@@ -53,7 +39,7 @@
 # <img src="img/adv-domain-03-small.svg"
 #      style="float:right;margin:auto;width:70%"/>
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Informations-Experte (engl. "Information Expert", GRASP)
 #
@@ -66,7 +52,7 @@
 # An die Klasse, die die meisten Informationen hat, die für die Erfüllung der
 # Verantwortung notwendig sind.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Wer ist der Informationsexperte?
 
@@ -83,19 +69,19 @@
 # <img src="img/adv-domain-03-small.svg"
 #      style="float:right;margin:auto;width:70%"/>
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass
 import json
 from pathlib import Path
 
 
-# %% tags=["keep"]
+# %%
 json_file = list(Path().glob("**/simple-locations.json"))[0]
 with open(json_file) as file:
     simple_locations = json.load(file)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class Location:
     name: str
@@ -106,7 +92,7 @@ class Location:
         return cls(description["name"], description.get("description", ""))
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def _world_from_location_descriptions(location_descriptions):
     locations = {
         data["name"]: Location.from_description(data) for data in location_descriptions
@@ -115,7 +101,7 @@ def _world_from_location_descriptions(location_descriptions):
     return World(locations, initial_location_name)
 
 
-# %% tags=["start", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class World:
     locations: dict[str, Location]

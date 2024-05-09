@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Einführung in SOLID und GRASP</b>
@@ -23,7 +9,7 @@
 # <!-- 02 Einführung in SOLID und GRASP.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_110_solid_grasp_intro.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # SOLID: Einführung
 #
@@ -32,7 +18,7 @@
 # - Sprach- und Domänenunabhängig
 # - Ziele: Wartbarkeit, Erweiterbarkeit, Wiederverwendbarkeit
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # - Single-Responsibility-Prinzip (SRP)
 # - Open/Closed-Prinzip (OCP)
@@ -40,7 +26,7 @@
 # - Interface-Segregation-Prinzip (ISP)
 # - Dependency-Inversion-Prinzip (DIP)
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## GRASP: Einführung
 #
@@ -50,7 +36,7 @@
 # - Sprach- und Domänenunabhängig
 # - Ziele: Wartbarkeit, Erweiterbarkeit, Wiederverwendbarkeit
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # - GRASP Patterns sind Hilfsmittel zum Verstehen von Responsibility-Driven
 #   Design
@@ -60,7 +46,7 @@
 #   übernehmen
 # - Andere sind sehr abstrakte Prinzipien
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # - Wir werden die SOLID- und GRASP-Patterns gemeinsam betrachten
 # - Im Kontext von zwei Beispielen

@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>SOLID: Open-Closed Prinzip</b>
@@ -23,7 +9,7 @@
 # <!-- 06 SOLID Open-Closed Prinzip.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_330_solid_ocp.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # Open-Closed Prinzip (SOLID)
 #
@@ -34,17 +20,17 @@
 #
 # sein.
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from enum import Enum
 
 
-# %% tags=["keep"]
+# %%
 class MovieKindV0(Enum):
     REGULAR = 1
     CHILDREN = 2
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class MovieV0:
     def __init__(self, title: str, kind=MovieKindV0.REGULAR):
         self.title = title
@@ -63,36 +49,36 @@ class MovieV0:
         print(f"{self.title} costs {self.compute_price()}")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 m1 = MovieV0("Casablanca")
 m2 = MovieV0("Shrek", MovieKindV0.CHILDREN)
 
 
-# %% tags=["keep"]
+# %%
 m1.print_info()
 m2.print_info()
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/movie_v0.svg" alt="MovieV0"
 #      style="display:block;margin:auto;width:50%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # Was passiert, wenn wir eine neue Filmart hinzufügen wollen?
 
-# %% tags=["keep"]
+# %%
 from enum import Enum
 
 
-# %% tags=["alt"]
+# %%
 class MovieKind(Enum):
     REGULAR = 1
     CHILDREN = 2
     NEW_RELEASE = 3
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class MovieV1:
     def __init__(self, title: str, kind=MovieKind.REGULAR):
         self.title = title
@@ -113,29 +99,29 @@ class MovieV1:
         print(f"{self.title} costs {self.compute_price()}")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 m1 = MovieV1("Casablanca")
 m2 = MovieV1("Shrek", MovieKind.CHILDREN)
 m3 = MovieV1("Brand New", MovieKind.NEW_RELEASE)
 
-# %% tags=["keep"]
+# %%
 m1.print_info()
 m2.print_info()
 m3.print_info()
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/movie_v1.svg" alt="MovieV1"
 #      style="display:block;margin:auto;width:50%"/>
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## OCP-Verletzung
 #
 # - Neue Filmarten erfordern Änderungen an `MovieV1`
 # - `MovieV1` ist nicht geschlossen für Modifikation
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Auflösung (Versuch 1: Vererbung)
 #
@@ -143,11 +129,11 @@ m3.print_info()
 # - `MovieV2` wird abstrakt
 # - `MovieV2` ist geschlossen für Modifikation
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod
 
 
-# %% tags=["keep"]
+# %%
 class MovieV2(ABC):
     def __init__(self, title: str):
         self.title = title
@@ -159,25 +145,25 @@ class MovieV2(ABC):
         print(f"{self.title} costs {self.compute_price()}")
 
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 class RegularMovie(MovieV2):
     def compute_price(self) -> float:
         return 4.99
 
 
-# %% tags=["keep"]
+# %%
 class ChildrenMovie(MovieV2):
     def compute_price(self) -> float:
         return 5.99
 
 
-# %% tags=["keep"]
+# %%
 class NewReleaseMovie(MovieV2):
     def compute_price(self) -> float:
         return 6.99
 
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 m1 = RegularMovie("Casablanca")
 m2 = ChildrenMovie("Shrek")
 m3 = NewReleaseMovie("Brand New")
@@ -191,13 +177,13 @@ m3.print_info()
 isinstance(m1, MovieV2)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/movie_v2.svg" alt="MovieV0"
 #      style="display:block;margin:auto;width:100%"/>
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - `MovieV2` ist offen für Erweiterung
 # - Neue Filmarten können hinzugefügt werden, ohne die bestehenden Klassen zu
@@ -210,7 +196,7 @@ isinstance(m1, MovieV2)
 # - Produkt von Klassen?
 #   - `ChildrenDVD`, `ChildrenBluRay`, `ChildrenOnline`, ...
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Bessere Auflösung: Strategy Pattern
 #
@@ -222,7 +208,7 @@ isinstance(m1, MovieV2)
 #   besser
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Zoo-Management-System
 #
@@ -231,7 +217,7 @@ isinstance(m1, MovieV2)
 # Herausforderung? Das vorhandene System verstößt gegen das OCP, und es liegt
 # an uns, das zu korrigieren.
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Szenario
 #
@@ -247,11 +233,11 @@ isinstance(m1, MovieV2)
 # Reptilien ändert? Die aktuelle Code-Struktur erfordert Änderungen an mehreren
 # Stellen.
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from enum import Enum, auto
 
 
-# %% tags=["keep"]
+# %%
 class AnimalType(Enum):
     Mammal = auto()
     Bird = auto()
@@ -259,7 +245,7 @@ class AnimalType(Enum):
     Aquatic = auto()
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class AnimalV0:
     def __init__(self, animal_type):
         self._type = animal_type
@@ -291,7 +277,7 @@ class AnimalV0:
             return f"No diet for {self._type}!"
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 animals_original = [
     AnimalV0(AnimalType.Mammal),
     AnimalV0(AnimalType.Bird),
@@ -299,22 +285,22 @@ animals_original = [
 ]
 
 
-# %% tags=["keep"]
+# %%
 def display_feeding_info(animals):
     for animal in animals:
         print(f"{animal.feeding_schedule} {animal.diet}")
 
 
-# %% tags=["keep"]
+# %%
 display_feeding_info(animals_original)
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Beseitigen Sie das Problem mit der OCP-Verletzung im vorhandenen Code
 # - Sie können entweder den vorhandenen Code ändern oder eine neue Lösung von
 #   Grund auf erstellen
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from abc import ABC, abstractmethod
 
 
@@ -339,7 +325,7 @@ class Animal(ABC):
         pass
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Mammal(Animal):
     def get_feeding_schedule(self) -> str:
         return "Feed at 9am and 5pm."
@@ -348,7 +334,7 @@ class Mammal(Animal):
         return "Diet: Grass and fruits."
 
 
-# %% tags=["alt"]
+# %%
 class Bird(Animal):
     def get_feeding_schedule(self) -> str:
         return "Feed at 8am and 4pm."
@@ -357,7 +343,7 @@ class Bird(Animal):
         return "Diet: Seeds and insects."
 
 
-# %% tags=["alt", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 class Reptile(Animal):
     def get_feeding_schedule(self) -> str:
         return "Feed at 12pm."
@@ -366,7 +352,7 @@ class Reptile(Animal):
         return "Diet: Insects."
 
 
-# %% tags=["alt"]
+# %%
 class Aquatic(Animal):
     def get_feeding_schedule(self) -> str:
         return "Feed at 11am and 6pm."
@@ -375,15 +361,15 @@ class Aquatic(Animal):
         return "Diet: Algae and small fish."
 
 
-# %% tags=["alt"]
+# %%
 animals_refactored = [Mammal(), Bird(), Reptile()]
 
 
-# %% tags=["alt"]
+# %%
 def display_feeding_info(animals):
     for animal in animals:
         print(f"{animal.feeding_schedule} {animal.diet}")
 
 
-# %% tags=["alt"]
+# %%
 display_feeding_info(animals_refactored)

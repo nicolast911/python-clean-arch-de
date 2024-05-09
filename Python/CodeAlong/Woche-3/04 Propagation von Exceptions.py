@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Propagation von Exceptions</b>
@@ -23,14 +9,14 @@
 # <!-- 04 Propagation von Exceptions.py -->
 # <!-- python_courses/slides/module_170_exceptions/topic_114_a1_stack_unwinding.py -->
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # # Stack-Unwinding
 #
 # Wenn eine Exception ausgelöst wird, werden geschachtelte Funktionsaufrufe so lange
 # abgebrochen, bis ein passender Handler gefunden wird:
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/stack-code.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%; margin-top: 3%;"/>
@@ -38,7 +24,7 @@
 # <img src="img/stack-01a.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%;"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/stack-code.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%; margin-top: 3%;"/>
@@ -46,7 +32,7 @@
 # <img src="img/stack-01b.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%;"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/stack-code.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%; margin-top: 3%;"/>
@@ -54,7 +40,7 @@
 # <img src="img/stack-01c.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%;"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/stack-code.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%; margin-top: 3%;"/>
@@ -62,7 +48,7 @@
 # <img src="img/stack-01d.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%;"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/stack-code.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%; margin-top: 3%;"/>
@@ -70,7 +56,7 @@
 # <img src="img/stack-01e.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%;"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/stack-code.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%; margin-top: 3%;"/>
@@ -78,7 +64,7 @@
 # <img src="img/stack-02.png" alt="Call Stack"
 #      style="float: left; width: 37.3%; margin-left: 10%;"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/stack-code.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%; margin-top: 3%;"/>
@@ -86,7 +72,7 @@
 # <img src="img/stack-03.png" alt="Call Stack"
 #      style="float: left; width: 37.3%; margin-left: 10%;"/>
 
-# %% [markdown] tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # <img src="img/stack-code.png" alt="Call Stack"
 #      style="float: left; width: 30%; margin-left: 10%; margin-top: 3%;"/>
@@ -95,11 +81,11 @@
 #      style="float: left; width: 30%; margin-left: 10%;"/>
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from enum import Enum
 
 
-# %% tags=["keep"]
+# %%
 class ErrorType(Enum):
     VALUE = "ValueError"
     LOOKUP = "LookupError"
@@ -110,17 +96,17 @@ class ErrorType(Enum):
 
 # %%
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def outer_caller_v0(error_type: ErrorType = ErrorType.VALUE):
     intermediate_fun_v0(error_type)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def intermediate_fun_v0(error_type: ErrorType):
     raise_and_handle_error_v0(error_type)
 
 
-# %% tags=["keep"]
+# %%
 def raise_and_handle_error_v0(error_type: ErrorType):
     try:
         if error_type == ErrorType.VALUE:
@@ -133,7 +119,7 @@ def raise_and_handle_error_v0(error_type: ErrorType):
         pass
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def outer_caller_with_try_v0(error_type: ErrorType = ErrorType.VALUE):
     try:
         intermediate_fun(error_type)
@@ -141,14 +127,14 @@ def outer_caller_with_try_v0(error_type: ErrorType = ErrorType.VALUE):
         pass
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller_with_try_v0(ErrorType.VALUE)
 
-# %% tags=["keep"]
+# %%
 # outer_caller_v0(ErrorType.VALUE)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def raise_and_handle_error(error_type: ErrorType):
     print("    raise_and_handle_error(): before try")
     try:
@@ -165,31 +151,31 @@ def raise_and_handle_error(error_type: ErrorType):
     print("    raise_and_handle_error(): after except")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def intermediate_fun(error_type: ErrorType):
     print("  intermediate_fun(): before call")
     raise_and_handle_error(error_type)
     print("  intermediate_fun(): after call")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def outer_caller(error_type: ErrorType = ErrorType.VALUE):
     print("outer_caller(): before calling")
     intermediate_fun(error_type)
     print("outer_caller(): after calling")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller(ErrorType.LOOKUP)
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller(ErrorType.INDEX)
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 # outer_caller(ErrorType.VALUE)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def outer_caller_with_try(error_type: ErrorType = ErrorType.VALUE):
     print("outer_caller(): before try")
     try:
@@ -201,15 +187,15 @@ def outer_caller_with_try(error_type: ErrorType = ErrorType.VALUE):
     print("outer_caller(): after except")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller_with_try(ErrorType.INDEX)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller_with_try(ErrorType.VALUE)
 
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Workshop: Verschachtelte Ausnahmen
 #
@@ -221,7 +207,7 @@ outer_caller_with_try(ErrorType.VALUE)
 # Welche Ausgabe erwarten Sie für Aufrufe von `outer_caller_ws()` und
 # `outer_caller_with_try_ws()` mit den verschiedenen `ErrorType`-Werten?
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def raise_and_handle_error_ws(exception_type: ErrorType):
     print("    raise_and_handle_error_ws(): before try")
     try:
@@ -240,7 +226,7 @@ def raise_and_handle_error_ws(exception_type: ErrorType):
     print("    raise_and_handle_error_ws(): after except")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def intermediate_fun_ws(exception_type: ErrorType):
     print("  intermediate_fun_ws(): before call")
     try:
@@ -259,24 +245,24 @@ def intermediate_fun_ws(exception_type: ErrorType):
     print("  intermediate_fun_ws() after call")
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def outer_caller_ws(exception_type: ErrorType = ErrorType.VALUE):
     print("outer_caller_ws(): before calling")
     intermediate_fun_ws(exception_type)
     print("outer_caller_ws(): after calling")
 
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller_ws(ErrorType.VALUE)
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 # outer_caller_ws(ErrorType.LOOKUP)
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 # outer_caller_ws(ErrorType.INDEX)
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 def outer_caller_with_try_ws(exception_type: ErrorType = ErrorType.VALUE):
     print("outer_caller_ws(): before try")
     try:
@@ -288,13 +274,13 @@ def outer_caller_with_try_ws(exception_type: ErrorType = ErrorType.VALUE):
     print("outer_caller_ws(): after except")
 
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller_with_try_ws(ErrorType.VALUE)
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller_with_try_ws(ErrorType.LOOKUP)
 
-# %% tags=["subslide", "keep"] slideshow={"slide_type": "subslide"}
+# %%
 outer_caller_with_try_ws(ErrorType.INDEX)
 
 # %%

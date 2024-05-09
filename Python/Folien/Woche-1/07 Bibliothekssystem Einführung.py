@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>Bibliothekssystem: Einführung</b>
@@ -23,7 +9,7 @@
 # <!-- 07 Bibliothekssystem Einführung.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_200_library_intro.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # # Bibliotheks-Verwaltungssystem: Einführung
 #
@@ -36,12 +22,12 @@
 #   - Leicht zu erweitern und zu warten
 #   - ...
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Anforderungen
 # - Domänenmodell
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Anforderungen
 #
@@ -52,7 +38,7 @@
 # - Ausleihen und Rückgabe von Büchern
 # - Erinnerungen und Gebühren
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Workshop: Bibliotheks-Verwaltungssystem (Teil 1)
 #
@@ -63,7 +49,7 @@
 #   - Mitgliedern?
 #   - Büchern?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Verwenden Sie das Creator Pattern um zu entscheiden, welche Klasse die
 #   Verantwortung für das Erstellen von Mitgliedern und welche die Verantwortung
@@ -74,11 +60,11 @@
 # - Implementieren Sie diesen Teil des Domänenmodells in Python
 # - Versuchen Sie dabei das Prinzip der niedrigen Repräsentationslücke anzuwenden
 
-# %% tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass, field
 
 
-# %% tags=["alt"]
+# %%
 @dataclass
 class Member:
     name: str
@@ -86,14 +72,14 @@ class Member:
     email: str
 
 
-# %% tags=["alt"]
+# %%
 @dataclass
 class Book:
     title: str
     isbn: str
 
 
-# %% tags=["alt"]
+# %%
 @dataclass
 class LibrarySystem:
     members: list[Member] = field(default_factory=list)
@@ -132,7 +118,7 @@ class LibrarySystem:
 # %%
 library = LibrarySystem()
 
-# %% lang="de"
+# %%
 library.add_member("Max Mustermann", "Musterstraße 1", "max@example.com")
 
 # %%

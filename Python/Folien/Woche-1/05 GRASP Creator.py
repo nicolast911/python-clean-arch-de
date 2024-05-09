@@ -1,18 +1,4 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.1
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
 #  <b>GRASP: Creator</b>
@@ -23,7 +9,7 @@
 # <!-- 05 GRASP Creator.py -->
 # <!-- python_courses/slides/module_500_solid_grasp/topic_160_grasp_creator.py -->
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Use Case "Spiel initialisieren"
 # - Bisher:
@@ -32,7 +18,7 @@
 # - Frage:
 #   - Wer erzeugt die `Location`-Instanzen?
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Kandidaten
 
@@ -49,7 +35,7 @@
 # <img src="img/adv-domain-03-small.svg"
 #      style="float:right;margin:auto;width:70%"/>
 
-# %% [markdown] lang="de" tags=["slide"] slideshow={"slide_type": "slide"}
+# %% [markdown]
 #
 # ## Das Creator Pattern (GRASP)
 #
@@ -68,13 +54,13 @@
 # - `A` hat die initialisierenden Daten, die `B` benötigt
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ### Bemerkung
 #
 # - Factory ist oft eine Alternative zu Creator
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # ## Creator
 
@@ -92,13 +78,13 @@
 #      style="float:right;margin:auto;width:70%"/>
 
 
-# %% tags=["keep", "subslide"] slideshow={"slide_type": "subslide"}
+# %%
 from dataclasses import dataclass
 import json
 from pathlib import Path
 
 
-# %% tags=["keep"]
+# %%
 @dataclass
 class Location:
     name: str
@@ -109,13 +95,13 @@ class Location:
         return cls(description["name"], description.get("description", ""))
 
 
-# %% tags=["keep"]
+# %%
 json_file = list(Path().glob("**/simple-locations.json"))[0]
 with open(json_file) as file:
     simple_locations = json.load(file)
 
 
-# %% tags=["subslide", "alt"] slideshow={"slide_type": "subslide"}
+# %%
 @dataclass
 class World:
     locations: dict[str, Location]
@@ -131,7 +117,7 @@ class World:
         return cls(locations, initial_location_name)
 
 
-# %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
+# %% [markdown]
 #
 # - Wir können die `World`-Klasse jetzt verwenden.
 
