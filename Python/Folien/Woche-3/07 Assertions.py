@@ -107,7 +107,7 @@ def better_user_input():
 # - Schreiben Sie das Programm so um, das dies nicht mehr möglich ist.
 
 # %% tags=["subslide"] slideshow={"slide_type": "subslide"}
-# !python valid_mail.py
+# # !python valid_mail.py
 
 # %%
-# !python -O valid_mail.py
+# # !python -O valid_mail.py

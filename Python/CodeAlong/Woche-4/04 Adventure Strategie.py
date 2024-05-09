@@ -161,8 +161,8 @@ def interactive_action_strategy(player: "Player"):
 player = Player("Iris", pawn, interactive_action_strategy)
 
 # %% tags=["keep"]
-for _ in range(5):
-    player.take_turn()
+# for _ in range(5):
+#     player.take_turn()
 
 # %% [markdown] lang="de" tags=["subslide"] slideshow={"slide_type": "subslide"}
 #
