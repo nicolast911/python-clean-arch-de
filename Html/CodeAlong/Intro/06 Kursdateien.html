@@ -13086,7 +13086,7 @@ div#notebook {
 <main>
 <div class="border-box-sizing" id="notebook" tabindex="-1">
 <div class="container" id="notebook-container">
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=78e7b8d95706803c"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=898da2c2cf78752d"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div style="text-align:center; font-size:200%;">
@@ -13096,33 +13096,129 @@ div#notebook {
 <div style="text-align:center;">Dr. Matthias Hölzl</div>
 <br/>
 <!-- 06 Kursdateien.html -->
-<!-- python_courses/slides/module_110_introduction/topic_110_a3_course_files.py -->
+<!-- python_courses/slides/module_110_introduction/topic_112_course_files_clean_arch.py -->
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=6fb2cc422ba8fe1a"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=835fef08f06b7c98"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Entpacken-der-Kursdateien">Entpacken der Kursdateien<a class="anchor-link" href="#Entpacken-der-Kursdateien">¶</a></h2><ul>
-<li>Es ist wichtig, dass Sie das Zip-Archiv entpacken, bevor Sie mit den Dateien
-arbeiten</li>
-<li>Möglicherweise kann Ihr Browser Dateien im Zip-Archiv öffnen, aber Sie können
-damit nicht arbeiten!</li>
-<li>Merken Sie sich den Ort, an dem Sie Ihre entpackten Dateien gespeichert haben.</li>
-<li>Sie brauchen diesen Ort, um im nächsten Schritt die Jupyter Notebooks zu öffnen.</li>
+<h2 id="GitHub">GitHub<a class="anchor-link" href="#GitHub">¶</a></h2><ul>
+<li><a href="https://github.com/Coding-Academy-Munich/python-clean-arch-de">GitHub Seite</a></li>
+<li><a href="https://github.com/Coding-Academy-Munich/python-clean-arch-de.git">Git Repository</a></li>
+<li><a href="https://github.com/Coding-Academy-Munich/python-clean-arch-de/archive/refs/heads/master.zip">Zip-Archiv</a></li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=0365faa6de28de3c"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=f71ffa0a83ca75b1"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Die-Struktur-des-Kurses">Die Struktur des Kurses<a class="anchor-link" href="#Die-Struktur-des-Kurses">¶</a></h2><ul>
-<li>Readme und Konfigurationsdateien im Wurzelverzeichnis</li>
-<li>Zwei Ordner, einer für Code-Alongs und einer für vollständige Folien</li>
-<li>In jedem dieser Ordner sind Unterordner für jede der 4 Wochen des Kurses</li>
-<li>In diesen Ordnern befinden sich Jupyter Notebooks mit der Dateiendung <code>ipynb</code></li>
+<h2 id="Clonen-und-Updaten-des-Git-Repositories">Clonen und Updaten des Git Repositories<a class="anchor-link" href="#Clonen-und-Updaten-des-Git-Repositories">¶</a></h2><ul>
+<li>Um das Git-Repository zu klonen, geben Sie folgendes Kommando in der
+Kommandozeile ein:</li>
+<li><code>git clone https://github.com/Coding-Academy-Munich/python-clean-arch-de.git</code></li>
+<li>Um auf die neuen Änderungen zuzugreifen, geben Sie z.B. folgendes Kommando in der
+Kommandozeile ein:</li>
+<li><code>git add -A &amp;&amp; git commit -m "Update" &amp;&amp; git pull --rebase</code></li>
+<li>Andere Workflows sind genau so möglich</li>
+<li>Entwicklungsumgebungen wie PyCharm oder Visual Studio Code haben Git-Integrationen</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=4a17b48c97daad62"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Herunterladen-und-Entpacken-des-Zip-Archivs">Herunterladen und Entpacken des Zip-Archivs<a class="anchor-link" href="#Herunterladen-und-Entpacken-des-Zip-Archivs">¶</a></h2><ul>
+<li><a href="https://github.com/Coding-Academy-Munich/python-clean-arch-de/archive/refs/heads/master.zip">Zip-Archiv</a></li>
+<li>Entpacken Sie das Zip-Archiv, bevor Sie mit den Dateien arbeiten</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=904c4619a8ac5223"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="JupyterHub">JupyterHub<a class="anchor-link" href="#JupyterHub">¶</a></h2><ul>
+<li><a href="https://jh1.mhoelzl.de/">Coding-Academy JupyterHub</a></li>
+<li>Login mit dem Namen aus Ihrer Email (vor dem <code>@</code>) in Kleinbuchstaben</li>
+<li>Beim ersten Login können Sie ein Passwort festlegen</li>
+<li>Bitte merken Sie sich dieses Passwort, Sie können es nicht selber
+zurücksetzen oder ändern</li>
+<li>Kursmaterial: <a href="https://jh1.mhoelzl.de/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FCoding-Academy-Munich%2Fpython-clean-arch-de&amp;urlpath=lab%2Ftree%2Fpython-clean-arch-de%2FFolien%2FNotebooks%2FCode-Along%2FIntro%2F01+Herzlich+Willkommen.ipynb&amp;branch=master">GitPuller Link</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=631778cac3705efa"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Struktur-des-Kurses">Struktur des Kurses<a class="anchor-link" href="#Struktur-des-Kurses">¶</a></h2><ul>
+<li>Top-level Ordner <code>folien</code> für die Folien</li>
+<li>Unterrdner für verschiedene Dateiformate:<ul>
+<li><code>Html</code>: HTML-Dateien</li>
+<li><code>Notebooks</code>: Jupyter Notebooks</li>
+<li><code>Python</code>: Python Code mit Text der Folien als Kommentaren</li>
+</ul>
+</li>
+<li>Unterordner für Code-Alongs und vollständige Folien</li>
+<li>Unterordner für Intro und jede der 4 Wochen des Kurses</li>
+<li>Evtl. andere Top-level Ordner für zusätzliche Materialien</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=5164d7090e4640dd"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Top-Level-Ordner">Top-Level Ordner<a class="anchor-link" href="#Top-Level-Ordner">¶</a></h3><pre><code>Folien/
+├── Html
+│   ├── Code-Along
+│   │   ├── Intro
+│   │   └── Woche 1
+│   └── Completed
+│       ├── Intro
+│       └── Woche 1
+├── Notebooks
+│   ├── Code-Along
+│   │   ├── Intro
+│   │   └── Woche 1
+│   └── Completed
+│       ├── Intro
+│       └── Woche 1
+└── Python
+    ├── Code-Along
+    │   ├── Intro
+    │   └── Woche 1
+    └── Completed
+        ├── Intro
+        └── Woche 1
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=708ab2c4bd1cc74d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Notebooks-Unterordner">Notebooks Unterordner<a class="anchor-link" href="#Notebooks-Unterordner">¶</a></h3><pre><code>Notebooks/
+├── Code-Along
+│   ├── Intro
+│   │   ├── 01 Herzlich Willkommen.ipynb
+│   │   ├── 02 Kursdateien.ipynb
+│   └── Woche 1
+│       ├── 01 Einführung ins Testen.ipynb
+│       ├── 02 Klassifizierung von Tests.ipynb
+│       └── img
+└── Completed
+    ├── Intro
+    │   ├── 01 Herzlich Willkommen.ipynb
+    │   ├── 02 Kursdateien.ipynb
+    └── Woche 1
+        ├── 01 Einführung ins Testen.ipynb
+        ├── 02 Klassifizierung von Tests.ipynb
+        └── img
+</code></pre>
 </div>
 </div>
 </div>

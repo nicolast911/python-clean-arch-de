@@ -16,6 +16,7 @@ dependencies:
   - copier
   - cython
   - cytoolz
+  - debugpy
   - flake8
   - gh
   - hydra-core
@@ -48,6 +49,7 @@ dependencies:
   # - pylance
   - pypandoc
   - pytest
+  - pytest-asyncio
   - pytest-cov
   - pytest-mock
   - python-build

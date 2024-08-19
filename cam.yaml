@@ -20,12 +20,10 @@ dependencies:
   - cookiecutter
   - copier
   - cuda>=12.1
-  - cudnn
-  - cupy
-  - cutensor
   - cython
   - cytoolz
   - datasets
+  - debugpy
   # - duckdb
   - einops
   - fastai
@@ -40,6 +38,7 @@ dependencies:
   - kaggle
   - lark
   - mypy
+  - nats-py
   - jinja2
   - jupyterlab>=4
   - jupyterlab_rise>=0.40.0
@@ -68,6 +67,7 @@ dependencies:
   - pypandoc
   # - pylance
   - pytest
+  - pytest-asyncio
   - pytest-cov
   - pytest-mock
   - python-build
@@ -93,7 +93,7 @@ dependencies:
   - tomli-w
   - tornado>=6.1
   - tox
-#  - tox-conda<0.10
+  #  - tox-conda<0.10
   - transformers>=4
   - typer
   - uvicorn

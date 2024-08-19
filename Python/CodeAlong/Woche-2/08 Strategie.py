@@ -268,7 +268,7 @@ import textwrap
 
 # %%
 class Blog:  # type: ignore
-    def __init__(self, strategy: TextWrapStrategy):
+    def __init__(self, strategy: Callable[[str, int], list[str]]):
         self.posts = []
         self.strategy = strategy
 
@@ -277,7 +277,7 @@ class Blog:  # type: ignore
             print(f"{'-' * width}")
             print(f"Title: {post.title}")
             print(f"Author: {post.author}")
-            for line in self.strategy.wrap(post.text, width):
+            for line in self.strategy(post.text, width):
                 print(line)
             print(f"{'-' * width}")
 

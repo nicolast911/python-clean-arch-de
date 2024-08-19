@@ -7,25 +7,110 @@
 # <div style="text-align:center;">Dr. Matthias Hölzl</div>
 # <br/>
 # <!-- 06 Kursdateien.py -->
-# <!-- python_courses/slides/module_110_introduction/topic_110_a3_course_files.py -->
+# <!-- python_courses/slides/module_110_introduction/topic_112_course_files_clean_arch.py -->
 
 # %% [markdown]
 #
-# ## Entpacken der Kursdateien
+# ## GitHub
 #
-# - Es ist wichtig, dass Sie das Zip-Archiv entpacken, bevor Sie mit den Dateien
-#   arbeiten
-# - Möglicherweise kann Ihr Browser Dateien im Zip-Archiv öffnen, aber Sie können
-#   damit nicht arbeiten!
-# - Merken Sie sich den Ort, an dem Sie Ihre entpackten Dateien gespeichert haben.
-# - Sie brauchen diesen Ort, um im nächsten Schritt die Jupyter Notebooks zu öffnen.
+# - [GitHub Seite](https://github.com/Coding-Academy-Munich/python-clean-arch-de)
+# - [Git Repository](https://github.com/Coding-Academy-Munich/python-clean-arch-de.git)
+# - [Zip-Archiv](https://github.com/Coding-Academy-Munich/python-clean-arch-de/archive/refs/heads/master.zip)
 
 # %% [markdown]
 #
-# ## Die Struktur des Kurses
+# ## Clonen und Updaten des Git Repositories
 #
-# - Readme und Konfigurationsdateien im Wurzelverzeichnis
-# - Zwei Ordner, einer für Code-Alongs und einer für vollständige Folien
-# - In jedem dieser Ordner sind Unterordner für jede der 4 Wochen des Kurses
-# - In diesen Ordnern befinden sich Jupyter Notebooks mit der Dateiendung `ipynb`
+# - Um das Git-Repository zu klonen, geben Sie folgendes Kommando in der
+#   Kommandozeile ein:
+# - `git clone https://github.com/Coding-Academy-Munich/python-clean-arch-de.git`
+# - Um auf die neuen Änderungen zuzugreifen, geben Sie z.B. folgendes Kommando in der
+#   Kommandozeile ein:
+# - `git add -A && git commit -m "Update" && git pull --rebase`
+# - Andere Workflows sind genau so möglich
+# - Entwicklungsumgebungen wie PyCharm oder Visual Studio Code haben Git-Integrationen
+
+# %% [markdown]
+#
+# ## Herunterladen und Entpacken des Zip-Archivs
+#
+# - [Zip-Archiv](https://github.com/Coding-Academy-Munich/python-clean-arch-de/archive/refs/heads/master.zip)
+# - Entpacken Sie das Zip-Archiv, bevor Sie mit den Dateien arbeiten
+
+# %% [markdown]
+#
+# ## JupyterHub
+#
+# - [Coding-Academy JupyterHub](https://jh1.mhoelzl.de/)
+# - Login mit dem Namen aus Ihrer Email (vor dem `@`) in Kleinbuchstaben
+# - Beim ersten Login können Sie ein Passwort festlegen
+# - Bitte merken Sie sich dieses Passwort, Sie können es nicht selber
+#   zurücksetzen oder ändern
+# - Kursmaterial: [GitPuller Link](https://jh1.mhoelzl.de/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FCoding-Academy-Munich%2Fpython-clean-arch-de&urlpath=lab%2Ftree%2Fpython-clean-arch-de%2FFolien%2FNotebooks%2FCode-Along%2FIntro%2F01+Herzlich+Willkommen.ipynb&branch=master)
+
+# %% [markdown]
+#
+# ## Struktur des Kurses
+#
+# - Top-level Ordner `folien` für die Folien
+# - Unterrdner für verschiedene Dateiformate:
+#   - `Html`: HTML-Dateien
+#   - `Notebooks`: Jupyter Notebooks
+#   - `Python`: Python Code mit Text der Folien als Kommentaren
+# - Unterordner für Code-Alongs und vollständige Folien
+# - Unterordner für Intro und jede der 4 Wochen des Kurses
+# - Evtl. andere Top-level Ordner für zusätzliche Materialien
+
+# %% [markdown]
+#
+# ### Top-Level Ordner
+#
+# ```
+# Folien/
+# ├── Html
+# │   ├── Code-Along
+# │   │   ├── Intro
+# │   │   └── Woche 1
+# │   └── Completed
+# │       ├── Intro
+# │       └── Woche 1
+# ├── Notebooks
+# │   ├── Code-Along
+# │   │   ├── Intro
+# │   │   └── Woche 1
+# │   └── Completed
+# │       ├── Intro
+# │       └── Woche 1
+# └── Python
+#     ├── Code-Along
+#     │   ├── Intro
+#     │   └── Woche 1
+#     └── Completed
+#         ├── Intro
+#         └── Woche 1
+# ```
+
+# %% [markdown]
+#
+# ### Notebooks Unterordner
+#
+# ```
+# Notebooks/
+# ├── Code-Along
+# │   ├── Intro
+# │   │   ├── 01 Herzlich Willkommen.ipynb
+# │   │   ├── 02 Kursdateien.ipynb
+# │   └── Woche 1
+# │       ├── 01 Einführung ins Testen.ipynb
+# │       ├── 02 Klassifizierung von Tests.ipynb
+# │       └── img
+# └── Completed
+#     ├── Intro
+#     │   ├── 01 Herzlich Willkommen.ipynb
+#     │   ├── 02 Kursdateien.ipynb
+#     └── Woche 1
+#         ├── 01 Einführung ins Testen.ipynb
+#         ├── 02 Klassifizierung von Tests.ipynb
+#         └── img
+# ```
 
