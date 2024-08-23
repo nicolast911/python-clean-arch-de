@@ -25,6 +25,7 @@ dependencies:
   - datasets
   - debugpy
   # - duckdb
+  - dramatiq
   - einops
   - fastai
   - fastapi
@@ -59,6 +60,7 @@ dependencies:
   - pandoc
   - papermill
   - pdoc
+  - pika
   - pip
   - platformdirs
   - pyarrow
@@ -74,6 +76,7 @@ dependencies:
   - python-dotenv
   - pytorch
   - pytorch-cuda==12.1
+  - redis-py
   - requests
   - ruff
   - scikit-build
@@ -98,4 +101,5 @@ dependencies:
   - typer
   - uvicorn
   - watchdog
+  - websockets
   - wurlitzer
