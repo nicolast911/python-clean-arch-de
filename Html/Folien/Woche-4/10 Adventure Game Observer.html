@@ -13368,18 +13368,10 @@ Player Bob has joined the game.
 <pre>Game started.
 Round started.
 Turn started for Alice.
-Alice performs: move north to Room 2
+Alice performs: wait one turn
 Turn ended for Alice.
 Turn started for Bob.
-Bob performs: wait one turn
-Turn ended for Bob.
-Round ended.
-Round started.
-Turn started for Alice.
-Alice performs: move south to Room 1
-Turn ended for Alice.
-Turn started for Bob.
-Bob performs: wait one turn
+Bob performs: move south to Room 1
 Turn ended for Bob.
 Round ended.
 Round started.
@@ -13388,6 +13380,14 @@ Alice performs: move north to Room 2
 Turn ended for Alice.
 Turn started for Bob.
 Bob performs: wait one turn
+Turn ended for Bob.
+Round ended.
+Round started.
+Turn started for Alice.
+Alice performs: wait one turn
+Turn ended for Alice.
+Turn started for Bob.
+Bob performs: move north to Room 2
 Turn ended for Bob.
 Round ended.
 Game ended.
@@ -13677,19 +13677,19 @@ A small room
 Alice performs: move north to Room 2
 Bob is in Room 2:
 A large room
-Bob performs: move south to Room 1
+Bob performs: wait one turn
 Alice is in Room 2:
 A large room
-Alice performs: move south to Room 1
-Bob is in Room 1:
-A small room
-Bob performs: wait one turn
-Alice is in Room 1:
-A small room
 Alice performs: wait one turn
-Bob is in Room 1:
-A small room
+Bob is in Room 2:
+A large room
 Bob performs: wait one turn
+Alice is in Room 2:
+A large room
+Alice performs: wait one turn
+Bob is in Room 2:
+A large room
+Bob performs: move south to Room 1
 </pre>
 </div>
 </div>
@@ -13724,6 +13724,20 @@ Bob performs: wait one turn
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>DEBUG: Game started.
 DEBUG: Round started.
+Alice is in Room 2:
+A large room
+DEBUG: Turn started for Alice.
+Alice performs: move south to Room 1
+DEBUG: Alice performs: move south to Room 1
+DEBUG: Turn ended for Alice.
+Bob is in Room 1:
+A small room
+DEBUG: Turn started for Bob.
+Bob performs: wait one turn
+DEBUG: Bob performs: wait one turn
+DEBUG: Turn ended for Bob.
+DEBUG: Round ended.
+DEBUG: Round started.
 Alice is in Room 1:
 A small room
 DEBUG: Turn started for Alice.
@@ -13741,28 +13755,14 @@ DEBUG: Round started.
 Alice is in Room 2:
 A large room
 DEBUG: Turn started for Alice.
-Alice performs: move south to Room 1
-DEBUG: Alice performs: move south to Room 1
-DEBUG: Turn ended for Alice.
-Bob is in Room 2:
-A large room
-DEBUG: Turn started for Bob.
-Bob performs: wait one turn
-DEBUG: Bob performs: wait one turn
-DEBUG: Turn ended for Bob.
-DEBUG: Round ended.
-DEBUG: Round started.
-Alice is in Room 1:
-A small room
-DEBUG: Turn started for Alice.
 Alice performs: wait one turn
 DEBUG: Alice performs: wait one turn
 DEBUG: Turn ended for Alice.
 Bob is in Room 2:
 A large room
 DEBUG: Turn started for Bob.
-Bob performs: wait one turn
-DEBUG: Bob performs: wait one turn
+Bob performs: move south to Room 1
+DEBUG: Bob performs: move south to Room 1
 DEBUG: Turn ended for Bob.
 DEBUG: Round ended.
 DEBUG: Game ended.

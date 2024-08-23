@@ -23,7 +23,7 @@ from random import choice
 from typing import Any
 
 # %%
-from action_v3 import Action, MoveAction
+from action_v4 import Action, MoveAction
 from location_v4 import Location
 from simple_locations import simple_locations
 from world_factory_v4 import WorldFactory
