@@ -1,0 +1,3 @@
+'''
+Workshop: Bibliotheks-Verwaltungssystem
+'''
